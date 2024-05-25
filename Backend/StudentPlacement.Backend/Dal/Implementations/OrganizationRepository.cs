@@ -22,10 +22,23 @@ namespace StudentPlacement.Backend.Dal.Implementations
             return createdOrganization.Entity;
         }
 
+        public async Task DeleteAllocationRequest(Organization organization)
+        {
+            organization.AllocationRequest = null;
+            organization.AllocationRequestId = null;
+
+            await context.SaveChangesAsync();
+        }
+
         public async Task<Organization?> FindOrganizationByLoginAndName(string login, string name)
         {
             return await context.Organizations.Include(x => x.User)
                 .FirstOrDefaultAsync(x => x.User.Login == login && x.Name == name);
+        }
+
+        public async Task<IEnumerable<Organization>> GetAllOrganizations()
+        {
+            return await context.Organizations.Include(x => x.AllocationRequest).ToListAsync();
         }
 
         public async Task<Organization> GetOrganizationById(int idOrganization)
@@ -40,6 +53,11 @@ namespace StudentPlacement.Backend.Dal.Implementations
             return await context.Organizations
                 .Include(x => x.User).Include(x => x.AllocationRequest)
                 .FirstOrDefaultAsync(x => x.User.Login == login);
+        }
+
+        public async Task<Organization> GetOrganizationIdRequest(int idRequest)
+        {
+            return await context.Organizations.Include(x => x.AllocationRequest).FirstOrDefaultAsync(x => x.AllocationRequestId == idRequest);
         }
 
         public async Task<Organization> UpdateOrganizationBase(Organization oldOrganization, Organization newOrganization)

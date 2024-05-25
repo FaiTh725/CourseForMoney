@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react"
+import { useContext, useEffect, useRef, useState } from "react"
 import styles from "./AccountControll.module.css"
 import api from "../../api/helpAxios";
 import { useNavigate } from "react-router-dom";
@@ -6,7 +6,18 @@ import useRedirectionRefreshToken from "../../hooks/useRedirectionRefreshToken";
 import useParseToken from "../../hooks/useParseToken";
 import useUpdateToken from "../../hooks/useUpdateToken";
 import AuthContext from "../Context/AuthProvider";
+import useImgToString from "../../hooks/useImgToString";
 
+import findImg from "../../assets/Account/find.png";
+import deleteCross from "../../assets/Account/delete_cross.png";
+import arrowDown from "../../assets/Account/arrow_down.png";
+import userImageExample from "../../assets/Account/user.png";
+import circleGray from "../../assets/Account/circleGray.png"
+import circleGreen from "../../assets/Account/circleGree.png"
+
+// сортировку по ролям
+// валидацию на ввод
+// оптимизировать загрузку картинок и не хранить строку в формате а только путь жо файла
 const AccountControll = () => {
     const [users, setUsers] = useState([]);
     const [usersView, setUsersView] = useState([]);
@@ -14,7 +25,7 @@ const AccountControll = () => {
     const navigate = useNavigate();
     const { auth, setAuth } = useContext(AuthContext);
     const [allGroups, setAllGroups] = useState([]);
-    
+
     const DeleteUser = async (e, idUser) => {
         e.preventDefault();
         try {
@@ -120,7 +131,8 @@ const AccountControll = () => {
         }
     }
 
-    const ChangeInfoUser = async (idUser, loginUser, passwordUser, roleUser, selectedGroup,
+    const ChangeInfoUser = async (idUser, loginUser, passwordUser, roleUser,
+        image, selectedGroup,
         fullName, averageScore, adressStudent,
         isMaried, isExtendedFamily,
         nameOrganization, contacts) => {
@@ -138,14 +150,15 @@ const AccountControll = () => {
                 login: loginUser,
                 password: passwordUser,
                 role: roleUser,
-                group: selectedGroup,
+                image: image,
+                group: 0,
                 fullName: "",
                 averageScore: 0,
                 adressStudent: "",
                 isMarried: false,
                 extendedFamily: false,
-                nameOrganization: "",
-                contacts: ""
+                organizationName: "",
+                contact: ""
             };
 
             console.log(data);
@@ -164,16 +177,31 @@ const AccountControll = () => {
             else if (roleUser == 3) {
                 data = {
                     ...data,
-                    nameOrganization: nameOrganization,
-                    contacts: contacts
+                    organizationName: nameOrganization,
+                    contact: contacts
                 }
             }
+
+            const formData = new FormData();
+            formData.append("id", idUser);
+            formData.append("login", data.login);
+            formData.append("password", data.password);
+            formData.append("role", data.selectedGroup);
+            formData.append("image", image);
+            formData.append("group", data.group);
+            formData.append("fullName", data.fullName);
+            formData.append("averageScore", data.averageScore);
+            formData.append("adressStudent", data.adressStudent);
+            formData.append("isMarried", data.isMarried);
+            formData.append("extendedFamily", data.extendedFamily);
+            formData.append("nameOrganization", data.nameOrganization);
+            formData.append("contacts", data.contact);
 
             const response = await api.patch("/Account/ChangeUser",
                 data,
                 {
                     headers: {
-                        'Content-Type': 'application/json',
+                        'Content-Type': 'multipart/form-data',
                         'Authorization': `Bearer ${token == null ? "" : token}`
                     }
                 });
@@ -184,7 +212,7 @@ const AccountControll = () => {
             console.log(error);
             if (error.request.status == 0) {
                 await useRedirectionRefreshToken(() => {
-                    ChangeInfoUser(idUser, loginUser, passwordUser, roleUser, group,
+                    ChangeInfoUser(idUser, loginUser, passwordUser, roleUser, image, group,
                         fullName, averageScore, adressStudent,
                         isMaried, isExtendedFamily,
                         nameOrganization, contacts,
@@ -218,13 +246,13 @@ const AccountControll = () => {
             </header>
             <section className={styles.searchSection}>
                 <div className={styles.searchInner}>
-                    <img src="" alt="search" />
+                    <img src={findImg} alt="search" height={40} />
                     <input type="text" onChange={(e) => { setSearchString(e.target.value) }} placeholder="поиск по логину" />
                 </div>
             </section>
             <section className={styles.accountsSection}>
                 {usersView.map(user => (
-                    <CardUser key={user.id} id={user.id} login={user.login} password={user.password} role={user.role}
+                    <CardUser key={user.id} id={user.id} image={user.image} login={user.login} password={user.password} role={user.role}
                         group={user.group} fullName={user.fullName} adressStudent={user.adressStudent} averageScore={user.averageScore} isMaried={user.isMarried} isExtendedFamily={user.extendedFamily}
                         nameOrganization={user.nameOrganization} contacts={user.contacts}
                         DeleteUser={DeleteUser} allGroups={allGroups} ChangeInfoUser={ChangeInfoUser} />
@@ -235,11 +263,13 @@ const AccountControll = () => {
     )
 }
 
-const CardUser = ({ id, login, password, role, group,
+const CardUser = ({ id, login, image, password, role, group,
     fullName, averageScore, adressStudent,
     isMaried, isExtendedFamily,
     nameOrganization, contacts,
     DeleteUser, allGroups, ChangeInfoUser }) => {
+    const [imageCur, setImage] = useState(image);
+    const [uploadFile, setUploadFile] = useState(null);
     const [loginCur, setLogin] = useState(login);
     const [passwordCur, setPassword] = useState(password);
     const [roleCur, setRole] = useState(role);
@@ -256,19 +286,61 @@ const CardUser = ({ id, login, password, role, group,
 
     const [showExtentionInfo, setShowExtentionInfo] = useState(false);
 
+    const imgBtn = useRef(null);
+
+    //error messages
+    const loginError = useRef(null);
+    const passwordError = useRef(null);
+    const averageScoreError = useRef(null);
+
+
     const ChangeInfo = async () => {
-        await ChangeInfoUser(id, loginCur,
-            passwordCur,
-            roleCur,
-            selectedGroupCur,
-            fullNameCur,
-            averageScoreCur,
-            adressStudentCur,
-            isMariedCur,
-            isExtendedFamilyCur,
-            nameOrganizationCur,
-            contactsCur,);
+        var flagError = false;
+        if (loginCur.length < 4) {
+            loginError.current.textContent = "Логин короче 4 символов";
+            flagError = true;
+        }
+        if (passwordCur.length < 4) {
+            passwordError.current.textContent = "Пароль короче 4 символов";
+            flagError = true;
+        }
+        else if (!/['a-zA-Z']/.test(passwordCur) || !/['0-9']/.test(passwordCur)) {
+            passwordError.current.textContent = "Пароль должен содержать 1 цифру и 1 букву";
+            flagError = true;
+        }
+        if (role == 0 && !(Number.parseFloat(averageScore) >= 0 && Number.parseFloat(averageScore) <= 10)) {
+            averageScoreError.current.textContent = "Средний балл должен быть в пределах от 0 до 4";
+            flagError = true;
+        }
+
+        if (!flagError) {
+
+            await ChangeInfoUser(id,
+                loginCur,
+                passwordCur,
+                roleCur,
+                uploadFile,
+                selectedGroupCur,
+                fullNameCur,
+                averageScoreCur,
+                adressStudentCur,
+                isMariedCur,
+                isExtendedFamilyCur,
+                nameOrganizationCur,
+                contactsCur,);
+        }
     }
+
+    // useEffect(() => {
+    //     const executeChanging = async () => {
+    //         if (imageCur != null && imageCur != "") {
+    //             await ChangeInfo();
+    //         }
+    //     }
+
+    //     executeChanging();
+    // }, [imageCur]);
+
 
     const roles = {
         0: "Студент",
@@ -280,43 +352,48 @@ const CardUser = ({ id, login, password, role, group,
     return (
         <div className={styles.cardUserMain}>
             <div className={styles.mainData}>
-                <img src="" alt="logo user" />
+                <img onClick={() => { imgBtn.current.click() }} src={uploadFile == null ? imageCur == null ? userImageExample : imageCur : URL.createObjectURL(uploadFile)} alt="logo user" height={70} width={70} />
+                <input onChange={(e) => { setUploadFile(e.target.files[0]) }} className={styles.inputFile} accept=".png" type="file" ref={imgBtn} />
                 <div className={styles.data}>
                     <div className={styles.deleteBtnContainer}>
-                        <button type="button" onClick={(e) => { DeleteUser(e, id) }}>
-                            <img src="" alt="delete profile" />
+                        <button className={styles.deleteBtn} type="button" onClick={(e) => { DeleteUser(e, id) }}>
+                            <p>Удалить</p>
+                            <img src={deleteCross} alt="delete profile" height={35} />
                         </button>
                     </div>
                     <div className={styles.inputData}>
                         <label >Логин</label>
-                        <input type="text" placeholder="логин" onBlur={(e) => { e.preventDefault(); ChangeInfo() }} defaultValue={loginCur} onChange={(e) => { setLogin(e.target.value) }} />
+                        <input type="text" placeholder="логин" defaultValue={loginCur} onChange={(e) => { setLogin(e.target.value) }} />
                     </div>
                     <div className={styles.inputData}>
                         <label >Пароль</label>
-                        <input type="text" placeholder="пароль" onBlur={(e) => { e.preventDefault(); ChangeInfo() }} defaultValue={passwordCur} onChange={(e) => { setPassword(e.target.value) }} />
+                        <input type="text" placeholder="пароль" defaultValue={passwordCur} onChange={(e) => { setPassword(e.target.value) }} />
                     </div>
                     <div className={styles.inputData}>
                         <label >Роль</label>
                         <input type="text" disabled={true} defaultValue={roles[roleCur]} />
                     </div>
+                    <div>
+                        <button onClick={(e) => { e.preventDefault(); ChangeInfo() }}>сохранить</button>
+                    </div>
                 </div>
             </div>
             {
                 (roleCur == 0 || roleCur == 3) && (
-                    <div>
+                    <div className={styles.extendedInfoContainer}>
                         <div className={styles.showExtentionInfoBtnContainer}>
-                            <button onClick={(e) => { e.preventDefault(); setShowExtentionInfo(!showExtentionInfo) }}>
+                            <button className={styles.btnShowInfo} onClick={(e) => { e.preventDefault(); setShowExtentionInfo(!showExtentionInfo) }}>
                                 <p>доп информация</p>
-                                <img src="" alt="arrow down" />
+                                <img src={arrowDown} height={20} alt="arrow down" />
                             </button>
                         </div>
                         {showExtentionInfo == true && (
                             <div className={styles.extentionInfo}>
                                 {role == 0 && (
                                     <div className={styles.settingStudent}>
-                                        <div className={styles.inputData}>
+                                        <div className={styles.inputDataExtend}>
                                             <label >Группа</label>
-                                            <select defaultValue={selectedGroupCur} onBlur={(e) => { e.preventDefault(); ChangeInfo() }} onChange={(e) => { setSelectedGroup(e.target.value) }}>
+                                            <select defaultValue={selectedGroupCur} onChange={(e) => { setSelectedGroup(e.target.value) }}>
                                                 {
                                                     allGroupsCur.map(group => (
                                                         <option key={group.id} value={group.id}>{group.name}</option>
@@ -324,37 +401,43 @@ const CardUser = ({ id, login, password, role, group,
                                                 }
                                             </select>
                                         </div>
-                                        <div className={styles.inputData}>
+                                        <div className={styles.inputDataExtend}>
                                             <label >Полное имя</label>
-                                            <input type="text" placeholder="полное имя" onBlur={(e) => { e.preventDefault(); ChangeInfo() }} defaultValue={fullNameCur} onChange={(e) => { setFullName(e.target.value) }} />
+                                            <input type="text" placeholder="полное имя" defaultValue={fullNameCur} onChange={(e) => { setFullName(e.target.value) }} />
                                         </div>
-                                        <div className={styles.inputData}>
+                                        <div className={styles.inputDataExtend}>
                                             <label >Средний балл</label>
-                                            <input type="text" placeholder="средний балл" onBlur={(e) => { e.preventDefault(); ChangeInfo() }} defaultValue={averageScoreCur} onChange={(e) => { setAverageScore(e.target.value) }} />
+                                            <input type="text" placeholder="средний балл" defaultValue={averageScoreCur} onChange={(e) => { setAverageScore(e.target.value) }} />
                                         </div>
-                                        <div className={styles.inputData}>
+                                        <div className={styles.inputDataExtend}>
                                             <label >Адрес</label>
-                                            <input type="text" placeholder="адрес" onBlur={(e) => { e.preventDefault(); ChangeInfo() }} defaultValue={adressStudentCur} onChange={(e) => { setAdressstudent(e.target.value) }} />
+                                            <input type="text" placeholder="адрес" defaultValue={adressStudentCur} onChange={(e) => { setAdressstudent(e.target.value) }} />
                                         </div>
-                                        <div className={styles.inputData}>
+                                        <div className={styles.inputDataExtend}>
                                             <label >Женат</label>
-                                            <input type="checkbox" checked={isMariedCur} onBlur={(e) => { e.preventDefault(); ChangeInfo() }} onChange={(e) => { setIsMaried(!isMariedCur) }} />
+                                            <button onClick={(e) => { e.preventDefault(); setIsMaried(!isMariedCur); }} type="button" className={isMariedCur == true ? styles.checkBoxChecked : styles.checkBox}>
+                                                <img src={isMariedCur ? circleGreen : circleGray} alt="" height={20} width={20} />
+                                            </button>
+                                            {/* <input type="checkbox" checked={isMariedCur} onBlur={(e) => { e.preventDefault(); ChangeInfo() }} onChange={(e) => { setIsMaried(!isMariedCur) }} /> */}
                                         </div>
-                                        <div className={styles.inputData}>
+                                        <div className={styles.inputDataExtend}>
                                             <label >Многодетная семья</label>
-                                            <input type="checkbox" checked={isExtendedFamilyCur} onBlur={(e) => { e.preventDefault(); ChangeInfo() }} onChange={(e) => { setIsExtendFamily(!isExtendedFamilyCur) }} />
+                                            <button onClick={(e) => { e.preventDefault(); setIsExtendFamily(!isExtendedFamilyCur); }} type="button" className={isExtendedFamilyCur == true ? styles.checkBoxChecked : styles.checkBox}>
+                                                <img src={isExtendedFamilyCur ? circleGreen : circleGray} alt="" height={20} width={20} />
+                                            </button>
+                                            {/* <input type="checkbox" checked={isExtendedFamilyCur} onBlur={(e) => { e.preventDefault(); ChangeInfo() }} onChange={(e) => { setIsExtendFamily(!isExtendedFamilyCur) }} /> */}
                                         </div>
                                     </div>
                                 )}
                                 {role == 3 && (
                                     <div className={styles.settingOrganization}>
-                                        <div className={styles.inputData}>
+                                        <div className={styles.inputDataExtend}>
                                             <label >Название</label>
-                                            <input type="text" placeholder="адрес" onBlur={(e) => { e.preventDefault(); ChangeInfo() }} defaultValue={nameOrganizationCur} onChange={(e) => { setNameOrganization(e.target.value) }} />
+                                            <input type="text" placeholder="адрес" onChange={(e) => { setNameOrganization(e.target.value) }} />
                                         </div>
-                                        <div className={styles.inputData}>
+                                        <div className={styles.inputDataExtend}>
                                             <label >Контакты</label>
-                                            <input type="text" placeholder="адрес" onBlur={(e) => { e.preventDefault(); ChangeInfo() }} defaultValue={contactsCur} onChange={(e) => { setContacts(e.target.value) }} />
+                                            <input type="text" placeholder="контакты" defaultValue={contactsCur} onChange={(e) => { setContacts(e.target.value) }} />
                                         </div>
                                     </div>
                                 )}
@@ -363,8 +446,6 @@ const CardUser = ({ id, login, password, role, group,
                     </div>
                 )
             }
-
-
         </div>
     )
 }

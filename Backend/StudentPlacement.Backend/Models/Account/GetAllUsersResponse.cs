@@ -10,6 +10,9 @@
 
         public int Role { get; set; }
 
+        public string? Image { get; set; }
+        /*public IFormFile? Image { get; set; }*/
+
         public int? Group { get; set; }
 
         public string? FullName { get; set; }

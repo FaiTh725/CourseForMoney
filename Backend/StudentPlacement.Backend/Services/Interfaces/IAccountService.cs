@@ -23,5 +23,7 @@ namespace StudentPlacement.Backend.Services.Interfaces
         public Task<BaseResponse> DeleteUser(DeleteUserRequest request);
 
         public Task<BaseResponse> ChangeUser(ChangeUserRequest request);
+
+        public Task<byte[]?> GetImageUser(int idUser);
     }
 }

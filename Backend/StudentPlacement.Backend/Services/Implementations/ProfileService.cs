@@ -26,7 +26,7 @@ namespace StudentPlacement.Backend.Services.Implementations
         {
             try
             {
-                var user = await userRepository.GetUser(request.IdUser);
+                var user = await userRepository.GetUser(request.Id);
 
                 if (user == null) 
                 {
@@ -41,8 +41,8 @@ namespace StudentPlacement.Backend.Services.Implementations
                 var createdAllocationRequest = await allocationRequestRepository
                         .CreateAllocationRequest(new AllocationRequest
                         {
-                            Adress = request.AdressAllocationRequest,
-                            CountPlace = request.CountPlace
+                            Adress = request.AllocationRequestAdress,
+                            CountPlace = request.CountSpace
                         });
 
                 var organization = await organizationRepository.GetOrganizationByLogin(user.Login);
@@ -58,7 +58,7 @@ namespace StudentPlacement.Backend.Services.Implementations
                     StatusCode = StatusCode.Ok,
                     Data = new AddAllocationResponse
                     {
-                        IdAllocatinRequest = newOrganization.Id
+                        IdAllocatinRequest = createdAllocationRequest.Id
                     }
                 };
             }
@@ -69,6 +69,92 @@ namespace StudentPlacement.Backend.Services.Implementations
                     Description = "Ошибка сервера",
                     StatusCode = StatusCode.ServerError,
                     Data = new()
+                };
+            }
+        }
+
+        public async Task<BaseResponse> DeleteAllocationRequest(DeleteAllocationRequest request)
+        {
+            try
+            {
+                var allocation = await allocationRequestRepository.GetAllocationRequestById(request.IdRequest);
+                var organization = await organizationRepository.FindOrganizationByLoginAndName(request.LoginUser, request.OrganizationName);
+
+                if(allocation == null || organization == null)
+                {
+                    return new BaseResponse
+                    {
+                        Description = "Запрос или орагинизация не найден",
+                        StatusCode = StatusCode.NotFountRequest
+                    };
+                }
+
+                await organizationRepository.DeleteAllocationRequest(organization);
+
+                await allocationRequestRepository.DeleteAllocationRequest(allocation);
+
+                return new BaseResponse
+                {
+                    Description = "Удалили заявку",
+                    StatusCode = StatusCode.Ok,
+                };
+            }
+            catch
+            {
+                return new BaseResponse
+                {
+                    Description = "Ошибка сервера",
+                    StatusCode = StatusCode.ServerError,
+                };
+            }
+        }
+
+        public async Task<BaseResponse> UpdateProfileOrganization(ChangeProfileRequest request)
+        {
+            try
+            {
+                var organization = await organizationRepository.GetOrganizationByLogin(request.LoginUser);
+
+                if(organization == null) 
+                {
+                    return new BaseResponse 
+                    { 
+                        Description = "Организация не найдена",
+                        StatusCode = StatusCode.Ok
+                    };
+                }
+
+                AllocationRequest allocationRequest = null;
+
+                if(request.CountPlace != null)
+                {
+                    allocationRequest = new AllocationRequest
+                    {
+                        Adress = request.Adress,
+                        CountPlace = request.CountPlace ?? 0
+                    };
+                }
+
+                await organizationRepository.UpdateOrganizationByLogin(request.LoginUser, new Organization
+                {
+                    Name = request.OrganizationName,
+                    Contacts = request.Contact,
+                    AllocationRequest = allocationRequest,
+                    AllocationRequestId = request.AllocationId
+                });
+
+                return new BaseResponse 
+                { 
+                    Description = "Обновили организацию",
+                    StatusCode = StatusCode.Ok,
+                };
+            }
+            catch
+            {
+                return new BaseResponse
+                {
+                    Description = "Ошибка сервера",
+                    StatusCode = StatusCode.ServerError,
                 };
             }
         }

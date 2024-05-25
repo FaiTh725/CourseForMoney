@@ -10,11 +10,12 @@
 
         public string Code { get; set; } = string.Empty;
     
-        /*public int DepartmentId { get; set; }
+        public int DepartmentId { get; set; }
 
         public Department Department { get; set; }
 
-        public int GroupId { get; set; }
+        public List<Group> Groups { get; set; }
+        /*public int GroupId { get; set; }
 
         public Group Group { get; set; }*/
     }

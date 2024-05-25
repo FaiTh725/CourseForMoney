@@ -14,7 +14,11 @@
         InvalidToken,
 
         StudentExist,
+        NotFoundStudent,
 
-        OrganizatinExist
+        OrganizatinExist,
+
+        NotFountRequest,
+        LimitStudent
     }
 }

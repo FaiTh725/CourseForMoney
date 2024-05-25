@@ -20,7 +20,25 @@ namespace StudentPlacement.Backend.Controllers
         [Authorize]
         public async Task<IActionResult> AddAllocationRequest(AddAllocationRequestRequest request)
         {
-            var response = profileService.AddAllocationRequest(request);
+            var response = await profileService.AddAllocationRequest(request);
+
+            return new JsonResult(response);
+        }
+
+        [HttpDelete("[action]")]
+        [Authorize]
+        public async Task<IActionResult> DeleteAllocationRequest(DeleteAllocationRequest request)
+        {
+            var response = await profileService.DeleteAllocationRequest(request);
+
+            return new JsonResult(response);
+        }
+
+        [HttpPatch("[action]")]
+        [Authorize]
+        public async Task<IActionResult> ChangeProfile(ChangeProfileRequest request)
+        {
+            var response = await profileService.UpdateProfileOrganization(request);
 
             return new JsonResult(response);
         }

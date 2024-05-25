@@ -1,5 +1,6 @@
 C:\VSProjects\React\CourceForMoney\Backend\StudentPlacement.Backend\bin\Debug\net8.0\appsettings.Development.json
 C:\VSProjects\React\CourceForMoney\Backend\StudentPlacement.Backend\bin\Debug\net8.0\appsettings.json
+C:\VSProjects\React\CourceForMoney\Backend\StudentPlacement.Backend\bin\Debug\net8.0\StudentPlacement.Backend.staticwebassets.runtime.json
 C:\VSProjects\React\CourceForMoney\Backend\StudentPlacement.Backend\bin\Debug\net8.0\StudentPlacement.Backend.exe
 C:\VSProjects\React\CourceForMoney\Backend\StudentPlacement.Backend\bin\Debug\net8.0\StudentPlacement.Backend.deps.json
 C:\VSProjects\React\CourceForMoney\Backend\StudentPlacement.Backend\bin\Debug\net8.0\StudentPlacement.Backend.runtimeconfig.json

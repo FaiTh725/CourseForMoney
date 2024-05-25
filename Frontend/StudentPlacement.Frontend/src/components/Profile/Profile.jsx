@@ -1,5 +1,5 @@
 
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import styles from "./Profile.module.css"
 import useParseToken from "../../hooks/useParseToken";
 import api from "../../api/helpAxios";
@@ -8,11 +8,17 @@ import useUpdateToken from "../../hooks/useUpdateToken";
 import useRedirectionRefreshToken from "../../hooks/useRedirectionRefreshToken";
 import AuthContext from "../Context/AuthProvider";
 
+import defaultUserImage from "../../assets/Account/user.png";
+import deleteCross from "../../assets/Account/delete_cross.png"
+import plus from "../../assets/Account/plus.png"
+
+// валидацию на ввод
 const Profile = () => {
     const [idUser, setIdUser] = useState(0);
     const [login, setLogin] = useState("");
     const [role, setRole] = useState(0);
-    const [selectedGroup, setSelectedGroup] = useState(0);
+    const [group, setGroup] = useState("");
+    const [image, setImage] = useState(null);
     const [fullName, setFullName] = useState("");
     const [averageScore, setAverageScore] = useState(0);
     const [adressStudent, setAdressstudent] = useState("");
@@ -24,6 +30,9 @@ const Profile = () => {
     const [nameAdressAllocationRequest, setNameAdressAllocationRequest] = useState();
     const [countPlace, setCountPlace] = useState();
 
+    const refRequest = useRef(null);
+    const refCountPlace = useRef(null);
+
     const navigate = useNavigate();
     const { auth, setAuth } = useContext(AuthContext);
     const roles = {
@@ -33,21 +42,101 @@ const Profile = () => {
         3: "Организация"
     }
 
+    const ChangeProfile = async () => {
+        try {
+            const token = localStorage.getItem("token");
+
+            const response = await api.patch("/Profile/ChangeProfile", {
+                loginUser: login,
+                organizationName: nameOrganization,
+                contact: contacts,
+                allocationId: idAllocationRequest,
+                adress: nameAdressAllocationRequest,
+                countPlace: countPlace
+            }, {
+                withCredentials: true,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token == null ? "" : token}`
+                }
+            });
+
+            if (response.data.statusCode != 0) {
+                console.log(response.data.description);
+            }
+
+            console.log(response);
+        }
+        catch (error) {
+            console.log(error);
+            if (error.request.status == 0) {
+                await useRedirectionRefreshToken(() => { ChangeProfile() },
+                    setAuth,
+                    navigate,
+                    useUpdateToken,
+                    useParseToken);
+            }
+        }
+    }
+
+    const DeleteAllocationRequest = async (e) => {
+        e.preventDefault();
+
+        try {
+            const token = localStorage.getItem("token");
+
+            const response = await api.delete("/Profile/DeleteAllocationRequest", {
+                data: {
+                    idRequest: idAllocationRequest,
+                    organizationName: nameOrganization,
+                    loginUser: login
+                },
+                withCredentials: true,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token == null ? "" : token}`
+                }
+            });
+
+            console.log(response);
+            setNameAdressAllocationRequest();
+            setCountPlace();
+            setIdAllocationRequest();
+            refCountPlace.current.value = "";
+            refRequest.current.value = "";
+        }
+        catch (error) {
+            console.log(error);
+            if (error.request.status == 0) {
+                await useRedirectionRefreshToken(() => { DeleteAllocationRequest(e) },
+                    setAuth,
+                    navigate,
+                    useUpdateToken,
+                    useParseToken);
+            }
+        }
+    }
+
     const AddAllocationRequest = async (e) => {
         e.preventDefault();
 
         try {
             const token = localStorage.getItem("token");
 
-            const response = await api.post("/Profile/AddAllocationRequest", {
-                idUser: idUser,
-                nameOrganization: nameOrganization,
-                adressAllocationRequest: nameAdressAllocationRequest,
-                countPlace: countPlace
-            }, {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token == null ? "" : token}`
-            });
+            const response = await api.post("/Profile/AddAllocationRequest",
+                {
+                    id: idUser,
+                    organizationName: nameOrganization,
+                    allocationRequestAdress: nameAdressAllocationRequest,
+                    countSpace: countPlace
+                },
+                {
+                    withCredentials: true,
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token == null ? "" : token}`
+                    }
+                });
 
             if (response.data.statusCode != 0) {
                 console.log(response.data.description);
@@ -55,6 +144,7 @@ const Profile = () => {
             }
 
             console.log(response);
+            setIdAllocationRequest(response.data.data.idAllocatinRequest);
         }
         catch (error) {
             console.log(error);
@@ -95,27 +185,29 @@ const Profile = () => {
             setIdUser(response.data.data.id);
             setLogin(response.data.data.login);
             setRole(response.data.data.role);
+            setImage(response.data.data.image);
 
             if (response.data.data.role == 0) {
-                setSelectedGroup(response.data.data.group);
+                setGroup(response.data.data.group);
                 setFullName(response.data.data.fullName);
                 setAverageScore(response.data.data.averageScore);
                 setAdressstudent(response.data.data.adressStudent);
                 setIsMaried(response.data.data.isMarried);
                 setIsExtendFamily(response.data.data.extendedFamily);
+                setGroup(response.data.data.groupName);
             }
             else if (response.data.data.role == 3) {
                 setNameOrganization(response.data.data.nameOrganization);
                 setContacts(response.data.data.contacts);
                 setIdAllocationRequest(response.data.data.idAllocationRequest);
-                setNameAdressAllocationRequest(response.data.data.nameAdressAllocationRequest);
+                setNameAdressAllocationRequest(response.data.data.nameAdressAllocationrequestRequest);
                 setCountPlace(response.data.data.countPlace);
             }
         }
         catch (error) {
             console.log(error);
             if (error.request.status == 0) {
-                await useRedirectionRefreshToken(() => { GetAllUsers() },
+                await useRedirectionRefreshToken(() => { GetUserInfo() },
                     setAuth,
                     navigate,
                     useUpdateToken,
@@ -137,7 +229,7 @@ const Profile = () => {
             </header>
             <section className={styles.profileContainer}>
                 <div className={styles.profileImage}>
-                    <img src="" alt="user Image" />
+                    <img src={image == "" || image == null ? defaultUserImage : image} alt="user Image" height={140} width={140} />
                 </div>
                 <div className={styles.mainInfo}>
                     <div className={styles.viewData}>
@@ -149,77 +241,84 @@ const Profile = () => {
                         <h3>{roles[role]}</h3>
                     </div>
                 </div>
-            </section>
-            {
-                role == 0 && (
-                    <section className={styles.extentionInfo}>
-                        <div className={styles.viewData}>
-                            <label>Группа</label>
-                            <h3></h3>
-                        </div>
-                        <div className={styles.viewData}>
-                            <label>Полное имя</label>
-                            <h3>{fullName}</h3>
-                        </div>
-                        <div className={styles.viewData}>
-                            <label>Средний балл</label>
-                            <h3>{averageScore}</h3>
-                        </div>
-                        <div className={styles.viewData}>
-                            <label>Адрес</label>
-                            <h3>{adressStudent}</h3>
-                        </div>
-                        <div className={styles.viewData}>
-                            <label>Женат</label>
-                            <h3>{isMaried}</h3>
-                        </div>
-                        <div className={styles.viewData}>
-                            <label>Многодетная семья</label>
-                            <h3>{isExtendedFamily}</h3>
-                        </div>
-                    </section>
-                )
-            }
-            {role == 3 && (
-                <section className={styles.extentionInfo}>
-                    <div className={styles.organizationInfo}>
-                        <div className={styles.inputData}>
-                            <label>Название</label>
-                            <input type="text" defaultValue={nameOrganization} />
-                        </div>
-                        <div className={styles.inputDataData}>
-                            <label>Контакты</label>
-                            <input type="text" defaultValue={contacts} />
-                        </div>
-                        <form className={styles.organizationRequest}>
-                            <div className={styles.inputData}>
+                {
+                    role == 0 && (
+                        <section className={styles.extentionInfo}>
+                            <div className={styles.viewData}>
+                                <label>Группа</label>
+                                <h3>{group}</h3>
+                            </div>
+                            <div className={styles.viewData}>
+                                <label className={styles.test}>Полное имя</label>
+                                <h3>{fullName}</h3>
+                            </div>
+                            <div className={styles.viewData}>
+                                <label>Средний балл</label>
+                                <h3>{averageScore}</h3>
+                            </div>
+                            <div className={styles.viewData}>
                                 <label>Адрес</label>
-                                <input onChange={(e) => { setNameAdressAllocationRequest(e.target.value) }} defaultValue={nameAdressAllocationRequest} type="text" placeholder="Адрес" />
+                                <h3>{adressStudent}</h3>
+                            </div>
+                            <div className={styles.viewData}>
+                                <label>Женат</label>
+                                <h3>{isMaried}</h3>
+                            </div>
+                            <div className={styles.viewData}>
+                                <label>Многодетная семья</label>
+                                <h3>{isExtendedFamily}</h3>
+                            </div>
+                        </section>
+                    )
+                }
+                {role == 3 && (
+                    <section className={styles.extentionInfo}>
+                        <div className={styles.organizationInfo}>
+                            <div className={styles.inputData}>
+                                <label>Название</label>
+                                <input onBlur={() => { ChangeProfile() }} type="text" onChange={(e) => { setNameOrganization(e.target.value) }} defaultValue={nameOrganization} />
                             </div>
                             <div className={styles.inputData}>
-                                <label>Количество мест</label>
-                                <input onChange={(e) => { setCountPlace(e.target.value) }} defaultValue={countPlace} type="text" placeholder="количество мест" />
+                                <label>Контакты</label>
+                                <input onBlur={() => { ChangeProfile() }} type="text" onChange={(e) => { setContacts(e.target.value) }} defaultValue={contacts} />
                             </div>
-                            {
-                                idAllocationRequest == null && (
-                                    <div >
-                                        <button type="submit">Добавить запрос</button>
-                                    </div>
-                                )
-                            }
-                            {
-                                idAllocationRequest != null && (
-                                    <div >
-                                        <button type="submit">Удалить запрос</button>
-                                    </div>
-                                )
-                            }
-                        </form>
-                    </div>
+                            <form className={styles.organizationRequest}>
+                                <div className={styles.inputData}>
+                                    <label>Адрес</label>
+                                    <input onBlur={() => { ChangeProfile() }} ref={refRequest} onChange={(e) => { setNameAdressAllocationRequest(e.target.value) }} defaultValue={nameAdressAllocationRequest} type="text" placeholder="Адрес" />
+                                </div>
+                                <div className={styles.inputData}>
+                                    <label>Количество мест</label>
+                                    <input onBlur={() => { ChangeProfile() }} ref={refCountPlace} onChange={(e) => { setCountPlace(e.target.value) }} defaultValue={countPlace} type="text" placeholder="количество мест" />
+                                </div>
+                                {
+                                    idAllocationRequest == null && (
+                                        <div className={styles.btnContainer} onClick={(e) => { AddAllocationRequest(e) }}>
+                                            <button className={styles.addBtn} type="submit">
+                                                <p>Добавить запрос</p>
+                                                <img src={plus} alt="delete profile" height={35} />    
+                                            </button>
+                                        </div>
+                                    )
+                                }
+                                {
+                                    idAllocationRequest != null && (
+                                        <div className={styles.btnContainer} onClick={(e) => { DeleteAllocationRequest(e) }}>
+                                            <button className={styles.deleteBtn} type="submit">
+                                                <p>Удалить запрос</p>
+                                                <img src={deleteCross} alt="delete profile" height={35} />    
+                                            </button>
+                                        </div>
+                                    )
+                                }
+                            </form>
+                        </div>
 
-                </section>
+                    </section>
 
-            )}
+                )}
+            </section>
+
         </main>
     )
 }

@@ -1,0 +1,130 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+.main {
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 16px;
+    padding: 40px 80px;
+}
+
+.header {
+    margin-bottom: 40px;
+    font-size: 24px;
+    font-weight: 600;
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    color: rgb(164, 166, 168);
+}
+
+.imageInput img{
+    border-radius: 50%;
+}
+
+.imageInput input {
+    height: 0;
+    width: 0;
+    padding: 0;
+    margin: 0;
+    opacity: 0;
+}
+
+.createAccount {
+    display: flex;
+    align-items: center;
+}
+
+.writeData {
+    margin-left: 40px;
+    display: inline-flex;
+    min-height: 300px;
+}
+
+.dataInput {
+    font-size: 18px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.dataInput label {
+    color: rgb(164, 166, 168);
+}
+
+.dataInput div {
+    display: flex;
+    border-radius: 8px;
+    border: 2px solid rgb(164, 166, 168);
+    padding: 7px 10px;
+    margin-top: 10px;
+}
+
+.dataInput div img {
+    margin-right: 10px;
+}
+
+.dataInput div input {
+    font-size: 14px;
+}
+
+.roleOption {
+    display: flex;
+    align-items: center;
+    margin: 25px 0;
+    font-size: 16px;
+    color: rgb(164, 166, 168);
+}
+
+.selectOption {
+    font-size: 16px;
+    padding: 8xp 10px;
+} 
+
+.selectOption:hover {
+    font-size: 16px;
+    background-color: #008054d9;
+}
+
+.groupOption {
+    margin-bottom: 20px;
+}
+
+.defaultBtn {
+    background-color: #008054d9;
+    color: #fff;
+    padding: 10px 14px;
+    font-size: 16px;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+.defaultBtn:hover {
+    background-color: #03794fd9;
+    box-shadow: 0px 0px 5px #06a06ad9;
+} 
+
+.btnContainer {
+    margin-left: 10px;
+    display: flex;
+    justify-content: start;
+    align-items: start;
+}
+
+.checkBox {
+    padding: 3px;
+    width: 50px;
+    border-radius: 14px;
+    background-color: transparent;
+    border: 2px solid #a4a6a8;
+    text-align: start;
+    margin-left: 8px;
+}
+
+.checkBoxChecked {
+    padding: 3px;
+    width: 50px;
+    border-radius: 14px;
+    background-color: transparent;
+    border: 2px solid #008054d9;
+    text-align: end;
+    margin-left: 8px;
+}

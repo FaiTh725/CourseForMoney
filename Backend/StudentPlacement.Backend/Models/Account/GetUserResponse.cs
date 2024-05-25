@@ -2,6 +2,7 @@
 {
     public class GetUserResponse : GetAllUsersResponse
     { 
+        public string? GroupName { get; set; } 
 
         public int? IdAllocationRequest { get; set; }   
 

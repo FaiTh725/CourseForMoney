@@ -1,4 +1,5 @@
 ﻿using Azure.Core;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using StudentPlacement.Backend.Dal.Interfaces;
 using StudentPlacement.Backend.Domain.Entities;
@@ -9,10 +10,20 @@ namespace StudentPlacement.Backend.Dal.Implementations
     public class UserRepository : IUserRepository
     {
         private readonly AppDbContext context;
+        private readonly IWebHostEnvironment environment;
+        private readonly LinkGenerator linkGenerator;
+        private readonly IHttpContextAccessor httpContextAccessor;
+        //private readonly IUrlHelper urlHelper;
 
-        public UserRepository(AppDbContext context)
+
+        public UserRepository(AppDbContext context, IWebHostEnvironment environment,
+                LinkGenerator linkGenerator,
+                IHttpContextAccessor httpContextAccessor)
         {
             this.context = context;
+            this.environment = environment;
+            this.linkGenerator = linkGenerator;
+            this.httpContextAccessor = httpContextAccessor;
         }
 
         public async Task<User> Createuser(User user)
@@ -47,6 +58,7 @@ namespace StudentPlacement.Backend.Dal.Implementations
                             Login = u.Login,
                             Password = u.Password,
                             Role = (int)u.Role,
+                            Image = u.ImageUserStringFormat,
                             FullName = s.FullName,
                             AdressStudent = s.Adress,
                             AverageScore = s.AverageScore,
@@ -57,7 +69,8 @@ namespace StudentPlacement.Backend.Dal.Implementations
                             Contacts = o.Contacts
                         };
 
-            return await query.ToListAsync();   
+            return await query.ToListAsync();
+
         }
 
         public async Task<User> GetUserByLogin(string login)
@@ -74,7 +87,7 @@ namespace StudentPlacement.Backend.Dal.Implementations
         {
             var user = await GetById(idUser);
 
-            if (user == null) 
+            if (user == null)
             {
                 return null;
             }
@@ -83,7 +96,8 @@ namespace StudentPlacement.Backend.Dal.Implementations
             user.Login = newUser.Login;
             user.Token = newUser.Token;
             user.TimeEndToken = newUser.TimeEndToken;
-            
+            user.ImageUserStringFormat = newUser.ImageUserStringFormat;
+
             await context.SaveChangesAsync();
 
             return user;
@@ -92,12 +106,26 @@ namespace StudentPlacement.Backend.Dal.Implementations
         public async Task DeleteUser(User user)
         {
             context.Users.Remove(user);
-            
-            await context.SaveChangesAsync();   
+
+            await context.SaveChangesAsync();
         }
 
         public async Task<GetUserResponse> GetUser(int idUser)
         {
+            var user = await GetById(idUser);
+
+            /*string? urlImage = null;
+            var path = environment.WebRootPath + $"/StorageUserImage/{user.Id} - {user.Login}.png";
+            if (File.Exists(path))
+            {
+                urlImage = linkGenerator.GetUriByAction(
+                    httpContext: httpContextAccessor.HttpContext,
+                    action: "GetUserImage",
+                    controller: "Image",
+                    values: new { userId = user.Id }
+                    );
+            }*/
+
             var query = from u in context.Users
                         where u.Id == idUser
                         join o in context.Organizations.Include(x => x.AllocationRequest) on u.Id equals o.UserId into ou
@@ -110,12 +138,15 @@ namespace StudentPlacement.Backend.Dal.Implementations
                             Login = u.Login,
                             Password = u.Password,
                             Role = (int)u.Role,
+                            /*Image = u.ImageUserStringFormat,*/
+                            Image = u.ImageUserStringFormat,
                             FullName = s.FullName,
                             AdressStudent = s.Adress,
                             AverageScore = s.AverageScore,
                             IsMarried = s.IsMarried,
                             ExtendedFamily = s.ExtendedFamily,
                             Group = s.GroupId,
+                            GroupName = s.Group.Number,
                             //IdOrganization = o.Id,
                             NameOrganization = o.Name,
                             Contacts = o.Contacts,
@@ -123,6 +154,8 @@ namespace StudentPlacement.Backend.Dal.Implementations
                             CountPlace = o.AllocationRequest.CountPlace,
                             NameAdressAllocationrequestRequest = o.AllocationRequest.Adress
                         };
+
+
 
             return await query.FirstOrDefaultAsync(x => x.Id == idUser);
         }

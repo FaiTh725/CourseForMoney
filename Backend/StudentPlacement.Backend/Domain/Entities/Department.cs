@@ -12,6 +12,6 @@
 
         public List<Specialization> Specializations { get; set; } = new();
         
-        public List<AllocationRequest> Requests { get; set; } = new();
+        //public List<AllocationRequest> Requests { get; set; } = new();
     }
 }

@@ -17,13 +17,19 @@ namespace StudentPlacement.Backend.Services.Implementations
         private readonly IOrganizationRepository organizationRepository;
         private readonly IAllocationRequestRepository allocationRequestRepository;
         private readonly IStudentRepository studentRepository;
+        private readonly IWebHostEnvironment environment;
+        private readonly LinkGenerator linkGenerator;
+        private readonly IHttpContextAccessor httpContextAccessor;
 
         public AccountService(IUserRepository userRepository,
                     IJwtProviderService jwtProviderService,
                     IGroupRepository groupRepository,
                     IOrganizationRepository organizationRepository,
                     IAllocationRequestRepository allocationRequestRepository,
-                    IStudentRepository studentRepository)
+                    IStudentRepository studentRepository,
+                    IWebHostEnvironment environment,
+                    LinkGenerator linkGenerator,
+                    IHttpContextAccessor httpContextAccessor)
         {
             this.userRepository = userRepository;
             this.jwtProviderService = jwtProviderService;
@@ -31,6 +37,9 @@ namespace StudentPlacement.Backend.Services.Implementations
             this.organizationRepository = organizationRepository;
             this.allocationRequestRepository = allocationRequestRepository;
             this.studentRepository = studentRepository;
+            this.environment = environment;
+            this.linkGenerator = linkGenerator;
+            this.httpContextAccessor = httpContextAccessor;
         }
 
         public async Task<BaseResponse> ChangeUser(ChangeUserRequest request)
@@ -59,14 +68,38 @@ namespace StudentPlacement.Backend.Services.Implementations
                     };
                 }
 
-                if (userByLogin.Login != request.Login || userByLogin.Password != request.Password)
+
+                string? newImageUser = null;
+
+                if (File.Exists(environment.WebRootPath + $"/StorageUserImage/{request.Id} - {request.Login}.png"))
                 {
-                    await userRepository.Update(user.Id, new User
+                    File.Delete(environment.WebRootPath + $"/StorageUserImage/{request.Id} - {request.Login}.png");
+                }
+
+                var updatedUser = await userRepository.Update(user.Id, new User
+                {
+                    Login = request.Login,
+                    Password = request.Password,
+                    Role = user.Role,
+                    ImageUserStringFormat = user.ImageUserStringFormat
+                });
+
+                if (request.Image != null)
+                {
+                    using (var file = new FileStream(environment.WebRootPath + $"/StorageUserImage/{request.Id} - {request.Login}.png", FileMode.Create))
                     {
-                        Login = request.Login,
-                        Password = request.Password,
-                        Role = user.Role
-                    });
+                        await request.Image.CopyToAsync(file);
+                    }
+
+                    newImageUser = linkGenerator.GetUriByAction(
+                                httpContext: httpContextAccessor.HttpContext,
+                                action: "GetUserImage",
+                                controller: "Image",
+                                values: new { userId = user.Id });
+
+                    updatedUser.ImageUserStringFormat = newImageUser;
+
+                    await userRepository.Update(user.Id, updatedUser);
                 }
 
 
@@ -93,8 +126,8 @@ namespace StudentPlacement.Backend.Services.Implementations
 
                     var newOrganization = new Organization
                     {
-                        Name = request.NameOrganization,
-                        Contacts = request.Contacts,
+                        Name = request.OrganizationName,
+                        Contacts = request.Contact,
 
                     };
 
@@ -141,6 +174,32 @@ namespace StudentPlacement.Backend.Services.Implementations
                 }
 
                 var createdUser = await userRepository.Createuser(user);
+
+                if (request.Image != null)
+                {
+                    var path = "/StorageUserImage/" + $"{createdUser.Id} - {user.Login}.png";
+
+                    using (var file = new FileStream(environment.WebRootPath + path, FileMode.Create))
+                    {
+                        await request.Image.CopyToAsync(file);
+                    }
+                }
+
+                string? urlImage = null;
+                var pathUserImage = environment.WebRootPath + $"/StorageUserImage/{user.Id} - {user.Login}.png";
+                if (File.Exists(pathUserImage))
+                {
+                    urlImage = linkGenerator.GetUriByAction(
+                        httpContext: httpContextAccessor.HttpContext,
+                        action: "GetUserImage",
+                        controller: "Image",
+                        values: new { userId = user.Id }
+                        );
+                }
+
+                createdUser.ImageUserStringFormat = urlImage;
+
+                await userRepository.Update(createdUser.Id, createdUser);
 
                 if (request.Role == 0)
                 {
@@ -192,18 +251,10 @@ namespace StudentPlacement.Backend.Services.Implementations
                         };
                     }
 
-                    /*var allocationRequest = await allocationRequestRepository.CreateAllocationRequest(new AllocationRequest
-                    {
-                        Adress = request.AdressAllocationRequest,
-                        CountPlace = request.CountPlace
-                    });*/
-
                     await organizationRepository.CreateOrganization(new Organization
                     {
                         Name = request.NameOrganization,
                         Contacts = request.Contacts,
-                        /*AllocationRequest = allocationRequest,
-                        AllocationRequestId = allocationRequest.Id,*/
                         User = createdUser,
                         UserId = createdUser.Id,
                     });
@@ -242,7 +293,13 @@ namespace StudentPlacement.Backend.Services.Implementations
                     };
                 }
 
+                // Сомнительное место еще не тестил
                 await userRepository.DeleteUser(user);
+
+                if (File.Exists(environment.WebRootPath + $"/StorageUserImage/{user.Id} - {user.Login}.png"))
+                {
+                    File.Delete(environment.WebRootPath + $"/StorageUserImage/{user.Id} - {user.Login}.png");
+                }
 
                 return new BaseResponse
                 {
@@ -339,6 +396,21 @@ namespace StudentPlacement.Backend.Services.Implementations
             }
         }
 
+        public async Task<byte[]?> GetImageUser(int idUser)
+        {
+            var user = await userRepository.GetById(idUser);
+
+            var path = "/StorageUserImage/" + $"{user.Id} - {user.Login}.png";
+
+
+            if (File.Exists(environment.WebRootPath + path))
+            {
+                return File.ReadAllBytes(environment.WebRootPath + path);
+            }
+
+            return null;
+        }
+
         public async Task<DataResponse<IEnumerable<GroupView>>> GetStudentSetting()
         {
             try
@@ -369,7 +441,7 @@ namespace StudentPlacement.Backend.Services.Implementations
             {
                 var user = await userRepository.GetUser(idUser);
 
-                return new DataResponse<GetUserResponse> 
+                return new DataResponse<GetUserResponse>
                 {
                     Description = "Получили пользователя",
                     StatusCode = StatusCode.Ok,

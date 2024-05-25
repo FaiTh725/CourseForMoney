@@ -1,0 +1,45 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\wwwroot\\StorageUserImage\\1 - user123.png",
+      "PackagePath": "staticwebassets\\StorageUserImage\\1 - user123.png"
+    },
+    {
+      "Id": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\wwwroot\\StorageUserImage\\28 - test.png",
+      "PackagePath": "staticwebassets\\StorageUserImage\\28 - test.png"
+    },
+    {
+      "Id": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\wwwroot\\StorageUserImage\\29 - test2.png",
+      "PackagePath": "staticwebassets\\StorageUserImage\\29 - test2.png"
+    },
+    {
+      "Id": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\wwwroot\\StorageUserImage\\30 - test4.png",
+      "PackagePath": "staticwebassets\\StorageUserImage\\30 - test4.png"
+    },
+    {
+      "Id": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\wwwroot\\StorageUserImage\\31 - test5.png",
+      "PackagePath": "staticwebassets\\StorageUserImage\\31 - test5.png"
+    },
+    {
+      "Id": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\wwwroot\\StorageUserImage\\32 - test1.png",
+      "PackagePath": "staticwebassets\\StorageUserImage\\32 - test1.png"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.StudentPlacement.Backend.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.StudentPlacement.Backend.props",
+      "PackagePath": "build\\StudentPlacement.Backend.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.StudentPlacement.Backend.props",
+      "PackagePath": "buildMultiTargeting\\StudentPlacement.Backend.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.StudentPlacement.Backend.props",
+      "PackagePath": "buildTransitive\\StudentPlacement.Backend.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

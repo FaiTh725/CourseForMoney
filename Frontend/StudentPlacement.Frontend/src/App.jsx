@@ -1,5 +1,5 @@
 import viteLogo from '/vite.svg' // будет как пример
-import './App.css'
+import "./reset.css"
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { AuthProvider } from './components/Context/AuthProvider'
 import Auth from './components/Auth/Auth'
@@ -8,6 +8,8 @@ import ProtectedRoute from './components/Context/ProtectedRoute'
 import Account from './components/Account/Account'
 import AccountControll from './components/Account/AccountControll'
 import Profile from './components/Profile/Profile'
+import Allocation from './components/Allocation/Allocation'
+
 
 function App() {
   
@@ -20,6 +22,7 @@ function App() {
           <Route exact path="/Account" element={<Account/>}/>
           <Route exact path="/AccountControll" element={<AccountControll/>}/>
           <Route exact path="/Profile" element={<Profile/>}/>
+          <Route exact path="/Allocation" element={<Allocation/>}/>
           <Route element={<ProtectedRoute/>}>
             <Route exact path="/Home" element={<Home/>}/>
           </Route>

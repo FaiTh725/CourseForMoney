@@ -37,12 +37,7 @@ namespace StudentPlacement.Backend.Migrations
                     b.Property<int>("CountPlace")
                         .HasColumnType("int");
 
-                    b.Property<int?>("DepartmentId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("DepartmentId");
 
                     b.ToTable("AllocationRequests");
                 });
@@ -137,7 +132,7 @@ namespace StudentPlacement.Backend.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("DepartmentId")
+                    b.Property<int>("DepartmentId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -214,6 +209,9 @@ namespace StudentPlacement.Backend.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("ImageUserStringFormat")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Login")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -236,17 +234,10 @@ namespace StudentPlacement.Backend.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("StudentPlacement.Backend.Domain.Entities.AllocationRequest", b =>
-                {
-                    b.HasOne("StudentPlacement.Backend.Domain.Entities.Department", null)
-                        .WithMany("Requests")
-                        .HasForeignKey("DepartmentId");
-                });
-
             modelBuilder.Entity("StudentPlacement.Backend.Domain.Entities.Group", b =>
                 {
                     b.HasOne("StudentPlacement.Backend.Domain.Entities.Specialization", "Specialization")
-                        .WithMany()
+                        .WithMany("Groups")
                         .HasForeignKey("SpecializationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -273,15 +264,19 @@ namespace StudentPlacement.Backend.Migrations
 
             modelBuilder.Entity("StudentPlacement.Backend.Domain.Entities.Specialization", b =>
                 {
-                    b.HasOne("StudentPlacement.Backend.Domain.Entities.Department", null)
+                    b.HasOne("StudentPlacement.Backend.Domain.Entities.Department", "Department")
                         .WithMany("Specializations")
-                        .HasForeignKey("DepartmentId");
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Department");
                 });
 
             modelBuilder.Entity("StudentPlacement.Backend.Domain.Entities.Student", b =>
                 {
                     b.HasOne("StudentPlacement.Backend.Domain.Entities.AllocationRequest", "AllocationRequest")
-                        .WithMany()
+                        .WithMany("Students")
                         .HasForeignKey("AllocationRequestId");
 
                     b.HasOne("StudentPlacement.Backend.Domain.Entities.Group", "Group")
@@ -303,16 +298,24 @@ namespace StudentPlacement.Backend.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("StudentPlacement.Backend.Domain.Entities.AllocationRequest", b =>
+                {
+                    b.Navigation("Students");
+                });
+
             modelBuilder.Entity("StudentPlacement.Backend.Domain.Entities.Department", b =>
                 {
-                    b.Navigation("Requests");
-
                     b.Navigation("Specializations");
                 });
 
             modelBuilder.Entity("StudentPlacement.Backend.Domain.Entities.Group", b =>
                 {
                     b.Navigation("Students");
+                });
+
+            modelBuilder.Entity("StudentPlacement.Backend.Domain.Entities.Specialization", b =>
+                {
+                    b.Navigation("Groups");
                 });
 #pragma warning restore 612, 618
         }

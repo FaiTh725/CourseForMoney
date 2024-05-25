@@ -12,7 +12,7 @@ namespace StudentPlacement.Backend.Domain.Entities
 
         public string Adress { get; set; } = string.Empty;
 
-        public StatusAllocationRequest StatusRequest { get; set; }
+        public StatusAllocationRequest StatusRequest { get; set; } = StatusAllocationRequest.NoRequest;
 
         public bool IsMarried { get; set; }
 

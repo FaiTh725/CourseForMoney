@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+.main {
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    background-color: rgba(228, 230, 231, 0.836);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.inner {
+    border-radius: 14px;
+    background-color: #fff;
+    padding: 40px 60px;
+    text-align: center;
+    box-shadow: 5xp -5px 10px #000000;
+}
+
+.head {
+    margin-bottom: 40px;
+}
+
+.inputData {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: start;
+}
+
+.inputData + .inputData{
+    margin-top: 20px;
+}
+
+.inputData input {
+    font-size: 16px;
+    padding: 7px 10px;
+    border-radius: 8px;
+    border: 2px solid transparent;
+    background-color: #f2f2f2;
+    margin-top: 10px;
+    min-width: 300px;
+} 
+
+.inputData input:focus {
+    border: 2px solid #008054d9;
+    background-color: #fff;
+}
+
+.errorMessage {
+    margin-top: 5px;
+    color: #b1b4b3d9;
+}
+
+.inputData label {
+    margin-left: 10px;
+}
+
+.btnContainer {
+    display: flex;
+    justify-content: end;
+    margin-top: 30px;
+}
+
+.defautlBtn {
+    background-color: #008054d9;
+    color: #fff;
+    padding: 10px 14px;
+    font-size: 16px;
+    border-radius: 8px;
+}
+
+.errorContainer {
+    display: flex;
+    margin-top: 5px;
+}
+
+.defautlBtn:hover {
+    background-color: #03794fd9;
+    box-shadow: 0px 0px 5px #06a06ad9;
+} 

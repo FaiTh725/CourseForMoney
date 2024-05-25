@@ -7,14 +7,7 @@
         public string Adress { get; set; } = string.Empty;
 
         public int CountPlace { get; set; }
-        
 
-        /*public int OrganizationId { get; set; } 
-
-        public Organization Organization { get; set; }
-
-        public int DepartmentId { get; set; }
-
-        public Department Department { get; set; }*/
+        public List<Student> Students { get; set; } = new List<Student>();
     }
 }

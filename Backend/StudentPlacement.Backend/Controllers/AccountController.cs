@@ -1,11 +1,15 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
+using StudentPlacement.Backend.Domain.Entities;
 using StudentPlacement.Backend.Models.Account;
 using StudentPlacement.Backend.Models.Enter;
 using StudentPlacement.Backend.Services.Interfaces;
 
 namespace StudentPlacement.Backend.Controllers
 {
+    // удалить поле image в таблице user 
     [ApiController]
     [Route("[controller]")]
     public class AccountController : ControllerBase
