@@ -19,20 +19,20 @@ import organizationNameImg from "../../assets/Account/organization_name.png"
 import contactsImg from "../../assets/Account/contacts.png"
 import roleImg from "../../assets/Account/role.png"
 import groupImg from "../../assets/Account/group.png"
+import emailImg from "../../assets/Account/email.png"
 import circleGray from "../../assets/Account/circleGray.png"
 import circleGreen from "../../assets/Account/circleGree.png"
 
-// валидация логина и пароля
-// валидацию данных
-// загрузка фото
 // маску для телефона для контактов организации
 // соединить создание и управление пользователями в одно 
+// увудомлять о успешном создании
 const Account = () => {
     const [uploadFile, setUploadFile] = useState(null);
     const [userImage, setUserImage] = useState("");
     const imgBtn = useRef(null);
     const [login, setLogin] = useState("");
     const [password, setPassword] = useState("");
+    const [email, setEmail] = useState("");
     const [selectedRole, setSelectedRole] = useState(0);
     const navigate = useNavigate();
     const { auth, setAuth } = useContext(AuthContext);
@@ -55,6 +55,7 @@ const Account = () => {
     // errors
     const loginError = useRef(null);
     const passwordError = useRef(null);
+    const emailError = useRef(null);
     const averageScoreError = useRef(null);
 
     useEffect(() => {
@@ -65,18 +66,10 @@ const Account = () => {
         }
 
         passwordError.current.textContent = "";
-    }, [login, password, averageScore]);
+    }, [login, password, averageScore, email]);
 
-    // useEffect(() => {
-
-    // }, [login, password, uploadFile,
-    //     selectedRole, selectedGroup, fullName,
-    //     adressAllocationRequest, adressStudent,
-    //     averageScore, isMaried, isExtendFamily,
-    //     nameOrganization, contacts, countSpace]);
 
     const CreateUser = async (e) => {
-        //console.log(selectedGroup);
         e.preventDefault();
 
         if (login.length < 4) {
@@ -98,6 +91,11 @@ const Account = () => {
             return;
         }
 
+        if (!email.includes("@")) {
+            emailError.current.textContent = "Неверная почта";
+            return;
+        }
+
         if (selectedRole == 0 && selectedGroup == null) {
             errorMessage.current.value = "Сейчас невозможно добавить студента";
             return;
@@ -110,11 +108,13 @@ const Account = () => {
             formData.append("password", password);
             formData.append("role", selectedRole);
             formData.append("image", uploadFile);
+            formData.append("email", email);
             var data = {
                 login: login,
                 password: password,
                 role: selectedRole,
                 image: uploadFile,
+                email: email,
                 group: selectedGroup,
                 fullName: "",
                 averageScore: 0,
@@ -169,15 +169,10 @@ const Account = () => {
 
 
             if (response.data.statusCode != 0) {
-                errorMessage.current.value = response.data.description;
+                alert(errorMessage.current.value = response.data.description);
                 return;
             }
             console.log(response);
-
-            if (response.data.statusCode != 0) {
-                errorMessage.current.textCpntent = response.data.description;
-                return;
-            }
 
 
         }
@@ -227,11 +222,6 @@ const Account = () => {
         }
     }
 
-    const HandlerImageChanged = async (file) => {
-        const fileString = await useImgToString(file);
-        setUserImage(fileString);
-    }
-
     useEffect(() => {
         const fatchAllGroup = async () => {
             await GetAllGroup();
@@ -278,6 +268,14 @@ const Account = () => {
                             <input maxLength={17} onChange={(e) => { setPassword(e.target.value) }} type="text" placeholder="пароль" />
                         </div>
                         <label ref={passwordError}></label>
+                    </div>
+                    <div className={styles.dataInput}>
+                        <label>Почта</label>
+                        <div>
+                            <img src={emailImg} alt="email" height={25} />
+                            <input className={styles.inputEmail} maxLength={30} onChange={(e) => { setEmail(e.target.value) }} type="text" placeholder="пароль" />
+                        </div>
+                        <label ref={emailError}></label>
                     </div>
                     <div className={styles.options}>
                         <div className={styles.roleOption}>

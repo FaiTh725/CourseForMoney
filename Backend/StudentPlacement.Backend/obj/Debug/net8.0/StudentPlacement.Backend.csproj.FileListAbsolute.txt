@@ -137,3 +137,6 @@ C:\VSProjects\React\CourceForMoney\Backend\StudentPlacement.Backend\obj\Debug\ne
 C:\VSProjects\React\CourceForMoney\Backend\StudentPlacement.Backend\obj\Debug\net8.0\StudentPlacement.Backend.pdb
 C:\VSProjects\React\CourceForMoney\Backend\StudentPlacement.Backend\obj\Debug\net8.0\StudentPlacement.Backend.genruntimeconfig.cache
 C:\VSProjects\React\CourceForMoney\Backend\StudentPlacement.Backend\obj\Debug\net8.0\ref\StudentPlacement.Backend.dll
+C:\VSProjects\React\CourceForMoney\Backend\StudentPlacement.Backend\bin\Debug\net8.0\BouncyCastle.Cryptography.dll
+C:\VSProjects\React\CourceForMoney\Backend\StudentPlacement.Backend\bin\Debug\net8.0\MailKit.dll
+C:\VSProjects\React\CourceForMoney\Backend\StudentPlacement.Backend\bin\Debug\net8.0\MimeKit.dll

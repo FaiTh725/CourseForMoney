@@ -20,6 +20,7 @@ namespace StudentPlacement.Backend.Services.Implementations
         private readonly IWebHostEnvironment environment;
         private readonly LinkGenerator linkGenerator;
         private readonly IHttpContextAccessor httpContextAccessor;
+        private readonly IEmailService emailService;    
 
         public AccountService(IUserRepository userRepository,
                     IJwtProviderService jwtProviderService,
@@ -29,7 +30,8 @@ namespace StudentPlacement.Backend.Services.Implementations
                     IStudentRepository studentRepository,
                     IWebHostEnvironment environment,
                     LinkGenerator linkGenerator,
-                    IHttpContextAccessor httpContextAccessor)
+                    IHttpContextAccessor httpContextAccessor,
+                    IEmailService emailService)
         {
             this.userRepository = userRepository;
             this.jwtProviderService = jwtProviderService;
@@ -40,6 +42,7 @@ namespace StudentPlacement.Backend.Services.Implementations
             this.environment = environment;
             this.linkGenerator = linkGenerator;
             this.httpContextAccessor = httpContextAccessor;
+            this.emailService = emailService;
         }
 
         public async Task<BaseResponse> ChangeUser(ChangeUserRequest request)
@@ -57,7 +60,8 @@ namespace StudentPlacement.Backend.Services.Implementations
                     };
                 }
 
-                var userByLogin = await userRepository.GetUserByLogin(user.Login);
+                var userByLogin = await userRepository.GetUserByLogin(request.Login);
+                var userByEmail = await userRepository.GetUserByEmail(request.Email);
 
                 if (userByLogin != null && user.Login != userByLogin.Login)
                 {
@@ -68,12 +72,13 @@ namespace StudentPlacement.Backend.Services.Implementations
                     };
                 }
 
-
-                string? newImageUser = null;
-
-                if (File.Exists(environment.WebRootPath + $"/StorageUserImage/{request.Id} - {request.Login}.png"))
+                if (userByEmail != null && user.Email !=  userByEmail.Email) 
                 {
-                    File.Delete(environment.WebRootPath + $"/StorageUserImage/{request.Id} - {request.Login}.png");
+                    return new BaseResponse
+                    {
+                        Description = "Почта уже занят",
+                        StatusCode = StatusCode.InvalidEmail
+                    };
                 }
 
                 var updatedUser = await userRepository.Update(user.Id, new User
@@ -81,11 +86,22 @@ namespace StudentPlacement.Backend.Services.Implementations
                     Login = request.Login,
                     Password = request.Password,
                     Role = user.Role,
+                    Email = request.Email,
                     ImageUserStringFormat = user.ImageUserStringFormat
                 });
 
+
+
                 if (request.Image != null)
                 {
+
+                    string? newImageUser = null;
+
+                    if (File.Exists(environment.WebRootPath + $"/StorageUserImage/{request.Id} - {request.Login}.png"))
+                    {
+                        File.Delete(environment.WebRootPath + $"/StorageUserImage/{request.Id} - {request.Login}.png");
+                    }
+
                     using (var file = new FileStream(environment.WebRootPath + $"/StorageUserImage/{request.Id} - {request.Login}.png", FileMode.Create))
                     {
                         await request.Image.CopyToAsync(file);
@@ -159,7 +175,8 @@ namespace StudentPlacement.Backend.Services.Implementations
                 {
                     Login = request.Login,
                     Password = request.Password,
-                    Role = (Role)request.Role
+                    Role = (Role)request.Role,
+                    Email = request.Email
                 };
 
                 var checkedUserLogin = await userRepository.GetUserByLogin(request.Login);
@@ -170,6 +187,42 @@ namespace StudentPlacement.Backend.Services.Implementations
                     {
                         Description = "Логин уже занят",
                         StatusCode = StatusCode.UserExist
+                    };
+                }
+
+                var userWithCurrentEmail = await userRepository.GetUserByEmail(request.Email);
+
+                if(userWithCurrentEmail != null)
+                {
+                    return new BaseResponse
+                    {
+                        Description = "Почта уже занята",
+                        StatusCode = StatusCode.InvalidEmail
+                    };
+                }
+
+                try
+                {
+                    string message = $@"<div style=""color: #fff; font-size: 18px;background-color: #008054d9;padding: 15px 20px; border-radius: 14px; "">
+                                            <div style='margin-bottom: 10px'>
+                                              <label>Логин</label>
+                                              <p style=""margin-top: 5px; margin-left: 10px"">{request.Login}</p>
+                                            </div>
+                                            <div>
+                                              <label>Пароль</label>
+                                              <p style=""margin-top: 5px; margin-left: 10px"">{request.Password}</p>
+                                            </div>
+                                            <footer style=""text-align: center; color: #ffffffb0"">Данные от личного кабинета</footer>
+                                        </div>";
+
+                    await emailService.SendDefaultEmail(request.Email, "Распределение, личный кабинет", message);
+                }
+                catch (MailKit.Net.Smtp.SmtpCommandException)
+                {
+                    return new BaseResponse
+                    {
+                        Description = "Email не действителен",
+                        StatusCode = StatusCode.InvalidEmail
                     };
                 }
 

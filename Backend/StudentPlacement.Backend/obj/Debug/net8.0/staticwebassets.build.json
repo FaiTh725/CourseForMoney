@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "GcqvF/+A6JJ33xaM40+ztJ93u3ZKjRwTNbZiVbmHhjk=",
+  "Hash": "jIyGMoHxOQCiXrcubLQ77vsJgCtof9wB8GOUEdVfI50=",
   "Source": "StudentPlacement.Backend",
   "BasePath": "_content/StudentPlacement.Backend",
   "Mode": "Default",
@@ -129,6 +129,44 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\StorageUserImage\\32 - test1.png"
+    },
+    {
+      "Identity": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\wwwroot\\StorageUserImage\\33 - test2.png",
+      "SourceId": "StudentPlacement.Backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\wwwroot\\",
+      "BasePath": "_content/StudentPlacement.Backend",
+      "RelativePath": "StorageUserImage/33 - test2.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\StorageUserImage\\33 - test2.png"
+    },
+    {
+      "Identity": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\wwwroot\\StorageUserImage\\34 - test3.png",
+      "SourceId": "StudentPlacement.Backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\wwwroot\\",
+      "BasePath": "_content/StudentPlacement.Backend",
+      "RelativePath": "StorageUserImage/34 - test3.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\StorageUserImage\\34 - test3.png"
     }
   ]
 }

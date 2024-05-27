@@ -1,5 +1,6 @@
 ﻿using StudentPlacement.Backend.Domain.Entities;
 using StudentPlacement.Backend.Models.Allocation;
+using StudentPlacement.Backend.Models.Profile;
 
 namespace StudentPlacement.Backend.Dal.Interfaces
 {
@@ -20,6 +21,8 @@ namespace StudentPlacement.Backend.Dal.Interfaces
         Task<IEnumerable<Student>> GetAllStudents();
 
         Task<IEnumerable<GetStudentAllocationResponse>> GetAllStudentWithRequestAndOrganization(int idGroup);
+
+        Task<GetStudentRequestResponse> GetStudentRequest(int idUser);
 
     }
 }

@@ -11,8 +11,7 @@ import whitePlus from "../../assets/Allocation/whitePlus.png"
 import crossDelete from "../../assets/Account/delete_cross.png"
 
 // по клике на заявку показать всех студентов в модальном окне
-// по клике на заявку у студента показывать доп инфу
-// порабоать с колличеством свободных мест
+// фильтры по студентам и поиск
 const Allocation = () => {
     const [allDepartments, setAllDepartments] = useState([]);
     const [specialities, setSpecialities] = useState([]);
@@ -157,15 +156,16 @@ const Allocation = () => {
             }
 
             console.log(response);
-            const newReq = allAllocationRequest.filter(req => {
+            const newReq = allAllocationRequest.map(req => {
                 if (req.idRequest == idRequest) {
+                    console.log("прибавили 1");
                     req.countFreeSpace++;
-                    return req;
                 }
-                else {
-                    return req;
-                }
+
+                return req;
             });
+
+            setAllAllocationRequest(newReq);
 
             const newStudents = allStudent.map(student => {
                 if (student.idStudent == idStudent) {
@@ -230,8 +230,18 @@ const Allocation = () => {
             });
 
             console.log(response);
-            console.log(newStudents);
             setAllStudent(newStudents);
+
+            const newRequests = allAllocationRequest.map(request => {
+                if (request.idRequest == idRequest) {
+                    console.log("Отняли 1");
+                    request.countFreeSpace--;
+                }
+
+                return request;
+            });
+
+            setAllAllocationRequest(newRequests);
         }
         catch (error) {
             console.log(error);
@@ -244,6 +254,10 @@ const Allocation = () => {
             }
         }
     }
+
+    useEffect(() => {
+        console.log(allAllocationRequest);
+    }, [allAllocationRequest]);
 
     useEffect(() => {
         const fatchAllDepartmantsAndGroups = async () => { await GetAllDepartmentsAndGroups() };
@@ -300,9 +314,11 @@ const Allocation = () => {
                 <div className={styles.requestsContainer}>
                     <h3>Заявки</h3>
                     <div className={styles.requests}>
-                        <CardRequest key={-1} nameOrganization={"Название организации"}
-                            contacts={"Контакты"}
-                            countPlace={0} />
+                        <div className={styles.cardRequestMain}>
+                            <p>Название организации</p>
+                            <p>Контакты</p>
+                            <p>Количество свободных мест</p>
+                        </div>
                         {
                             allAllocationRequest.map(request => (
                                 <CardRequest key={request.idOrganization} id={request.idOrganization}
@@ -329,7 +345,7 @@ const Allocation = () => {
                         <tbody className={styles.tableBody}>
                             {
                                 allStudent.map(student => (
-                                    <CardStudentWithRequest key={student.id} idStudent={student.idStudent}
+                                    <CardStudentWithRequest key={student.idStudent} idStudent={student.idStudent}
                                         fullName={student.fullName}
                                         averageScore={student.averageScore}
                                         status={student.status}
@@ -355,20 +371,25 @@ const Requests = ({ Requests, idStudent, AddRequestToUser }) => {
 
     return (
         <section className={styles.personalRequests}>
-            {Requests.map(request => (
-                <div className={styles.oneRequest} key={request.idOrganization}>
-                    <div className={styles.oneRequestInfo}>
-                        <p>{request.nameOrganization}</p>
-                        <p>{request.contacts}</p>
+            {Requests.map(request => {
+                if (request.countFreePlace === 0) return null;
+
+                return (
+                    <div className={styles.oneRequest} key={request.idOrganization}>
+                        <div className={styles.oneRequestInfo}>
+                            <p>{request.nameOrganization}</p>
+                            <p>{request.contacts}</p>
+                        </div>
+                        <div className={styles.btnRequestContainer}>
+                            <button onClick={(e) => { AddRequestToUser(e, request.idRequest, idStudent) }} type="button">
+                                <img src={whitePlus} alt="add" width={30} height={30} />
+                            </button>
+                        </div>
                     </div>
-                    <div className={styles.btnRequestContainer}>
-                        <button onClick={(e) => { AddRequestToUser(e, request.idRequest, idStudent) }} type="button">
-                            <img src={whitePlus} alt="add" width={30} height={30} />
-                        </button>
-                    </div>
-                </div>
-            ))}
-        </section>
+                );
+            })}
+
+        </section >
     )
 }
 
@@ -376,7 +397,6 @@ const CardStudentWithRequest = ({ idStudent, fullName, averageScore,
     currentRequest, status, request,
     setModalStudentIsOpen, modalStudentIsOpen, DeleteRequestUser,
     AddRequestToUser }) => {
-    // изменить заявку, заявку у студента и все заявки
 
     const [fullOpenRequest, setFullOpenRequest] = useState(false);
 
@@ -388,7 +408,7 @@ const CardStudentWithRequest = ({ idStudent, fullName, averageScore,
             <td className={styles.sectionOptionRequest}>{/*если есть заявка просто ее показать*/}
                 {
                     currentRequest.idRequest == null && (
-                        <div>
+                        <div className={styles.pickRequest}>
                             <button onClick={(e) => { setModalStudentIsOpen((prev => ({ ...prev, [idStudent]: !prev[idStudent] }))) }} type="button">
                                 выбрать заявку
                             </button>
@@ -402,14 +422,14 @@ const CardStudentWithRequest = ({ idStudent, fullName, averageScore,
                     currentRequest.idRequest != null && (
                         <div className={styles.cardRequestUser}>
                             {fullOpenRequest == false && (
-                                <div className={styles.requestUser} onClick={() => {setFullOpenRequest(!fullOpenRequest)}}>
+                                <div className={styles.requestUser} onClick={() => { setFullOpenRequest(!fullOpenRequest) }}>
                                     <p>{currentRequest.nameOrganization}</p>
                                     <p>{currentRequest.adressRequest}</p>
                                     <p>{currentRequest.contacts}</p>
                                 </div>
                             )}
                             {fullOpenRequest == true && (
-                                <div className={styles.requestUser} onClick={() => {setFullOpenRequest(!fullOpenRequest)}}>
+                                <div className={styles.requestUser} onClick={() => { setFullOpenRequest(!fullOpenRequest) }}>
                                     <div>
                                         <label>Организация</label>
                                         <p>{currentRequest.nameOrganization}</p>
@@ -442,7 +462,15 @@ const CardRequest = ({ id, nameOrganization, contacts, countPlace, countFreePlac
     const [nameOrganizationCur, setNameOrganization] = useState(nameOrganization);
     const [contactsCur, setContacts] = useState(contacts);
     const [countPlaceCur, setCountPlace] = useState(countPlace);
-    const [countFreePlaceCur, setCountFeePlace] = useState(countFreePlace);
+    const [countFreePlaceCur, setCountFreePlace] = useState(countFreePlace);
+
+    useEffect(() => {
+        setId(id);
+        setNameOrganization(nameOrganization);
+        setContacts(contacts);
+        setCountPlace(countPlace);
+        setCountFreePlace(countFreePlace);
+    }, [id, nameOrganization, contacts, countPlace, countFreePlace]);
 
     return (
         <div className={styles.cardRequestMain}>

@@ -98,7 +98,7 @@
     padding-bottom: 10px;
     padding-left: 15px;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
 }
 
 .requestUser {
@@ -201,23 +201,19 @@
 .modalRequestHide {
     position: absolute;
     display: none;
-    height: 200px;
-    width: 250px;
 }
 
-.modalRequestOpen {
-    position: absolute;
-    display: none;
-    height: 200px;
-    width: 250px;
-    background-color: red;
-}
+/*.modalRequestOpen {
+    height: 100%;
+    width: 100%;
+    display: inline-flex;
+} */
 
 .sectionOptionRequest {
     position: relative;
     display: inline-flex;
     flex-wrap: wrap;
-    overflow-y: scroll;
+    overflow-y: hidden;
     width: 100%;
 }
 
@@ -229,6 +225,11 @@
     width: 100%;
     height: 100%;
     padding: 15px 20px;
+}
+
+.pickRequest {
+    width: 100%;
+
 }
 
 .oneRequest {

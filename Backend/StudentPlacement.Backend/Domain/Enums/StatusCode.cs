@@ -4,6 +4,7 @@
     {
         Ok,
         ServerError,
+        InvalidEmail,
 
         UnAuthorize,
         UserExist,

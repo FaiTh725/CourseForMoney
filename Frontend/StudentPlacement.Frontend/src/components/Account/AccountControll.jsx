@@ -17,7 +17,7 @@ import circleGreen from "../../assets/Account/circleGree.png"
 
 // сортировку по ролям
 // валидацию на ввод
-// оптимизировать загрузку картинок и не хранить строку в формате а только путь жо файла
+
 const AccountControll = () => {
     const [users, setUsers] = useState([]);
     const [usersView, setUsersView] = useState([]);
@@ -131,7 +131,8 @@ const AccountControll = () => {
         }
     }
 
-    const ChangeInfoUser = async (idUser, loginUser, passwordUser, roleUser,
+    const ChangeInfoUser = async (idUser, loginUser, passwordUser,
+        email, roleUser,
         image, selectedGroup,
         fullName, averageScore, adressStudent,
         isMaried, isExtendedFamily,
@@ -149,6 +150,7 @@ const AccountControll = () => {
                 id: idUser,
                 login: loginUser,
                 password: passwordUser,
+                email: email,
                 role: roleUser,
                 image: image,
                 group: 0,
@@ -186,6 +188,7 @@ const AccountControll = () => {
             formData.append("id", idUser);
             formData.append("login", data.login);
             formData.append("password", data.password);
+            formData.append("email", data.email);
             formData.append("role", data.selectedGroup);
             formData.append("image", image);
             formData.append("group", data.group);
@@ -252,7 +255,8 @@ const AccountControll = () => {
             </section>
             <section className={styles.accountsSection}>
                 {usersView.map(user => (
-                    <CardUser key={user.id} id={user.id} image={user.image} login={user.login} password={user.password} role={user.role}
+                    <CardUser key={user.id} id={user.id} image={user.image} login={user.login} password={user.password}
+                        email={user.email} role={user.role}
                         group={user.group} fullName={user.fullName} adressStudent={user.adressStudent} averageScore={user.averageScore} isMaried={user.isMarried} isExtendedFamily={user.extendedFamily}
                         nameOrganization={user.nameOrganization} contacts={user.contacts}
                         DeleteUser={DeleteUser} allGroups={allGroups} ChangeInfoUser={ChangeInfoUser} />
@@ -263,7 +267,8 @@ const AccountControll = () => {
     )
 }
 
-const CardUser = ({ id, login, image, password, role, group,
+const CardUser = ({ id, login, image, password,
+    email, role, group,
     fullName, averageScore, adressStudent,
     isMaried, isExtendedFamily,
     nameOrganization, contacts,
@@ -272,6 +277,7 @@ const CardUser = ({ id, login, image, password, role, group,
     const [uploadFile, setUploadFile] = useState(null);
     const [loginCur, setLogin] = useState(login);
     const [passwordCur, setPassword] = useState(password);
+    const [emailCur, setEmail] = useState(email);
     const [roleCur, setRole] = useState(role);
     const [selectedGroupCur, setSelectedGroup] = useState(group);
     const [fullNameCur, setFullName] = useState(fullName);
@@ -292,6 +298,7 @@ const CardUser = ({ id, login, image, password, role, group,
     const loginError = useRef(null);
     const passwordError = useRef(null);
     const averageScoreError = useRef(null);
+    const emailError = useRef(null);
 
 
     const ChangeInfo = async () => {
@@ -312,12 +319,17 @@ const CardUser = ({ id, login, image, password, role, group,
             averageScoreError.current.textContent = "Средний балл должен быть в пределах от 0 до 4";
             flagError = true;
         }
+        if (emailCur.length == "" || !email.includes("@")) {
+            emailError.current.textContent = "Неверная почта";
+            flagError = true;
+        }
 
         if (!flagError) {
 
             await ChangeInfoUser(id,
                 loginCur,
                 passwordCur,
+                emailCur,
                 roleCur,
                 uploadFile,
                 selectedGroupCur,
@@ -330,17 +342,6 @@ const CardUser = ({ id, login, image, password, role, group,
                 contactsCur,);
         }
     }
-
-    // useEffect(() => {
-    //     const executeChanging = async () => {
-    //         if (imageCur != null && imageCur != "") {
-    //             await ChangeInfo();
-    //         }
-    //     }
-
-    //     executeChanging();
-    // }, [imageCur]);
-
 
     const roles = {
         0: "Студент",
@@ -368,6 +369,10 @@ const CardUser = ({ id, login, image, password, role, group,
                     <div className={styles.inputData}>
                         <label >Пароль</label>
                         <input type="text" placeholder="пароль" defaultValue={passwordCur} onChange={(e) => { setPassword(e.target.value) }} />
+                    </div>
+                    <div className={styles.inputData}>
+                        <label >Почта</label>
+                        <input type="text" placeholder="почта" defaultValue={emailCur} onChange={(e) => { setEmail(e.target.value) }} />
                     </div>
                     <div className={styles.inputData}>
                         <label >Роль</label>

@@ -3,6 +3,7 @@ using StudentPlacement.Backend.Dal.Interfaces;
 using StudentPlacement.Backend.Domain.Entities;
 using StudentPlacement.Backend.Models.Account;
 using StudentPlacement.Backend.Models.Allocation;
+using StudentPlacement.Backend.Models.Profile;
 
 namespace StudentPlacement.Backend.Dal.Implementations
 {
@@ -70,6 +71,39 @@ namespace StudentPlacement.Backend.Dal.Implementations
         public async Task<Student> GetStudentByLogin(string login)
         {
             return await context.Students.Include(x => x.User).FirstOrDefaultAsync(x => x.User.Login == login);
+        }
+
+        public async Task<GetStudentRequestResponse> GetStudentRequest(int idUser)
+        {
+            /*var query = from student in context.Students
+                        join request in context.AllocationRequests on student.IdAllocationRequest equals request.Id into sr
+                        join user in context.Users on student.UserId equals user.Id into su
+                        join orgnization in context.Organizations on sr.
+*/
+            var request = await context.Students.Include(x => x.User).Include(x => x.AllocationRequest)
+                .FirstOrDefaultAsync(x => x.User.Id == idUser);
+
+            if(request == null)
+            {
+                return new GetStudentRequestResponse
+                {
+                    IdRequest = null,
+                    RequestAdressRequest = null,
+                    RequestContacts = null,
+                    RequestNameOrganization = null
+                };
+            }
+
+            var data = (await context.Organizations.Include(x => x.AllocationRequest)
+                .FirstOrDefaultAsync(x => x.AllocationRequestId == request.IdAllocationRequest));
+
+            return new GetStudentRequestResponse
+            {
+                IdRequest = data?.AllocationRequestId,
+                RequestAdressRequest = data?.AllocationRequest.Adress,
+                RequestContacts = data?.Contacts,
+                RequestNameOrganization = data?.Name
+            };
         }
 
         public async Task<Student> UpdateStudentById(int studentId, Student student)

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using StudentPlacement.Backend.Dal.Interfaces;
 using StudentPlacement.Backend.Domain.Entities;
+using StudentPlacement.Backend.Migrations;
 using StudentPlacement.Backend.Models.Account;
 
 namespace StudentPlacement.Backend.Dal.Implementations
@@ -10,20 +11,20 @@ namespace StudentPlacement.Backend.Dal.Implementations
     public class UserRepository : IUserRepository
     {
         private readonly AppDbContext context;
-        private readonly IWebHostEnvironment environment;
+        /*private readonly IWebHostEnvironment environment;
         private readonly LinkGenerator linkGenerator;
-        private readonly IHttpContextAccessor httpContextAccessor;
+        private readonly IHttpContextAccessor httpContextAccessor;*/
         //private readonly IUrlHelper urlHelper;
 
 
-        public UserRepository(AppDbContext context, IWebHostEnvironment environment,
+        public UserRepository(AppDbContext context/*, IWebHostEnvironment environment,
                 LinkGenerator linkGenerator,
-                IHttpContextAccessor httpContextAccessor)
+                IHttpContextAccessor httpContextAccessor*/)
         {
-            this.context = context;
+            this.context = context;/*
             this.environment = environment;
             this.linkGenerator = linkGenerator;
-            this.httpContextAccessor = httpContextAccessor;
+            this.httpContextAccessor = httpContextAccessor;*/
         }
 
         public async Task<User> Createuser(User user)
@@ -58,6 +59,7 @@ namespace StudentPlacement.Backend.Dal.Implementations
                             Login = u.Login,
                             Password = u.Password,
                             Role = (int)u.Role,
+                            Email = u.Email,
                             Image = u.ImageUserStringFormat,
                             FullName = s.FullName,
                             AdressStudent = s.Adress,
@@ -97,6 +99,7 @@ namespace StudentPlacement.Backend.Dal.Implementations
             user.Token = newUser.Token;
             user.TimeEndToken = newUser.TimeEndToken;
             user.ImageUserStringFormat = newUser.ImageUserStringFormat;
+            user.Email = newUser.Email;
 
             await context.SaveChangesAsync();
 
@@ -114,23 +117,11 @@ namespace StudentPlacement.Backend.Dal.Implementations
         {
             var user = await GetById(idUser);
 
-            /*string? urlImage = null;
-            var path = environment.WebRootPath + $"/StorageUserImage/{user.Id} - {user.Login}.png";
-            if (File.Exists(path))
-            {
-                urlImage = linkGenerator.GetUriByAction(
-                    httpContext: httpContextAccessor.HttpContext,
-                    action: "GetUserImage",
-                    controller: "Image",
-                    values: new { userId = user.Id }
-                    );
-            }*/
-
             var query = from u in context.Users
                         where u.Id == idUser
                         join o in context.Organizations.Include(x => x.AllocationRequest) on u.Id equals o.UserId into ou
                         from o in ou.DefaultIfEmpty()
-                        join s in context.Students on u.Id equals s.UserId into su
+                        join s in context.Students.Include(x => x.AllocationRequest) on u.Id equals s.UserId into su
                         from s in su.DefaultIfEmpty()
                         select new GetUserResponse
                         {
@@ -138,8 +129,8 @@ namespace StudentPlacement.Backend.Dal.Implementations
                             Login = u.Login,
                             Password = u.Password,
                             Role = (int)u.Role,
-                            /*Image = u.ImageUserStringFormat,*/
                             Image = u.ImageUserStringFormat,
+                            Email = u.Email,
                             FullName = s.FullName,
                             AdressStudent = s.Adress,
                             AverageScore = s.AverageScore,
@@ -158,6 +149,11 @@ namespace StudentPlacement.Backend.Dal.Implementations
 
 
             return await query.FirstOrDefaultAsync(x => x.Id == idUser);
+        }
+
+        public async Task<User> GetUserByEmail(string email)
+        {
+            return await context.Users.FirstOrDefaultAsync(u => u.Email == email);
         }
     }
 }

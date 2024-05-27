@@ -13,22 +13,33 @@ import deleteCross from "../../assets/Account/delete_cross.png"
 import plus from "../../assets/Account/plus.png"
 
 // валидацию на ввод
+// возле полей женат и многодетная добавить значки да или нет а то там ничего
+// в зависимости от запроса отправлять запрос на получения или организации или студента или ничего
 const Profile = () => {
     const [idUser, setIdUser] = useState(0);
     const [login, setLogin] = useState("");
     const [role, setRole] = useState(0);
     const [group, setGroup] = useState("");
     const [image, setImage] = useState(null);
+    const [email, setEmail] = useState("");
+
     const [fullName, setFullName] = useState("");
     const [averageScore, setAverageScore] = useState(0);
     const [adressStudent, setAdressstudent] = useState("");
     const [isMaried, setIsMaried] = useState(false);
     const [isExtendedFamily, setIsExtendFamily] = useState(false);
+    const [idStudentRequest, setIdStudentRequest] = useState(null);
+    const [adressRequest, setAdressRequest] = useState("");
+    const [organizationNameRequest, setOrganizationNameRequest] = useState("");
+    const [contactRequest, setContactsRequest] = useState("");
+
     const [nameOrganization, setNameOrganization] = useState("");
     const [contacts, setContacts] = useState("");
     const [idAllocationRequest, setIdAllocationRequest] = useState();
     const [nameAdressAllocationRequest, setNameAdressAllocationRequest] = useState();
     const [countPlace, setCountPlace] = useState();
+
+
 
     const refRequest = useRef(null);
     const refCountPlace = useRef(null);
@@ -158,6 +169,46 @@ const Profile = () => {
         }
     }
 
+    const GetUserRequest = async () => {
+        try {
+            const token = localStorage.getItem("token");
+
+            const { id, login, role } = useParseToken(token);
+
+            if (role != "User") {
+                return;
+            }
+
+            const response = await api.get('/Profile/GetStudentRequest',
+                {
+                    params: {
+                        idUser: id
+                    },
+                    withCredentials: true,
+                    headers: {
+                        'Authorization': `Bearer ${token == null ? "" : token}`
+                    }
+                }
+            );
+
+            console.log(response);
+            setIdStudentRequest(response.data.data.idRequest);
+            setOrganizationNameRequest(response.data.data.requestNameOrganization);
+            setAdressRequest(response.data.data.requestAdressRequest);
+            setContactsRequest(response.data.data.requestContacts);
+        }
+        catch (error) {
+            console.log(error);
+            if (error.request.status == 0) {
+                await useRedirectionRefreshToken(() => { GetUserRequest() },
+                    setAuth,
+                    navigate,
+                    useUpdateToken,
+                    useParseToken);
+            }
+        }
+    }
+
     const GetUserInfo = async () => {
         try {
             const token = localStorage.getItem("token");
@@ -186,6 +237,7 @@ const Profile = () => {
             setLogin(response.data.data.login);
             setRole(response.data.data.role);
             setImage(response.data.data.image);
+            setEmail(response.data.data.email);
 
             if (response.data.data.role == 0) {
                 setGroup(response.data.data.group);
@@ -218,8 +270,10 @@ const Profile = () => {
 
     useEffect(() => {
         const fatchUserInfo = async () => { await GetUserInfo() };
+        const fatchUserRequest = async () => { await GetUserRequest() };
 
         fatchUserInfo();
+        fatchUserRequest();
     }, []);
 
     return (
@@ -237,38 +291,70 @@ const Profile = () => {
                         <h3>{login}</h3>
                     </div>
                     <div className={styles.viewData}>
+                        <label>Почта</label>
+                        <h3>{email}</h3>
+                    </div>
+                    <div className={styles.viewData}>
                         <label>Статус</label>
                         <h3>{roles[role]}</h3>
                     </div>
                 </div>
                 {
                     role == 0 && (
-                        <section className={styles.extentionInfo}>
-                            <div className={styles.viewData}>
-                                <label>Группа</label>
-                                <h3>{group}</h3>
-                            </div>
-                            <div className={styles.viewData}>
-                                <label className={styles.test}>Полное имя</label>
-                                <h3>{fullName}</h3>
-                            </div>
-                            <div className={styles.viewData}>
-                                <label>Средний балл</label>
-                                <h3>{averageScore}</h3>
-                            </div>
-                            <div className={styles.viewData}>
-                                <label>Адрес</label>
-                                <h3>{adressStudent}</h3>
-                            </div>
-                            <div className={styles.viewData}>
-                                <label>Женат</label>
-                                <h3>{isMaried}</h3>
-                            </div>
-                            <div className={styles.viewData}>
-                                <label>Многодетная семья</label>
-                                <h3>{isExtendedFamily}</h3>
-                            </div>
-                        </section>
+                        <div>
+                            <section className={styles.extentionInfo}>
+                                <div className={styles.viewData}>
+                                    <label>Группа</label>
+                                    <h3>{group}</h3>
+                                </div>
+                                <div className={styles.viewData}>
+                                    <label className={styles.test}>Полное имя</label>
+                                    <h3>{fullName}</h3>
+                                </div>
+                                <div className={styles.viewData}>
+                                    <label>Средний балл</label>
+                                    <h3>{averageScore}</h3>
+                                </div>
+                                <div className={styles.viewData}>
+                                    <label>Адрес</label>
+                                    <h3>{adressStudent}</h3>
+                                </div>
+                                <div className={styles.viewData}>
+                                    <label>Женат</label>
+                                    <h3>{isMaried}</h3>
+                                </div>
+                                <div className={styles.viewData}>
+                                    <label>Многодетная семья</label>
+                                    <h3>{isExtendedFamily}</h3>
+                                </div>
+                            </section>
+                            {
+                                idStudentRequest != null && (
+                                    <section className={styles.extentionInfo}>
+                                        <div className={styles.viewData}>
+                                            <label>Адрес заявки</label>
+                                            <h3>{adressRequest}</h3>
+                                        </div>
+                                        <div className={styles.viewData}>
+                                            <label>Название организации</label>
+                                            <h3>{organizationNameRequest}</h3>
+                                        </div>
+                                        <div className={styles.viewData}>
+                                            <label>Контакты</label>
+                                            <h3>{contactRequest}</h3>
+                                        </div>
+                                    </section>
+                                )
+                            }
+                            {
+                                idStudentRequest == null && (
+                                    <div className={styles.noRequestMessgae}>
+                                        <h3>Вас пока не распределили</h3>
+                                    </div>
+                                )
+                            }
+
+                        </div>
                     )
                 }
                 {role == 3 && (
@@ -296,7 +382,7 @@ const Profile = () => {
                                         <div className={styles.btnContainer} onClick={(e) => { AddAllocationRequest(e) }}>
                                             <button className={styles.addBtn} type="submit">
                                                 <p>Добавить запрос</p>
-                                                <img src={plus} alt="delete profile" height={35} />    
+                                                <img src={plus} alt="delete profile" height={35} />
                                             </button>
                                         </div>
                                     )
@@ -306,7 +392,7 @@ const Profile = () => {
                                         <div className={styles.btnContainer} onClick={(e) => { DeleteAllocationRequest(e) }}>
                                             <button className={styles.deleteBtn} type="submit">
                                                 <p>Удалить запрос</p>
-                                                <img src={deleteCross} alt="delete profile" height={35} />    
+                                                <img src={deleteCross} alt="delete profile" height={35} />
                                             </button>
                                         </div>
                                     )

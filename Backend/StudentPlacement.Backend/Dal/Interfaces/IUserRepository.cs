@@ -12,6 +12,8 @@ namespace StudentPlacement.Backend.Dal.Interfaces
 
         public Task<User> GetUserByLogin(string login);
 
+        public Task<User> GetUserByEmail(string email);
+
         public Task<User> Update(int idUser, User newUser);
 
         public Task<User> Createuser(User user);

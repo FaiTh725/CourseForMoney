@@ -38,7 +38,7 @@ namespace StudentPlacement.Backend.Dal.Implementations
 
         public async Task<IEnumerable<Organization>> GetAllOrganizations()
         {
-            return await context.Organizations.Include(x => x.AllocationRequest).ToListAsync();
+            return await context.Organizations.Include(x => x.AllocationRequest).ThenInclude(x => x.Students).ToListAsync();
         }
 
         public async Task<Organization> GetOrganizationById(int idOrganization)

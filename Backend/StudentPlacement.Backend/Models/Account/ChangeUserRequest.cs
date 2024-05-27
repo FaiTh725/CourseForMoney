@@ -8,6 +8,8 @@
 
         public string Login { get; set; }
 
+        public string Email { get; set; }
+
         public int Role { get; set; }
 
         public IFormFile? Image {  get; set; }

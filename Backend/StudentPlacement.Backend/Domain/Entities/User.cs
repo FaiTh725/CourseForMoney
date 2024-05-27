@@ -15,6 +15,8 @@ namespace StudentPlacement.Backend.Domain.Entities
 
         public string? ImageUserStringFormat {  get; set; } // если аватарки нету то аватарку по стандарту хранит путь к файла в папке StorageUserImage
         
+        public string Email {  get; set; }
+
         public string? Token { get; set; } = string.Empty;
 
         public DateTime? TimeEndToken { get; set; }

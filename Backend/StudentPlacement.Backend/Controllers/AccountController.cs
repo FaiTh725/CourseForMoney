@@ -9,7 +9,6 @@ using StudentPlacement.Backend.Services.Interfaces;
 
 namespace StudentPlacement.Backend.Controllers
 {
-    // удалить поле image в таблице user 
     [ApiController]
     [Route("[controller]")]
     public class AccountController : ControllerBase

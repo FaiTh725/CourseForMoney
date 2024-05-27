@@ -12,14 +12,17 @@ namespace StudentPlacement.Backend.Services.Implementations
         private readonly IUserRepository userRepository;
         private readonly IOrganizationRepository organizationRepository;
         private readonly IAllocationRequestRepository allocationRequestRepository;
+        private readonly IStudentRepository studentRepository;
 
         public ProfileService(IUserRepository userRepository,
                 IOrganizationRepository organizationRepository,
-                IAllocationRequestRepository allocationRequestRepository)
+                IAllocationRequestRepository allocationRequestRepository,
+                IStudentRepository studentRepository)
         {
             this.userRepository = userRepository;
             this.organizationRepository = organizationRepository;
             this.allocationRequestRepository = allocationRequestRepository;
+            this.studentRepository = studentRepository;
         }
 
         public async Task<DataResponse<AddAllocationResponse>> AddAllocationRequest(AddAllocationRequestRequest request)
@@ -105,6 +108,30 @@ namespace StudentPlacement.Backend.Services.Implementations
                 {
                     Description = "Ошибка сервера",
                     StatusCode = StatusCode.ServerError,
+                };
+            }
+        }
+
+        public async Task<DataResponse<GetStudentRequestResponse>> GetStudentRequest(int idUser)
+        {
+            try
+            {
+                var student = await studentRepository.GetStudentRequest(idUser);
+
+                return new DataResponse<GetStudentRequestResponse>
+                {
+                    Data = student,
+                    Description = "Получили заявку",
+                    StatusCode = StatusCode.Ok,
+                };
+            }
+            catch
+            {
+                return new DataResponse<GetStudentRequestResponse>
+                {
+                    Description = "Ошибка сервера",
+                    StatusCode = StatusCode.ServerError,
+                    Data = new()
                 };
             }
         }

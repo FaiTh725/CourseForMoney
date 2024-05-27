@@ -12,6 +12,8 @@
 
         public IFormFile? Image { get; set; }
 
+        public string Email { get; set; }
+
         public int Group { get; set; }
 
         public string? FullName { get; set; }
