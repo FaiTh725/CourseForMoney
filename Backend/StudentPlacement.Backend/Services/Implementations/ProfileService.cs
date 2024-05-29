@@ -136,6 +136,45 @@ namespace StudentPlacement.Backend.Services.Implementations
             }
         }
 
+        public async Task<DataResponse<HomeProfileResponse>> GetUserHomeProfile(int idUser)
+        {
+            try
+            {
+                var user = await userRepository.GetById(idUser);
+
+                if(user == null)
+                {
+                    return new DataResponse<HomeProfileResponse>
+                    {
+                        Data = new(),
+                        Description = "Пользователь не найден",
+                        StatusCode= StatusCode.NotFoundUser,
+                    };
+                }
+
+                return new DataResponse<HomeProfileResponse>
+                {
+                    StatusCode = StatusCode.Ok,
+                    Description = "Получили логин и картинку пользователя",
+                    Data = new HomeProfileResponse
+                    {
+                        Id = user.Id,
+                        Login = user.Login,
+                        Image = user.ImageUserStringFormat
+                    }
+                };
+            }
+            catch
+            {
+                return new DataResponse<HomeProfileResponse>
+                {
+                    Data = new(),
+                    Description = "Ошибка сервера",
+                    StatusCode = StatusCode.ServerError
+                };
+            }
+        }
+
         public async Task<BaseResponse> UpdateProfileOrganization(ChangeProfileRequest request)
         {
             try

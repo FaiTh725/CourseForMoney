@@ -3,7 +3,7 @@ import { useContext, useEffect, useRef, useState } from "react";
 import styles from "./Profile.module.css"
 import useParseToken from "../../hooks/useParseToken";
 import api from "../../api/helpAxios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useUpdateToken from "../../hooks/useUpdateToken";
 import useRedirectionRefreshToken from "../../hooks/useRedirectionRefreshToken";
 import AuthContext from "../Context/AuthProvider";
@@ -11,6 +11,7 @@ import AuthContext from "../Context/AuthProvider";
 import defaultUserImage from "../../assets/Account/user.png";
 import deleteCross from "../../assets/Account/delete_cross.png"
 import plus from "../../assets/Account/plus.png"
+import arrowLeft from "../../assets/Profile/ArrowLeft.svg"
 
 // валидацию на ввод
 // возле полей женат и многодетная добавить значки да или нет а то там ничего
@@ -280,6 +281,10 @@ const Profile = () => {
         <main className={styles.main}>
             <header className={styles.header}>
                 <h1>Профиль</h1>
+                <Link className={styles.backHomeBtn} to="/Home">
+                    <img src={arrowLeft} height={25} alt="arrowleft" />
+                    <p>назад</p>
+                </Link>
             </header>
             <section className={styles.profileContainer}>
                 <div className={styles.profileImage}>

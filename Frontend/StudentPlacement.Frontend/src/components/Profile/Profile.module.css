@@ -11,6 +11,8 @@
     font-weight: 600;
     color: #a4a6a8;
     margin-bottom: 40px;
+    display: flex;
+    align-items: center;
 }
 
 .profileContainer {
@@ -124,4 +126,24 @@
     border-radius: 7px;
     border: 1px solid #a4a6a8;
     margin-bottom: 10px;
+}
+
+.backHomeBtn {
+    display: flex;
+    align-items: center;
+    background-color: #008054d9;
+    color: #fff;
+    border-radius: 14px;
+    padding: 7px 5px;
+    padding-right: 10px;
+    margin-left: 15px;
+    transition: all .5s;
+}
+
+.backHomeBtn:hover {
+    transform: translateX(-8px);
+}
+
+.backHomeBtn p {
+    margin-left: 5px;
 }

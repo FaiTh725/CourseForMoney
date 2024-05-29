@@ -37,6 +37,7 @@
 .writeData {
     margin-left: 40px;
     display: inline-flex;
+    flex-wrap: wrap;
     min-height: 300px;
 }
 

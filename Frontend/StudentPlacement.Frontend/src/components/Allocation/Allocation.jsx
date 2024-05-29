@@ -9,19 +9,28 @@ import AuthContext from "../Context/AuthProvider"
 
 import whitePlus from "../../assets/Allocation/whitePlus.png"
 import crossDelete from "../../assets/Account/delete_cross.png"
+import circleGray from "../../assets/Account/circleGray.png"
+import circleGreen from "../../assets/Account/circleGree.png"
+import triangleDown from "../../assets/Allocation/downArrow.png"
 
-// по клике на заявку показать всех студентов в модальном окне
+// по клике на заявку показать всех студентов в таблице
 // фильтры по студентам и поиск
 const Allocation = () => {
     const [allDepartments, setAllDepartments] = useState([]);
     const [specialities, setSpecialities] = useState([]);
     const [groups, setGroups] = useState([]);
-    const [selectedGroup, setSelectedGroup] = useState();
+    const [selectedGroup, setSelectedGroup] = useState(null);
 
     const [allAllocationRequest, setAllAllocationRequest] = useState([]);
     const [allStudent, setAllStudent] = useState([]);
 
     const [modalStudentIsOpen, setModalStudentIsOpen] = useState({});
+
+    // filters 
+    const [allocationFilter, setAllocationfilter] = useState(true);
+    const [notAllocationFilter, setNotAllocationFilter] = useState(true);
+    const [nameFilter, setNameFilter] = useState(null);
+    const [averageFilter, setAverageFilter] = useState(null);
 
     const navigate = useNavigate();
     const { auth, setAuth } = useContext(AuthContext);
@@ -255,6 +264,50 @@ const Allocation = () => {
         }
     }
 
+    const DownloadReportAllocation = async (e) => {
+        e.preventDefault();
+
+        try {
+            const token = localStorage.getItem("token")
+
+            const response = await api.get("/Report/GetReport/",
+                {
+                    params: {
+                        idGroup: selectedGroup
+                    },
+                    withCredentials: true,
+                    headers: {
+                        'Authorization': `Bearer ${token == null ? "" : token}`,
+                    },
+                    responseType: 'blob'
+                }
+            );
+
+            const href = URL.createObjectURL(response.data);
+
+            const link = document.createElement('a');
+            link.href = href;
+            link.setAttribute('download', 'AllocationReport.docx');
+            document.body.appendChild(link);
+            link.click();
+
+            document.body.removeChild(link);
+            URL.revokeObjectURL(href);
+
+            console.log(response);
+        }
+        catch (error) {
+            console.log(error);
+            if (error.request.status == 0) {
+                await useRedirectionRefreshToken(() => { DownloadReportAllocation() },
+                    setAuth,
+                    navigate,
+                    useUpdateToken,
+                    useParseToken);
+            }
+        }
+    }
+
     useEffect(() => {
         console.log(allAllocationRequest);
     }, [allAllocationRequest]);
@@ -332,12 +385,48 @@ const Allocation = () => {
                 </div>
             </section>
             {
+                selectedGroup != null && (
+                    <section className={styles.reportContainer}>
+                        <div className={styles.filters}>
+                            <section className={styles.filterRequest}>
+                                <p>Заявка</p>
+                                <div>
+                                    <p>Распределен</p>
+                                    <button type="button" onClick={(e) => {setAllocationfilter(!allocationFilter)}} className={allocationFilter == true ? styles.checkBoxChecked : styles.checkBox}>
+                                        <img src={allocationFilter ? circleGreen : circleGray} alt="" height={20} width={20} />
+                                    </button>
+                                </div>
+                                <div>
+                                    <p>Не распределен</p>
+                                    <button type="button" onClick={(e) => {setNotAllocationFilter(!notAllocationFilter)}} className={notAllocationFilter == true ? styles.checkBoxChecked : styles.checkBox}>
+                                        <img src={notAllocationFilter ? circleGreen : circleGray} alt="" height={20} width={20} />
+                                    </button>
+                                </div>
+                            </section>
+                        </div>
+                        <div className={styles.reportButtonContainer}>
+                            <button onClick={(e) => { DownloadReportAllocation(e) }} className={styles.getReportBtn}>Ведомость</button>
+                        </div>
+                    </section>
+                )
+            }
+            {
                 allStudent.length > 0 && (
                     <table className={styles.allStudent}>
                         <thead className={styles.tableHead}>
                             <tr>
-                                <th className={styles.firstColumn}>Полное имя</th>
-                                <th>Средний балл</th>
+                                <th onClick={() => {setNameFilter(nameFilter == null ? true : !nameFilter)}} className={`${styles.firstColumn}`}>
+                                    <div className={styles.tableHeadCell}>
+                                        <p>Полное имя</p>
+                                        <img className={nameFilter == null ? styles.filterTrianleHide: nameFilter == true ? styles.filterTrianleUp: styles.filterTrianleDown} src={triangleDown} alt="arrow" height={15} width={15}/>
+                                    </div>
+                                </th>
+                                <th onClick={() => {setAverageFilter(averageFilter == null ? true : !averageFilter)}}>
+                                    <div className={styles.tableHeadCell}>
+                                        <p>Средний балл</p>
+                                        <img className={averageFilter == null ? styles.filterTrianleHide: averageFilter == true ? styles.filterTrianleUp: styles.filterTrianleDown} src={triangleDown} alt="arrow" height={15} width={15}/> 
+                                    </div>   
+                                </th>
                                 <th>Статус</th>
                                 <th className={styles.lastColumn}>Заявка</th>
                             </tr>
@@ -435,11 +524,11 @@ const CardStudentWithRequest = ({ idStudent, fullName, averageScore,
                                         <p>{currentRequest.nameOrganization}</p>
                                     </div>
                                     <div>
-                                        <label>Контакты</label>
+                                        <label>Адрес заявки</label>
                                         <p>{currentRequest.adressRequest}</p>
                                     </div>
                                     <div>
-                                        <label>Адрес заявки</label>
+                                        <label>Контакты</label>
                                         <p>{currentRequest.contacts}</p>
                                     </div>
                                 </div>

@@ -3,6 +3,7 @@ using StudentPlacement.Backend.Dal.Interfaces;
 using StudentPlacement.Backend.Domain.Entities;
 using StudentPlacement.Backend.Models.Account;
 using StudentPlacement.Backend.Models.Allocation;
+using StudentPlacement.Backend.Models.Doc;
 using StudentPlacement.Backend.Models.Profile;
 
 namespace StudentPlacement.Backend.Dal.Implementations
@@ -73,13 +74,26 @@ namespace StudentPlacement.Backend.Dal.Implementations
             return await context.Students.Include(x => x.User).FirstOrDefaultAsync(x => x.User.Login == login);
         }
 
+        public async Task<List<ReportStudentAllocation>> GetStudentForReport(int idGroup)
+        {
+            return await context.Students
+                .Include(x => x.AllocationRequest).Include(x => x.Group)
+                .Where(x => x.GroupId == idGroup)
+                .Select(x => new ReportStudentAllocation
+                    {
+                        AverageScore = x.AverageScore,
+                        FullName = x.FullName,
+                        AllocationData = new AllocationData
+                        {
+                            AdressRequest = x.AllocationRequest.Adress,
+                            NameOrganixation = context.Organizations.FirstOrDefault(y => y.AllocationRequestId == x.IdAllocationRequest).Name,
+                            Contacts = context.Organizations.FirstOrDefault(y => y.AllocationRequestId == x.IdAllocationRequest).Contacts
+                        }
+                    }).ToListAsync();
+        }
+
         public async Task<GetStudentRequestResponse> GetStudentRequest(int idUser)
         {
-            /*var query = from student in context.Students
-                        join request in context.AllocationRequests on student.IdAllocationRequest equals request.Id into sr
-                        join user in context.Users on student.UserId equals user.Id into su
-                        join orgnization in context.Organizations on sr.
-*/
             var request = await context.Students.Include(x => x.User).Include(x => x.AllocationRequest)
                 .FirstOrDefaultAsync(x => x.User.Id == idUser);
 

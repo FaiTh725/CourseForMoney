@@ -1,12 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "FpmXSMiMgEZ6YOky0o87mSFl6dlrpfpFeh2kThjwot2Ts+Ccd0vMCcSGgB1F0mFR1IzW0QWPDkRF2WKJ+pc7rQ==",
+  "dgSpecHash": "YSXBd2iCPJalDmF/UjnuQjrVXPHyWnTQ3KBL6GKHI+uohH7vDIbO8PlajCF7TYe5oLlRC7Ql4k+lZxzC1cP7NA==",
   "success": true,
   "projectFilePath": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\StudentPlacement.Backend.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\zelen\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\zelen\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",
     "C:\\Users\\zelen\\.nuget\\packages\\bouncycastle.cryptography\\2.3.1\\bouncycastle.cryptography.2.3.1.nupkg.sha512",
+    "C:\\Users\\zelen\\.nuget\\packages\\docx\\3.0.0\\docx.3.0.0.nupkg.sha512",
     "C:\\Users\\zelen\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\zelen\\.nuget\\packages\\mailkit\\4.6.0\\mailkit.4.6.0.nupkg.sha512",
     "C:\\Users\\zelen\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\8.0.5\\microsoft.aspnetcore.authentication.jwtbearer.8.0.5.nupkg.sha512",
@@ -67,6 +68,7 @@
     "C:\\Users\\zelen\\.nuget\\packages\\system.formats.asn1\\8.0.0\\system.formats.asn1.8.0.0.nupkg.sha512",
     "C:\\Users\\zelen\\.nuget\\packages\\system.identitymodel.tokens.jwt\\7.1.2\\system.identitymodel.tokens.jwt.7.1.2.nupkg.sha512",
     "C:\\Users\\zelen\\.nuget\\packages\\system.io.filesystem.accesscontrol\\5.0.0\\system.io.filesystem.accesscontrol.5.0.0.nupkg.sha512",
+    "C:\\Users\\zelen\\.nuget\\packages\\system.io.packaging\\4.5.0\\system.io.packaging.4.5.0.nupkg.sha512",
     "C:\\Users\\zelen\\.nuget\\packages\\system.io.pipelines\\6.0.3\\system.io.pipelines.6.0.3.nupkg.sha512",
     "C:\\Users\\zelen\\.nuget\\packages\\system.memory\\4.5.4\\system.memory.4.5.4.nupkg.sha512",
     "C:\\Users\\zelen\\.nuget\\packages\\system.memory.data\\1.0.2\\system.memory.data.1.0.2.nupkg.sha512",

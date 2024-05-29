@@ -51,5 +51,14 @@ namespace StudentPlacement.Backend.Controllers
 
             return new JsonResult(response);
         }
+
+        [HttpGet("[action]")]
+        [Authorize]
+        public async Task<IActionResult> GetHomeProfile(int idUser)
+        {
+            var response = await profileService.GetUserHomeProfile(idUser);
+
+            return new JsonResult(response);
+        }
     }
 }

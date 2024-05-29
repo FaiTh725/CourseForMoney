@@ -12,5 +12,7 @@ namespace StudentPlacement.Backend.Services.Interfaces
         Task<BaseResponse> UpdateProfileOrganization(ChangeProfileRequest request);
 
         Task<DataResponse<GetStudentRequestResponse>> GetStudentRequest(int idUser);
+
+        Task<DataResponse<HomeProfileResponse>> GetUserHomeProfile(int idUser);
     }
 }
