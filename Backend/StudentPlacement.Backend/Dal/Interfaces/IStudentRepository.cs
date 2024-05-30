@@ -27,5 +27,7 @@ namespace StudentPlacement.Backend.Dal.Interfaces
 
         Task<List<ReportStudentAllocation>> GetStudentForReport(int idGroup);
 
+        Task DeleteRequestInStudents(AllocationRequest allocation);
+
     }
 }

@@ -26,7 +26,7 @@ import circleGreen from "../../assets/Account/circleGree.png"
 // маску для телефона для контактов организации
 // соединить создание и управление пользователями в одно 
 // увудомлять о успешном создании
-const Account = () => {
+const Account = ({SetTab}) => {
     const [uploadFile, setUploadFile] = useState(null);
     const [userImage, setUserImage] = useState("");
     const imgBtn = useRef(null);
@@ -172,8 +172,10 @@ const Account = () => {
                 alert(errorMessage.current.value = response.data.description);
                 return;
             }
-            console.log(response);
 
+            console.log(response);
+            alert("Создали пользователя");
+            SetTab(null);
 
         }
         catch (error) {

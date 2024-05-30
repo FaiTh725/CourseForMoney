@@ -26,6 +26,14 @@ namespace StudentPlacement.Backend.Dal.Implementations
             return student;
         }
 
+        public async Task DeleteRequestInStudents(AllocationRequest allocation)
+        {
+            await context.Students
+                .Where(x => x.IdAllocationRequest == allocation.Id)
+                .ExecuteUpdateAsync(x => x.SetProperty(p => p.AllocationRequest, p=>null)
+                                          .SetProperty(p => p.IdAllocationRequest, p => null));
+        }
+
         public async Task<Student?> FindStudentByLoginAndFullName(string loginName, string fullName)
         {
             return await context.Students.Include(x => x.User)

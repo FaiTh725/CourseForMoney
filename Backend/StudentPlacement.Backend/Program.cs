@@ -34,6 +34,7 @@ builder.Services.AddScoped<IProfileService, ProfileService>();
 builder.Services.AddScoped<IAllocationService, AllocationService>();
 builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<IDocService, DocService>();
+builder.Services.AddScoped<IStructureService, StructureService>();
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IGroupRepository, GroupRepository>();
@@ -41,6 +42,7 @@ builder.Services.AddScoped<IOrganizationRepository, OrganizationRepository>();
 builder.Services.AddScoped<IAllocationRequestRepository, AllocationRequestRepository>();
 builder.Services.AddScoped<IStudentRepository, StudentRepository>();
 builder.Services.AddScoped<IDepartmentsRepository, DepartmentRepository>();
+builder.Services.AddScoped<ISpecialityRepository, SpecialityRepository>();
 
 /*builder.Services.AddScoped<IUrlHelper>(x =>
 {

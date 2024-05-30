@@ -9,6 +9,15 @@
         UnAuthorize,
         UserExist,
 
+        DepartmentExist,
+        NotFoundDepartment,
+
+        SpecializationExist,
+        NotFoundSpecialization,
+
+        GroupExist,
+        NotFoundGroup,
+
         NotFoundUser,
         InvaludDataforUpdate,
 

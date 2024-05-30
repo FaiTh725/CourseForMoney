@@ -139,7 +139,9 @@ namespace StudentPlacement.Backend.Services.Implementations
         {
             try
             {
-                var request = (await organizationRepository.GetAllOrganizations()).Select(x => new AllocationResponse
+                var data  = await allocationRequestRepository.GetAllRequestsWithOrganizationInfo();
+
+                /*var request = (await organizationRepository.GetAllOrganizations()).Select(x => new AllocationResponse
                 {
                     IdOrganization = x.Id,
                     IdRequest = x.AllocationRequestId ?? -1,
@@ -147,14 +149,14 @@ namespace StudentPlacement.Backend.Services.Implementations
                     Contacts = x.Contacts,
                     CountSpace = x.AllocationRequest?.CountPlace,
                     CountFreeSpace = x.AllocationRequest?.CountPlace - x.AllocationRequest?.Students.Count
-                });
+                });*/
 
 
                 return new DataResponse<IEnumerable<AllocationResponse>>
                 {
                     Description = "Получили все заявки",
                     StatusCode = StatusCode.Ok,
-                    Data = request
+                    Data = data
                 };
             }
             catch

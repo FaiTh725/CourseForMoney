@@ -1,4 +1,5 @@
 ﻿using StudentPlacement.Backend.Domain.Entities;
+using StudentPlacement.Backend.Models.Allocation;
 
 namespace StudentPlacement.Backend.Dal.Interfaces
 {
@@ -11,5 +12,7 @@ namespace StudentPlacement.Backend.Dal.Interfaces
         Task<AllocationRequest> GetAllocationRequestById(int id);
 
         Task<AllocationRequest> UpdateAllocationRequest(int idAllocationRequest, AllocationRequest allocationRequest);
+
+        Task<List<AllocationResponse>> GetAllRequestsWithOrganizationInfo();
     }
 }

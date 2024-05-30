@@ -20,9 +20,23 @@ namespace StudentPlacement.Backend.Dal.Implementations
             await context.SaveChangesAsync();
         }
 
+        public async Task<Group> CreateGroup(Group group)
+        {
+            var newGroup = await context.AddAsync(group);
+
+            await context.SaveChangesAsync();
+
+            return newGroup.Entity;
+        }
+
         public async Task<Group> GetGroupById(int idGroup)
         {
             return await context.Groups.Include(x => x.Specialization).FirstOrDefaultAsync(x => x.Id == idGroup);
+        }
+
+        public async Task<Group> GetGroupByName(string name)
+        {
+            return await context.Groups.Include(x => x.Specialization).FirstOrDefaultAsync(x => x.Number == name);
         }
 
         public async Task<IEnumerable<Group>> GetGroups()

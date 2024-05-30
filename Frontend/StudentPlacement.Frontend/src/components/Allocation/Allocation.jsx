@@ -308,6 +308,31 @@ const Allocation = () => {
         }
     }
 
+        function CompareStudent (left, right) {
+        
+            if (left.fullName < right.fullName) {
+                return nameFilter ?? true ? -1 : 1;
+            }
+            if (left.fullName > right.fullName) {
+                return nameFilter ?? true ? 1 : -1;
+            }
+
+            if (left.averageScore < right.averageScore) {
+                return averageFilter ?? true ? -1 : 1;
+            }
+            if (left.averageScore > right.averageScore) {
+                return averageFilter ?? true ? 1 : -1;
+            }
+            
+            return 0;
+        
+    }
+
+    const SortTableStudents = () => {
+        //console.log(nameFilter);
+        allStudent.sort(CompareStudent);
+    }
+
     useEffect(() => {
         console.log(allAllocationRequest);
     }, [allAllocationRequest]);
@@ -392,13 +417,13 @@ const Allocation = () => {
                                 <p>Заявка</p>
                                 <div>
                                     <p>Распределен</p>
-                                    <button type="button" onClick={(e) => {setAllocationfilter(!allocationFilter)}} className={allocationFilter == true ? styles.checkBoxChecked : styles.checkBox}>
+                                    <button type="button" onClick={(e) => { setAllocationfilter(!allocationFilter) }} className={allocationFilter == true ? styles.checkBoxChecked : styles.checkBox}>
                                         <img src={allocationFilter ? circleGreen : circleGray} alt="" height={20} width={20} />
                                     </button>
                                 </div>
                                 <div>
                                     <p>Не распределен</p>
-                                    <button type="button" onClick={(e) => {setNotAllocationFilter(!notAllocationFilter)}} className={notAllocationFilter == true ? styles.checkBoxChecked : styles.checkBox}>
+                                    <button type="button" onClick={(e) => { setNotAllocationFilter(!notAllocationFilter) }} className={notAllocationFilter == true ? styles.checkBoxChecked : styles.checkBox}>
                                         <img src={notAllocationFilter ? circleGreen : circleGray} alt="" height={20} width={20} />
                                     </button>
                                 </div>
@@ -415,17 +440,17 @@ const Allocation = () => {
                     <table className={styles.allStudent}>
                         <thead className={styles.tableHead}>
                             <tr>
-                                <th onClick={() => {setNameFilter(nameFilter == null ? true : !nameFilter)}} className={`${styles.firstColumn}`}>
+                                <th onClick={() => { setNameFilter(nameFilter == null ? true : !nameFilter); SortTableStudents() }} className={`${styles.firstColumn}`}>
                                     <div className={styles.tableHeadCell}>
                                         <p>Полное имя</p>
-                                        <img className={nameFilter == null ? styles.filterTrianleHide: nameFilter == true ? styles.filterTrianleUp: styles.filterTrianleDown} src={triangleDown} alt="arrow" height={15} width={15}/>
+                                        <img className={nameFilter == null ? styles.filterTrianleHide : nameFilter == true ? styles.filterTrianleUp : styles.filterTrianleDown} src={triangleDown} alt="arrow" height={15} width={15} />
                                     </div>
                                 </th>
-                                <th onClick={() => {setAverageFilter(averageFilter == null ? true : !averageFilter)}}>
+                                <th onClick={() => { setAverageFilter(averageFilter == null ? true : !averageFilter) }}>
                                     <div className={styles.tableHeadCell}>
                                         <p>Средний балл</p>
-                                        <img className={averageFilter == null ? styles.filterTrianleHide: averageFilter == true ? styles.filterTrianleUp: styles.filterTrianleDown} src={triangleDown} alt="arrow" height={15} width={15}/> 
-                                    </div>   
+                                        <img className={averageFilter == null ? styles.filterTrianleHide : averageFilter == true ? styles.filterTrianleUp : styles.filterTrianleDown} src={triangleDown} alt="arrow" height={15} width={15} />
+                                    </div>
                                 </th>
                                 <th>Статус</th>
                                 <th className={styles.lastColumn}>Заявка</th>
@@ -460,8 +485,15 @@ const Requests = ({ Requests, idStudent, AddRequestToUser }) => {
 
     return (
         <section className={styles.personalRequests}>
+            {
+                Requests.filter(request => request.countFreeSpace > 0).length == 0 && (
+                    <div className={styles.emptyRequests}>
+                        <p>Нету свободных заявок</p>
+                    </div>
+                )
+            }
             {Requests.map(request => {
-                if (request.countFreePlace === 0) return null;
+                if (request.countFreeSpace === 0) return null;
 
                 return (
                     <div className={styles.oneRequest} key={request.idOrganization}>

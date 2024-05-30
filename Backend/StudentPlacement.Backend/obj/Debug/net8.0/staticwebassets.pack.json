@@ -25,14 +25,6 @@
       "PackagePath": "staticwebassets\\StorageUserImage\\32 - test1.png"
     },
     {
-      "Id": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\wwwroot\\StorageUserImage\\33 - test2.png",
-      "PackagePath": "staticwebassets\\StorageUserImage\\33 - test2.png"
-    },
-    {
-      "Id": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\wwwroot\\StorageUserImage\\34 - test3.png",
-      "PackagePath": "staticwebassets\\StorageUserImage\\34 - test3.png"
-    },
-    {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.StudentPlacement.Backend.Microsoft.AspNetCore.StaticWebAssets.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
     },

@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using StudentPlacement.Backend.Dal.Interfaces;
 using StudentPlacement.Backend.Domain.Entities;
+using StudentPlacement.Backend.Models.Allocation;
 
 namespace StudentPlacement.Backend.Dal.Implementations
 {
@@ -33,6 +34,19 @@ namespace StudentPlacement.Backend.Dal.Implementations
         public async Task<AllocationRequest> GetAllocationRequestById(int id)
         {
             return await context.AllocationRequests.FirstOrDefaultAsync(x => x.Id == id);
+        }
+
+        public async Task<List<AllocationResponse>> GetAllRequestsWithOrganizationInfo()
+        {
+            return await context.AllocationRequests.Select(x => new AllocationResponse 
+            { 
+                IdRequest = x.Id,
+                CountSpace = x.CountPlace,
+                IdOrganization = context.Organizations.FirstOrDefault(y => y.AllocationRequestId == x.Id).Id,
+                Contacts = context.Organizations.FirstOrDefault(y => y.AllocationRequestId == x.Id).Contacts,
+                NameOrganization = context.Organizations.FirstOrDefault(y => y.AllocationRequestId == x.Id).Name,
+                CountFreeSpace = x.CountPlace - x.Students.Count
+            }).ToListAsync();
         }
 
         public async Task<AllocationRequest> UpdateAllocationRequest(int idAllocationRequest, AllocationRequest allocationRequest)

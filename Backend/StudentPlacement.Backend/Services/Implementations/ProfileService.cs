@@ -96,6 +96,8 @@ namespace StudentPlacement.Backend.Services.Implementations
 
                 await allocationRequestRepository.DeleteAllocationRequest(allocation);
 
+                //await studentRepository.DeleteRequestInStudents(allocation);
+
                 return new BaseResponse
                 {
                     Description = "Удалили заявку",
@@ -190,22 +192,31 @@ namespace StudentPlacement.Backend.Services.Implementations
                     };
                 }
 
-                AllocationRequest allocationRequest = null;
-
-                if(request.CountPlace != null)
+                if(request.AllocationId == null)
                 {
-                    allocationRequest = new AllocationRequest
+                    await organizationRepository.UpdateOrganizationByLogin(request.LoginUser, new Organization
                     {
-                        Adress = request.Adress,
-                        CountPlace = request.CountPlace ?? 0
+                        Name = request.OrganizationName,
+                        Contacts = organization.Contacts,
+                    });
+
+                    return new BaseResponse
+                    {
+                        Description = "Обновили организацию",
+                        StatusCode = StatusCode.Ok,
                     };
                 }
+
+                var oldAllocation = await allocationRequestRepository.GetAllocationRequestById(request.AllocationId ?? -1);
+
+                oldAllocation.Adress = request.Adress;
+                oldAllocation.CountPlace = request.CountPlace ?? -1;
 
                 await organizationRepository.UpdateOrganizationByLogin(request.LoginUser, new Organization
                 {
                     Name = request.OrganizationName,
                     Contacts = request.Contact,
-                    AllocationRequest = allocationRequest,
+                    AllocationRequest = oldAllocation,
                     AllocationRequestId = request.AllocationId
                 });
 

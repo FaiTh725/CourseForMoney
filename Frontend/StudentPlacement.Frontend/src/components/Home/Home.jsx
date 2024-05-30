@@ -6,6 +6,7 @@ import useParseToken from "../../hooks/useParseToken";
 import useUpdateToken from "../../hooks/useUpdateToken";
 import useRedirectionRefreshToken from "../../hooks/useRedirectionRefreshToken";
 import api from "../../api/helpAxios";
+import Create from "../Create/Create";
 
 import logo from "../../assets/Auth/LogoAuth.png"
 import defaultUserImage from "../../assets/Account/user.png";
@@ -74,7 +75,14 @@ const Home = () => {
     }
 
     useEffect(() => {
+        console.log(auth);
+    }, [auth]);
+
+    useEffect(() => {
         const fatchHomeProfile = async () => { await GetHomeProfile() };
+
+        const token = localStorage.getItem("token");
+        setAuth(useParseToken(token));
 
         fatchHomeProfile();
     }, []);
@@ -86,11 +94,14 @@ const Home = () => {
                     <a href="/Home"><img src={logo} alt="logo" height={60} width={60} /></a>
                 </section>
                 <section className={styles.navigationHeader}>
-                    <ul>
-                        <li onClick={() => { setTab(<AccountControll />) }}>Пользователи</li>
-                        <li onClick={() => { setTab(<Account />) }}>Создание</li>
-                        <li onClick={() => { setTab(<Allocation />) }}>Распределение</li>
-                    </ul>
+                    {auth.role != "User" && auth.role != "Organization" && (
+                        <ul>
+                            {auth.role == "Admin" && (<li onClick={() => { setTab(<AccountControll />) }}>Пользователи</li>)}
+                            {auth.role == "Admin" && (<li onClick={() => { setTab(<Create SetTab={setTab}/>) }}>Создание</li>)}
+                            <li onClick={() => { setTab(<Allocation />) }}>Распределение</li>
+                        </ul>
+                    )}
+                    
                 </section>
                 <section className={styles.userContainer}>
                     <div className={styles.userImageContainer} onClick={() => {setProfileIsOpen(!profileIsOpen)}}>

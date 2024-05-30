@@ -24,8 +24,10 @@ namespace StudentPlacement.Backend.Dal.Implementations
 
         public async Task DeleteAllocationRequest(Organization organization)
         {
-            organization.AllocationRequest = null;
-            organization.AllocationRequestId = null;
+            var organizationByQuery = await GetOrganizationById(organization.Id);
+
+            organizationByQuery.AllocationRequest = null;
+            organizationByQuery.AllocationRequestId = null;
 
             await context.SaveChangesAsync();
         }

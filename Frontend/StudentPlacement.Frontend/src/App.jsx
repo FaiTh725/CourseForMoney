@@ -9,6 +9,7 @@ import Account from './components/Account/Account'
 import AccountControll from './components/Account/AccountControll'
 import Profile from './components/Profile/Profile'
 import Allocation from './components/Allocation/Allocation'
+import Structure from './components/StuructureUniversity/Strucrute'
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
     <BrowserRouter>
       <AuthProvider>
         <Routes>
+          <Route exact path='/Struct' element={<Structure/>}/>
           <Route exact path="/Auth" element={<Auth/>}/>
           <Route exact path="/Account" element={<Account/>}/>
           <Route exact path="/AccountControll" element={<AccountControll/>}/>

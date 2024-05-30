@@ -58,6 +58,8 @@ const Profile = () => {
         try {
             const token = localStorage.getItem("token");
 
+
+
             const response = await api.patch("/Profile/ChangeProfile", {
                 loginUser: login,
                 organizationName: nameOrganization,
@@ -109,6 +111,11 @@ const Profile = () => {
                     'Authorization': `Bearer ${token == null ? "" : token}`
                 }
             });
+
+            if (response.data.statusCode != 0) {
+                alert(response.data.description);
+                return ;
+            }
 
             console.log(response);
             setNameAdressAllocationRequest();
