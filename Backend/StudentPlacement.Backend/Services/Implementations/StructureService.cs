@@ -21,7 +21,7 @@ namespace StudentPlacement.Backend.Services.Implementations
             this.groupRepository = groupRepository;
         }
 
-        public async Task<BaseResponse> CreateDepartment(CreateDepartmentRequest request)
+        public async Task<DataResponse<CreatestructResponse>> CreateDepartment(CreateDepartmentRequest request)
         {
             try
             {
@@ -29,10 +29,11 @@ namespace StudentPlacement.Backend.Services.Implementations
 
                 if (department != null)
                 {
-                    return new BaseResponse
+                    return new DataResponse<CreatestructResponse>
                     {
                         Description = "Кафедру уже существует",
-                        StatusCode = Domain.Enums.StatusCode.DepartmentExist
+                        StatusCode = Domain.Enums.StatusCode.DepartmentExist,
+                        Data = new()
                     };
                 }
 
@@ -43,20 +44,26 @@ namespace StudentPlacement.Backend.Services.Implementations
                     ShortName = request.ShortName,
                 };
 
-                await departmentsRepository.CreateDepartment(newDepartment);
+                var createdDepartment =  await departmentsRepository.CreateDepartment(newDepartment);
 
-                return new BaseResponse
+                return new DataResponse<CreatestructResponse>
                 {
                     Description = "Добавили кафедру",
-                    StatusCode = Domain.Enums.StatusCode.Ok
+                    StatusCode = Domain.Enums.StatusCode.Ok,
+                    Data = new()
+                    {
+                        Id = createdDepartment.Id,
+                        Name = createdDepartment.Name,
+                    }
                 };
             }
             catch
             {
-                return new BaseResponse
+                return new DataResponse<CreatestructResponse>
                 {
                     StatusCode = Domain.Enums.StatusCode.ServerError,
-                    Description = "Ошибка сервера"
+                    Description = "Ошибка сервера",
+                    Data = new()
                 };
             }
         }
@@ -115,7 +122,7 @@ namespace StudentPlacement.Backend.Services.Implementations
             }
         }
 
-        public async Task<BaseResponse> CreateSpeciality(CreateSpecialityRequest request)
+        public async Task<DataResponse<CreatestructResponse>> CreateSpeciality(CreateSpecialityRequest request)
         {
             try
             {
@@ -123,10 +130,11 @@ namespace StudentPlacement.Backend.Services.Implementations
 
                 if (department == null)
                 {
-                    return new BaseResponse
+                    return new DataResponse<CreatestructResponse>
                     {
                         Description = "Кафедра не найдена",
-                        StatusCode = Domain.Enums.StatusCode.NotFoundDepartment
+                        StatusCode = Domain.Enums.StatusCode.NotFoundDepartment,
+                        Data = new()
                     };
                 }
 
@@ -134,10 +142,12 @@ namespace StudentPlacement.Backend.Services.Implementations
 
                 if (specialization != null && specialization.DepartmentId == department.Id)
                 {
-                    return new BaseResponse
+                    return new DataResponse<CreatestructResponse>
                     {
                         Description = "Специальность уже существует",
-                        StatusCode = Domain.Enums.StatusCode.SpecializationExist
+                        StatusCode = Domain.Enums.StatusCode.SpecializationExist,
+                        Data = new()
+                    
                     };
                 }
 
@@ -154,20 +164,26 @@ namespace StudentPlacement.Backend.Services.Implementations
 
                 department.Specializations.Add(createdSpecialization);
 
-                await departmentsRepository.UpdateDepartment(department.Id, department);
+                var createdSpeciality = await departmentsRepository.UpdateDepartment(department.Id, department);
 
-                return new BaseResponse
+                return new DataResponse<CreatestructResponse>
                 {
                     Description = "Добавили специальность",
-                    StatusCode = Domain.Enums.StatusCode.Ok
+                    StatusCode = Domain.Enums.StatusCode.Ok,
+                    Data = new()
+                    {
+                        Id = createdSpecialization.Id,
+                        Name = createdSpecialization.Name
+                    }
                 };
             }
             catch
             {
-                return new BaseResponse
+                return new DataResponse<CreatestructResponse>
                 {
                     Description = "Ошибка сервера",
-                    StatusCode = Domain.Enums.StatusCode.ServerError
+                    StatusCode = Domain.Enums.StatusCode.ServerError,
+                    Data = new()
                 };
             }
 

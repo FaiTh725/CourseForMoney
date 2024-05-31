@@ -116,6 +116,10 @@
     align-items: start;
 }
 
+.errorModal {
+    margin-top: 40px;
+}
+
 .checkBox {
     padding: 3px;
     width: 50px;

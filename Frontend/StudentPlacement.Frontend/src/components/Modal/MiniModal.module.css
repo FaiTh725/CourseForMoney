@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+
+.modal {
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    height: 100vh;
+    width: 100vw;
+    right: 10px;
+    bottom: 10px;
+    background-color: transparent;
+    position: fixed;
+    display: flex;
+    justify-content: end;
+    align-items: end;
+    transition: all .5s;
+    pointer-events: none;
+    opacity: 0;
+}
+
+.modal.active {
+    opacity: 1;
+    pointer-events: none;
+} 
+
+.modalContent {
+    border-radius: 7px;
+    padding: 14px 20px;
+    background-color: #fff;
+    border: 2px solid #008054d9;
+    color: #a4a6a8;
+    font-size: 18px;
+    font-weight: 500;
+    box-shadow: 0px 0px 50px #06a16b50;
+}

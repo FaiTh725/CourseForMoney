@@ -14,11 +14,14 @@ import arrowDown from "../../assets/Account/arrow_down.png";
 import userImageExample from "../../assets/Account/user.png";
 import circleGray from "../../assets/Account/circleGray.png"
 import circleGreen from "../../assets/Account/circleGree.png"
+import MiniModal from "../Modal/MiniModal";
+import Modal from "../Modal/Modal";
 
 // сортировку по ролям
 // валидацию на ввод
 // при изменении была шляпа хз пофиксил ли
 // сортировка
+// валидация почты
 const AccountControll = () => {
     const [users, setUsers] = useState([]);
     const [usersView, setUsersView] = useState([]);
@@ -26,6 +29,10 @@ const AccountControll = () => {
     const navigate = useNavigate();
     const { auth, setAuth } = useContext(AuthContext);
     const [allGroups, setAllGroups] = useState([]);
+    const [miniModalActive, setMiniModalActive] = useState(false);
+    const [modalActive, setModalActive] = useState(false);
+    const messageOperator = useRef(null);
+    const modalMessage = useRef(null);
 
     const DeleteUser = async (e, idUser) => {
         e.preventDefault();
@@ -34,7 +41,9 @@ const AccountControll = () => {
             const { id, login, role } = useParseToken(token == null ? "" : token);
 
             if (id == idUser) {
-                alert("Удаление самого себя (потом сделать как всплыющие окно)");
+                //alert("Удаление самого себя ");
+                modalMessage.current.textContent = "Удаление самого себя";
+                setModalActive(true);
                 return;
             }
 
@@ -143,7 +152,7 @@ const AccountControll = () => {
             const { id, login, role } = useParseToken(token);
 
             if (id == idUser && role == roleUser) {
-                alert("я вам запрещаю изменять свою роль");
+                modalMessage.current.textContent = "Не изменяйте свою роль";
                 return;
             }
 
@@ -163,8 +172,6 @@ const AccountControll = () => {
                 organizationName: "",
                 contact: ""
             };
-
-            console.log(data);
 
             if (roleUser == 0) {
                 data = {
@@ -210,6 +217,15 @@ const AccountControll = () => {
                     }
                 });
 
+            if (response.data.statusCode != 0) {
+                setMiniModalActive(true);
+                messageOperator.current.textContent = response.data.description;
+                return;
+            }
+
+            setMiniModalActive(true);
+            messageOperator.current.textContent = response.data.description;
+
             console.log(response);
         }
         catch (error) {
@@ -248,6 +264,12 @@ const AccountControll = () => {
                 <img src="" alt="" />
                 <h1>Управление аккаунтами</h1>
             </header>
+            <MiniModal active={miniModalActive} setActive={setMiniModalActive}>
+                <p ref={messageOperator}></p>
+            </MiniModal>
+            <Modal active={modalActive} setActive={setModalActive}>
+                <p ref={modalMessage}></p>
+            </Modal>
             <section className={styles.searchSection}>
                 <div className={styles.searchInner}>
                     <img src={findImg} alt="search" height={40} />
@@ -340,7 +362,7 @@ const CardUser = ({ id, login, image, password,
                 isMariedCur,
                 isExtendedFamilyCur,
                 nameOrganizationCur,
-                contactsCur,);
+                contactsCur);
         }
     }
 
@@ -366,20 +388,23 @@ const CardUser = ({ id, login, image, password,
                     <div className={styles.inputData}>
                         <label >Логин</label>
                         <input type="text" placeholder="логин" defaultValue={loginCur} onChange={(e) => { setLogin(e.target.value) }} />
+                        <label ref={loginError}></label>
                     </div>
                     <div className={styles.inputData}>
                         <label >Пароль</label>
                         <input type="text" placeholder="пароль" defaultValue={passwordCur} onChange={(e) => { setPassword(e.target.value) }} />
+                        <label ref={passwordError}></label>
                     </div>
                     <div className={styles.inputData}>
                         <label >Почта</label>
                         <input type="text" placeholder="почта" defaultValue={emailCur} onChange={(e) => { setEmail(e.target.value) }} />
+                        <label ref={emailError}></label>
                     </div>
                     <div className={styles.inputData}>
                         <label >Роль</label>
                         <input type="text" disabled={true} defaultValue={roles[roleCur]} />
                     </div>
-                    <div>
+                    <div className={styles.saveBtnContainer}>
                         <button onClick={(e) => { e.preventDefault(); ChangeInfo() }}>сохранить</button>
                     </div>
                 </div>

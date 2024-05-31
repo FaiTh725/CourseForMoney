@@ -6,14 +6,21 @@ import useRedirectionRefreshToken from "../../hooks/useRedirectionRefreshToken";
 import api from "../../api/helpAxios";
 import AuthContext from "../Context/AuthProvider";
 import { useNavigate } from "react-router-dom";
+import Modal from "../Modal/Modal";
+import MiniModal from "../Modal/MiniModal";
 
 // сделать красивую выборку из специальностей и кафедр
 // валидация ввода
 // добавить удаление
 const Structure = () => {
     const [createElement, setCreateElement] = useState("DepartmentCreate");
-    const [departments, setDepartments] = useState([]);
+    // const [departments, setDepartments] = useState([]);
     const [specialities, setSpecialities] = useState([]);
+    const [modalActive, setModalActive] = useState(false);
+    const [miniModalActive, setMiniModalActive] = useState(false);
+
+    const modalError = useRef(null);
+    const miniMidalError = useRef(null);
 
     const { auth, setAuth } = useContext(AuthContext);
     const navigate = useNavigate();
@@ -51,43 +58,44 @@ const Structure = () => {
         }
     }
 
-    const GetAllDepartment = async () => {
-        try {
-            const token = localStorage.getItem("token");
+    // const GetAllDepartment = async () => {
+    //     try {
+    //         const token = localStorage.getItem("token");
 
-            const response = await api.get("/Structure/GetAllDepartments",
-                {
-                    withCredentials: true,
-                    headers: {
-                        'Authorization': `Bearer ${token == null ? "" : token}`
-                    }
-                }
-            );
+    //         const response = await api.get("/Structure/GetAllDepartments",
+    //             {
+    //                 withCredentials: true,
+    //                 headers: {
+    //                     'Authorization': `Bearer ${token == null ? "" : token}`
+    //                 }
+    //             }
+    //         );
 
-            if (response.data.statusCode != 0) {
-                console.log(response.data.description);
-                return;
-            }
-            console.log(response);
-            setDepartments(response.data.data);
-        }
-        catch (error) {
-            console.log(error);
-            if (error.request.status == 0) {
-                await useRedirectionRefreshToken(() => { GetAllDepartment() },
-                    setAuth,
-                    navigate,
-                    useUpdateToken,
-                    useParseToken);
-            }
-        }
-    }
+    //         if (response.data.statusCode != 0) {
+    //             console.log(response.data.description);
+    //             return;
+    //         }
+
+    //         console.log(response);
+    //         setDepartments(response.data.data);
+    //     }
+    //     catch (error) {
+    //         console.log(error);
+    //         if (error.request.status == 0) {
+    //             await useRedirectionRefreshToken(() => { GetAllDepartment() },
+    //                 setAuth,
+    //                 navigate,
+    //                 useUpdateToken,
+    //                 useParseToken);
+    //         }
+    //     }
+    // }
 
     useEffect(() => {
-        const fatchAllDepartments = async () => { await GetAllDepartment() };
+        //const fatchAllDepartments = async () => { await GetAllDepartment() };
         const fatchAllSpecializations = async () => { await GetAllSpecializations() };
 
-        fatchAllDepartments();
+        //fatchAllDepartments();
         fatchAllSpecializations();
     }, []);
 
@@ -100,6 +108,12 @@ const Structure = () => {
                 <div>
                     <p>Создать</p>
                 </div>
+                <Modal active={modalActive} setActive={setModalActive}>
+                    <p ref={modalError}></p>
+                </Modal>
+                <MiniModal active={miniModalActive} setActive={setMiniModalActive}>
+                    <p ref={miniMidalError}></p>
+                </MiniModal>
                 <ul>
                     <li className={createElement == "DepartmentCreate" ? styles.tabChacked : styles.settionOption} onClick={() => { setCreateElement("DepartmentCreate") }}>Кафедра</li>
                     <li className={createElement == "SpecializationCreate" ? styles.tabChacked : styles.settionOption} onClick={() => { setCreateElement("SpecializationCreate") }}>Специльность</li>
@@ -107,15 +121,16 @@ const Structure = () => {
                 </ul>
             </section>
             <section className={styles.addElemnt}>
-                {createElement == "DepartmentCreate" && (<DepartmentCreate navigate={navigate} setAuth={setAuth} />)}
-                {createElement == "SpecializationCreate" && (<SpecializationCreate departments={departments} navigate={navigate} setAuth={setAuth} />)}
-                {createElement == "GroupCreate" && (<GroupCreate specialities={specialities} navigate={navigate} setAuth={setAuth} />)}
+                {createElement == "DepartmentCreate" && (<DepartmentCreate navigate={navigate} setAuth={setAuth} setMiniModalActive={setMiniModalActive} setModalActive={setModalActive} modalMessage={modalError} miniModalMessage={miniMidalError} departments={specialities} />)}
+                {createElement == "SpecializationCreate" && (<SpecializationCreate departments={specialities} navigate={navigate} setAuth={setAuth} setMiniModalActive={setMiniModalActive} setModalActive={setModalActive} modalMessage={modalError} miniModalMessage={miniMidalError} />)}
+                {createElement == "GroupCreate" && (<GroupCreate specialities={specialities} navigate={navigate} setAuth={setAuth} setMiniModalActive={setMiniModalActive} setModalActive={setModalActive} modalMessage={modalError} miniModalMessage={miniMidalError} />)}
             </section>
         </main>
     )
 }
 
-const GroupCreate = ({ specialities, navigate, setAuth }) => {
+const GroupCreate = ({ specialities, navigate, setAuth,
+    setModalActive, setMiniModalActive, modalMessage, miniModalMessage }) => {
     const [selectedSpecialization, setSelectedSpecialization] = useState([]);
     const [specialization, setSpecialization] = useState(null);
 
@@ -126,11 +141,19 @@ const GroupCreate = ({ specialities, navigate, setAuth }) => {
     useEffect(() => {
         if (specialities.length > 0) {
             setSelectedSpecialization(specialities[0].departmentSpeciality);
-            if (selectedSpecialization.length > 0) {
-                setSpecialization(selectedSpecialization[0].id);
+            if (specialities[0].departmentSpeciality.length > 0) {
+                setSpecialization(specialities[0].departmentSpeciality[0].id);
             }
         }
     }, []);
+
+    // useEffect(() => {
+    //     console.log(selectedSpecialization);
+    //     if (selectedSpecialization.departmentSpeciality.length>0) {
+    //         console.log("Условие выполнилось");
+    //         setSpecialization(selectedSpecialization.departmentSpeciality[0].id);
+    //     }
+    // }, [selectedSpecialization]);
 
     const CreateGroup = async (e) => {
         var flag = false;
@@ -143,9 +166,13 @@ const GroupCreate = ({ specialities, navigate, setAuth }) => {
         if (flag) return;
 
         if (specialities.length == 0 || selectedSpecialization.length == 0) {
-            alert("Добавьте кафедру и специальность для добавлении группы");
+            setModalActive(true);
+            modalMessage.current.textContent = "Добавьте кафедру и специальность для добавлении группы";
+            // alert("Добавьте кафедру и специальность для добавлении группы");
             return;
         }
+
+        console.log(specialization);
 
         try {
             const token = localStorage.getItem("token");
@@ -166,19 +193,27 @@ const GroupCreate = ({ specialities, navigate, setAuth }) => {
             );
 
             if (response.data.statusCode == 9) {
-                alert("Группа уже существует");
+                setModalActive(true);
+                modalMessage.current.textContent = "Группа уже существует";
+                //alert("Группа уже существует");
                 return;
             }
             if (response.data.statusCode == 8) {
-                alert("Неверная выбранная группа");
+                setModalActive(true);
+                modalMessage.current.textContent = "Неверная выбранная группа";
+                //alert("Неверная выбранная группа");
                 return;
             }
             if (response.data.statusCode != 0) {
-                alert("Ошибка серве");
+                setModalActive(true);
+                modalMessage.current.textContent = response.data.description;
+                //alert("Ошибка серве");
                 return;
             }
 
             console.log(response);
+            miniModalMessage.current.textContent = "Создали специальность";
+            setMiniModalActive(true);
             setNumber("");
         }
         catch (error) {
@@ -227,7 +262,8 @@ const GroupCreate = ({ specialities, navigate, setAuth }) => {
     )
 }
 
-const SpecializationCreate = ({ departments, navigate, setAuth }) => {
+const SpecializationCreate = ({ departments, navigate, setAuth,
+    setModalActive, setMiniModalActive, modalMessage, miniModalMessage }) => {
     const [selectedDepartment, setSelectedDepartment] = useState(null);
     const [name, setName] = useState("");
     const [shortName, setShortName] = useState("");
@@ -250,9 +286,15 @@ const SpecializationCreate = ({ departments, navigate, setAuth }) => {
         }
     }, []);
 
+    useEffect(() => {
+        console.log(departments.find(department => department.id == selectedDepartment));
+    }, [selectedDepartment]);
+
     const CreateSpecialization = async (e) => {
         if (selectedDepartment == null) {
-            alert("Для начала добавьте кафедру для группы");
+            modalMessage.current.textContent = "Добавить фафедру для группы";
+            setModalActive(true);
+            //alert("Для начала добавьте кафедру для группы");
             return;
         }
 
@@ -295,19 +337,33 @@ const SpecializationCreate = ({ departments, navigate, setAuth }) => {
             );
 
             if (response.data.statusCode == 6) {
-                alert("Ошибка при выборекафедры");
+                setModalActive(true);
+                modalMessage.current.textContent = "Ошибка при выборекафедры";
+                // alert("Ошибка при выборекафедры");
                 return;
             }
             if (response.data.statusCode == 7) {
-                alert("Специальность уже существует");
+                setModalActive(true);
+                modalMessage.current.textContent = "Специальность уже существует";
+                // alert("Специальность уже существует");
                 return;
             }
             if (response.data.statusCode != 0) {
-                alert(response.data.description);
+                setModalActive(true);
+                modalMessage.current.textContent = response.data.description;
+                //alert(response.data.description);
                 return;
             }
 
+            var updateDepartment = departments.find(department => department.id == selectedDepartment);
+            console.log(updateDepartment);
+            updateDepartment.departmentSpeciality.push({ id: response.data.data.id, name: response.data.data.name });
+            console.log(updateDepartment);
+
             console.log(response);
+            miniModalMessage.current.textContent = "Создали специальность";
+            //departments.push({});
+            setMiniModalActive(true);
             setCode("");
             setName("");
             setShortName("");
@@ -358,7 +414,8 @@ const SpecializationCreate = ({ departments, navigate, setAuth }) => {
     )
 }
 
-const DepartmentCreate = ({ navigate, setAuth }) => {
+const DepartmentCreate = ({ navigate, setAuth, departments,
+    setModalActive, setMiniModalActive, modalMessage, miniModalMessage }) => {
 
     const [name, setName] = useState("");
     const [shortName, setShortName] = useState("");
@@ -414,11 +471,19 @@ const DepartmentCreate = ({ navigate, setAuth }) => {
             );
 
             if (response.data.statusCode != 0) {
-                alert(response.data.description);
+                setModalActive(true);
+                modalMessage.current.textContent = response.data.description;
+                // alert(response.data.description);
                 return;
             }
+            const createdDepartmentId = response.data.data.id;
+            const createdDepartmentName = response.data.data.name;
+
+            departments.push({ id: createdDepartmentId, name: createdDepartmentName, departmentSpeciality: [] });
 
             console.log(response);
+            setMiniModalActive(true);
+            miniModalMessage.current.textContent = "Создали кафедру";
             setName("");
             setShortName("");
             setHeadOfdepartment("");

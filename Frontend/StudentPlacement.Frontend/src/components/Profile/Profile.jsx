@@ -58,8 +58,6 @@ const Profile = () => {
         try {
             const token = localStorage.getItem("token");
 
-
-
             const response = await api.patch("/Profile/ChangeProfile", {
                 loginUser: login,
                 organizationName: nameOrganization,

@@ -142,6 +142,27 @@
     z-index: 0;
 }
 
+.saveBtnContainer {
+    display: flex;
+    justify-content: end;
+
+}
+
+.saveBtnContainer button {
+    padding: 10px 15px;
+    border-radius: 7px;
+    font: inherit;
+    font-size: 14px;
+    color: #a4a6a8;
+    transition: all .5s;
+}
+
+.saveBtnContainer button:hover {
+    box-shadow: 0 0px 15px #737575fb;
+    color: #008054d9;
+    transform: scale(1.1);
+}
+
 .inputDataExtend {
     display: flex;
     color: #008054d9;

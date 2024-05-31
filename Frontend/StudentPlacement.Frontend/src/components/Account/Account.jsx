@@ -8,6 +8,7 @@ import AuthContext from "../Context/AuthProvider";
 import useRedirectionRefreshToken from "../../hooks/useRedirectionRefreshToken";
 import useImgToString from "../../hooks/useImgToString";
 import ReactInputMask from "react-input-mask";
+import Modal from "../Modal/Modal";
 
 import defaultUserImage from "../../assets/Account/user.png";
 import loginImg from "../../assets/Account/login.png";
@@ -23,6 +24,7 @@ import emailImg from "../../assets/Account/email.png"
 import circleGray from "../../assets/Account/circleGray.png"
 import circleGreen from "../../assets/Account/circleGree.png"
 
+
 // маску для телефона для контактов организации
 // соединить создание и управление пользователями в одно 
 // увудомлять о успешном создании
@@ -37,6 +39,7 @@ const Account = ({SetTab}) => {
     const navigate = useNavigate();
     const { auth, setAuth } = useContext(AuthContext);
     const errorMessage = useRef(null);
+    const [modalActive, setModalActive] = useState(false);
     // student setting
     const [groups, setGroups] = useState([]);
     const [selectedGroup, setSelectedGroup] = useState(0);
@@ -169,7 +172,9 @@ const Account = ({SetTab}) => {
 
 
             if (response.data.statusCode != 0) {
-                alert(errorMessage.current.value = response.data.description);
+                errorMessage.current.textContent = response.data.description;
+                setModalActive(true);
+                // alert(errorMessage.current.value = response.data.description);
                 return;
             }
 
@@ -248,6 +253,9 @@ const Account = ({SetTab}) => {
             <header className={styles.header}>
                 <h1>Управдение пользователями</h1>
             </header>
+            <Modal active={modalActive} setActive={setModalActive}>
+                <p className={styles.errorModal} ref={errorMessage}></p>
+            </Modal>
             <form onSubmit={(e) => { CreateUser(e) }} className={styles.createAccount}>
                 <div className={styles.imageInput}>
                     <img onClick={() => { imgBtn.current.click(); }} src={uploadFile == null ? defaultUserImage : URL.createObjectURL(uploadFile)} alt="user logo" height={140} width={140} />
@@ -358,9 +366,6 @@ const Account = ({SetTab}) => {
                                 </div>
                             )}
                         </div>
-                    </div>
-                    <div>
-                        <label ref={errorMessage}></label>
                     </div>
                     <div className={styles.btnContainer}>
                         <button className={styles.defaultBtn} type="submit">Создать</button>
