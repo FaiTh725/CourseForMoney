@@ -176,7 +176,9 @@ const Account = ({SetTab}) => {
             }
 
             console.log(response);
-            alert("Создали пользователя");
+            //alert("Создали пользователя");
+            setModalActive(true);
+            errorMessage.current.textContent = "Создали пользователя";
             SetTab(null);
 
         }
