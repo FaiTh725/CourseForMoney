@@ -61,5 +61,14 @@ namespace StudentPlacement.Backend.Controllers
 
             return new JsonResult(response);
         }
+
+        [HttpGet("[action]")]
+        [Authorize]
+        public async Task<IActionResult> GetStudentsFromRequest(int idRequest)
+        {
+            var response = await allocationService.GetSttudentsByRequest(idRequest);
+
+            return new JsonResult(response);
+        }
     }
 }

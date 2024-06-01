@@ -23,6 +23,8 @@ namespace StudentPlacement.Backend.Dal.Interfaces
 
         Task<IEnumerable<GetStudentAllocationResponse>> GetAllStudentWithRequestAndOrganization(int idGroup);
 
+        Task<IEnumerable<GetStudentsFromRequestResponse>> GetStudentFromRequest(int idRequest);
+
         Task<GetStudentRequestResponse> GetStudentRequest(int idUser);
 
         Task<List<ReportStudentAllocation>> GetStudentForReport(int idGroup);

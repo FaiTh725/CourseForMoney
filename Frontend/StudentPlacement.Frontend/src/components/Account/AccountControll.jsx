@@ -16,10 +16,8 @@ import circleGray from "../../assets/Account/circleGray.png"
 import circleGreen from "../../assets/Account/circleGree.png"
 import MiniModal from "../Modal/MiniModal";
 import Modal from "../Modal/Modal";
+import errorImg from '/error.png'
 
-// сортировку по ролям
-// валидацию на ввод
-// при изменении была шляпа хз пофиксил ли
 // сортировка
 // валидация почты
 const AccountControll = () => {
@@ -33,6 +31,12 @@ const AccountControll = () => {
     const [modalActive, setModalActive] = useState(false);
     const messageOperator = useRef(null);
     const modalMessage = useRef(null);
+
+    // filter
+    const [includeAdmin, setIncludeAdmin] = useState(true);
+    const [includeHODepartment, setIncludeHODepartment] = useState(true);
+    const [includeOrganization, setIncludeOrganization] = useState(true);
+    const [includeStudent, setIncludeStudent] = useState(true);
 
     const DeleteUser = async (e, idUser) => {
         e.preventDefault();
@@ -247,6 +251,16 @@ const AccountControll = () => {
     }
 
     useEffect(() => {
+        
+        setUsersView(users.filter(user => {
+            if(includeAdmin && user.role == 2) return user 
+            if(includeHODepartment && user.role == 1) return user 
+            if(includeOrganization && user.role == 3) return user 
+            if(includeStudent && user.role == 0) return user 
+        }));
+    }, [includeAdmin, includeHODepartment, includeOrganization, includeStudent]);
+
+    useEffect(() => {
         setUsersView(users.filter(user => user.login.startsWith(searchString)));
     }, [searchString]);
 
@@ -269,6 +283,7 @@ const AccountControll = () => {
             </MiniModal>
             <Modal active={modalActive} setActive={setModalActive}>
                 <p ref={modalMessage}></p>
+                <img src={errorImg} alt="error" width={800} height={600} />
             </Modal>
             <section className={styles.searchSection}>
                 <div className={styles.searchInner}>
@@ -276,6 +291,37 @@ const AccountControll = () => {
                     <input type="text" onChange={(e) => { setSearchString(e.target.value) }} placeholder="поиск по логину" />
                 </div>
             </section>
+            <div>
+                <section className={styles.filterSection}>
+                    <div className={styles.filter}>
+                        <p>Роли</p>
+                        <div className={styles.filterPoint}>
+                            <label >Админ</label>
+                            <button onClick={(e) => { e.preventDefault(); setIncludeAdmin(!includeAdmin); }} type="button" className={includeAdmin == true ? styles.checkBoxChecked : styles.checkBox}>
+                                <img src={includeAdmin ? circleGreen : circleGray} alt="" height={20} width={20} />
+                            </button>
+                        </div>
+                        <div className={styles.filterPoint}>
+                            <label >Зав кафедры</label>
+                            <button onClick={(e) => { e.preventDefault(); setIncludeHODepartment(!includeHODepartment); }} type="button" className={includeHODepartment == true ? styles.checkBoxChecked : styles.checkBox}>
+                                <img src={includeHODepartment ? circleGreen : circleGray} alt="" height={20} width={20} />
+                            </button>
+                        </div>
+                        <div className={styles.filterPoint}>
+                            <label >Организация</label>
+                            <button onClick={(e) => { e.preventDefault(); setIncludeOrganization(!includeOrganization) }} type="button" className={includeOrganization == true ? styles.checkBoxChecked : styles.checkBox}>
+                                <img src={includeOrganization ? circleGreen : circleGray} alt="" height={20} width={20} />
+                            </button>
+                        </div>
+                        <div className={styles.filterPoint}>
+                            <label >Студент</label>
+                            <button onClick={(e) => { e.preventDefault(); setIncludeStudent(!includeStudent) }} type="button" className={includeStudent == true ? styles.checkBoxChecked : styles.checkBox}>
+                                <img src={includeStudent ? circleGreen : circleGray} alt="" height={20} width={20} />
+                            </button>
+                        </div>
+                    </div>
+                </section>
+            </div>
             <section className={styles.accountsSection}>
                 {usersView.map(user => (
                     <CardUser key={user.id} id={user.id} image={user.image} login={user.login} password={user.password}
@@ -449,14 +495,12 @@ const CardUser = ({ id, login, image, password,
                                             <button onClick={(e) => { e.preventDefault(); setIsMaried(!isMariedCur); }} type="button" className={isMariedCur == true ? styles.checkBoxChecked : styles.checkBox}>
                                                 <img src={isMariedCur ? circleGreen : circleGray} alt="" height={20} width={20} />
                                             </button>
-                                            {/* <input type="checkbox" checked={isMariedCur} onBlur={(e) => { e.preventDefault(); ChangeInfo() }} onChange={(e) => { setIsMaried(!isMariedCur) }} /> */}
                                         </div>
                                         <div className={styles.inputDataExtend}>
                                             <label >Многодетная семья</label>
                                             <button onClick={(e) => { e.preventDefault(); setIsExtendFamily(!isExtendedFamilyCur); }} type="button" className={isExtendedFamilyCur == true ? styles.checkBoxChecked : styles.checkBox}>
                                                 <img src={isExtendedFamilyCur ? circleGreen : circleGray} alt="" height={20} width={20} />
                                             </button>
-                                            {/* <input type="checkbox" checked={isExtendedFamilyCur} onBlur={(e) => { e.preventDefault(); ChangeInfo() }} onChange={(e) => { setIsExtendFamily(!isExtendedFamilyCur) }} /> */}
                                         </div>
                                     </div>
                                 )}

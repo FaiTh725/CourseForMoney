@@ -6,15 +6,18 @@ import useRedirectionRefreshToken from "../../hooks/useRedirectionRefreshToken"
 import { useNavigate } from "react-router-dom"
 import { useContext, useEffect, useState } from "react"
 import AuthContext from "../Context/AuthProvider"
+import Modal from "../Modal/Modal"
 
 import whitePlus from "../../assets/Allocation/whitePlus.png"
 import crossDelete from "../../assets/Account/delete_cross.png"
 import circleGray from "../../assets/Account/circleGray.png"
 import circleGreen from "../../assets/Account/circleGree.png"
 import triangleDown from "../../assets/Allocation/downArrow.png"
+import checked from "../../assets/Allocation/checked.png"
+import unchecked from "../../assets/Allocation/unchecked.png"
+import find from "../../assets/Account/find.png"
 
-// по клике на заявку показать всех студентов в таблице
-// фильтры по студентам и поиск
+
 const Allocation = () => {
     const [allDepartments, setAllDepartments] = useState([]);
     const [specialities, setSpecialities] = useState([]);
@@ -23,6 +26,7 @@ const Allocation = () => {
 
     const [allAllocationRequest, setAllAllocationRequest] = useState([]);
     const [allStudent, setAllStudent] = useState([]);
+    const [viewFilteredStudent, setViewFilteredStudent] = useState([]);
 
     const [modalStudentIsOpen, setModalStudentIsOpen] = useState({});
 
@@ -127,6 +131,7 @@ const Allocation = () => {
             console.log(response);
 
             setAllStudent(response.data.data);
+            setViewFilteredStudent(response.data.data);
             setModalStudentIsOpen(response.data.data.map(pair => { pair.idStudent, false }));
         }
         catch (error) {
@@ -189,6 +194,7 @@ const Allocation = () => {
             });
 
             setAllStudent(newStudents);
+            setViewFilteredStudent(newStudents);
         }
         catch (error) {
             console.log(error);
@@ -240,6 +246,7 @@ const Allocation = () => {
 
             console.log(response);
             setAllStudent(newStudents);
+            setViewFilteredStudent(newStudents);
 
             const newRequests = allAllocationRequest.map(request => {
                 if (request.idRequest == idRequest) {
@@ -308,30 +315,67 @@ const Allocation = () => {
         }
     }
 
-        function CompareStudent (left, right) {
-        
-            if (left.fullName < right.fullName) {
-                return nameFilter ?? true ? -1 : 1;
-            }
-            if (left.fullName > right.fullName) {
-                return nameFilter ?? true ? 1 : -1;
-            }
+    function CompareStudentByName(left, right) {
 
-            if (left.averageScore < right.averageScore) {
-                return averageFilter ?? true ? -1 : 1;
-            }
-            if (left.averageScore > right.averageScore) {
-                return averageFilter ?? true ? 1 : -1;
-            }
-            
-            return 0;
-        
+        if (left.fullName < right.fullName) {
+            return nameFilter ?? true ? -1 : 1;
+        }
+        if (left.fullName > right.fullName) {
+            return nameFilter ?? true ? 1 : -1;
+        }
+
+        if (left.averageScore < right.averageScore) {
+            return averageFilter ?? true ? -1 : 1;
+        }
+        if (left.averageScore > right.averageScore) {
+            return averageFilter ?? true ? 1 : -1;
+        }
+
+        return 0;
+
     }
 
-    const SortTableStudents = () => {
-        //console.log(nameFilter);
-        allStudent.sort(CompareStudent);
+    function ComapreStudentByAverageScore(left, right) {
+        if (left.averageScore < right.averageScore) {
+            return averageFilter ?? true ? -1 : 1;
+        }
+        if (left.averageScore > right.averageScore) {
+            return averageFilter ?? true ? 1 : -1;
+        }
+
+        if (left.fullName < right.fullName) {
+            return nameFilter ?? true ? -1 : 1;
+        }
+        if (left.fullName > right.fullName) {
+            return nameFilter ?? true ? 1 : -1;
+        }
     }
+
+    const SortTableStudentsByName = () => {
+        viewFilteredStudent.sort(CompareStudentByName);
+    }
+
+    const SortTableStudentByAverageScore = () => {
+        viewFilteredStudent.sort(ComapreStudentByAverageScore);
+    }
+
+    const SearchStudents = (param) => {
+        const filteredStudent = allStudent.filter(student => student.fullName.startsWith(param));
+
+        setViewFilteredStudent(filteredStudent);
+    }
+
+    useEffect(() => {
+        const filteredStudents = allStudent.filter(student => {
+            if (allocationFilter && student.status == 0) return student;
+            if (notAllocationFilter && student.status == 1) return student;
+        });
+
+        console.log(filteredStudents);
+
+        //setAllStudent(filteredStudents);
+        setViewFilteredStudent(filteredStudents);
+    }, [allocationFilter, notAllocationFilter]);
 
     useEffect(() => {
         console.log(allAllocationRequest);
@@ -399,11 +443,14 @@ const Allocation = () => {
                         </div>
                         {
                             allAllocationRequest.map(request => (
-                                <CardRequest key={request.idOrganization} id={request.idOrganization}
+                                <CardRequest key={request.idOrganization} idOrganization={request.idOrganization}
+                                    idRequest = {request.idRequest}
                                     nameOrganization={request.nameOrganization}
                                     contacts={request.contacts}
                                     countPlace={request.countSpace}
-                                    countFreePlace={request.countFreeSpace} />
+                                    countFreePlace={request.countFreeSpace}
+                                    setAuth={setAuth}
+                                    navigate={navigate} />
                             ))
                         }
                     </div>
@@ -428,6 +475,30 @@ const Allocation = () => {
                                     </button>
                                 </div>
                             </section>
+                            <section className={styles.filterRequest}>
+                                <p>Упорядочить</p>
+                                <div>
+                                    <p>Полное имя</p>
+                                    <button type="button" onClick={(e) => { setNameFilter(nameFilter != null ? null : true); setAverageFilter(averageFilter != null ? null : null); }} className={nameFilter != null ? styles.checkBoxChecked : styles.checkBox}>
+                                        <img src={nameFilter != null ? circleGreen : circleGray} alt="" height={20} width={20} />
+                                    </button>
+                                </div>
+                                <div>
+                                    <p>Средний балл</p>
+                                    <button type="button" onClick={(e) => { setAverageFilter(averageFilter != null ? null : true); setNameFilter(nameFilter != null ? null : null); }} className={averageFilter != null ? styles.checkBoxChecked : styles.checkBox}>
+                                        <img src={averageFilter != null ? circleGreen : circleGray} alt="" height={20} width={20} />
+                                    </button>
+                                </div>
+                            </section>
+                            <section className={styles.filterRequest}>
+                                <p>Поиск</p>
+                                <div className={styles.searchContainer}>
+                                    <div className={styles.search}>
+                                        <div className={styles.imgContainer}><img src={find} alt="search" height={30} width={30} /></div>
+                                        <div className={styles.inputContainer}><input type="text" onChange={(e) => { SearchStudents(e.target.value) }} /></div>
+                                    </div>
+                                </div>
+                            </section>
                         </div>
                         <div className={styles.reportButtonContainer}>
                             <button onClick={(e) => { DownloadReportAllocation(e) }} className={styles.getReportBtn}>Ведомость</button>
@@ -436,17 +507,17 @@ const Allocation = () => {
                 )
             }
             {
-                allStudent.length > 0 && (
+                viewFilteredStudent.length > 0 && (
                     <table className={styles.allStudent}>
                         <thead className={styles.tableHead}>
                             <tr>
-                                <th onClick={() => { setNameFilter(nameFilter == null ? true : !nameFilter); SortTableStudents() }} className={`${styles.firstColumn}`}>
+                                <th onClick={() => { setNameFilter(nameFilter == null ? true : !nameFilter); SortTableStudentsByName() }} className={`${styles.firstColumn}`}>
                                     <div className={styles.tableHeadCell}>
                                         <p>Полное имя</p>
                                         <img className={nameFilter == null ? styles.filterTrianleHide : nameFilter == true ? styles.filterTrianleUp : styles.filterTrianleDown} src={triangleDown} alt="arrow" height={15} width={15} />
                                     </div>
                                 </th>
-                                <th onClick={() => { setAverageFilter(averageFilter == null ? true : !averageFilter) }}>
+                                <th onClick={() => { setAverageFilter(averageFilter == null ? true : !averageFilter); SortTableStudentByAverageScore() }}>
                                     <div className={styles.tableHeadCell}>
                                         <p>Средний балл</p>
                                         <img className={averageFilter == null ? styles.filterTrianleHide : averageFilter == true ? styles.filterTrianleUp : styles.filterTrianleDown} src={triangleDown} alt="arrow" height={15} width={15} />
@@ -458,7 +529,7 @@ const Allocation = () => {
                         </thead>
                         <tbody className={styles.tableBody}>
                             {
-                                allStudent.map(student => (
+                                viewFilteredStudent.map(student => (
                                     <CardStudentWithRequest key={student.idStudent} idStudent={student.idStudent}
                                         fullName={student.fullName}
                                         averageScore={student.averageScore}
@@ -578,23 +649,91 @@ const CardStudentWithRequest = ({ idStudent, fullName, averageScore,
     )
 }
 
-const CardRequest = ({ id, nameOrganization, contacts, countPlace, countFreePlace }) => {
-    const [idCur, setId] = useState(id);
+const CardRequest = ({ idOrganization, idRequest, nameOrganization, contacts, countPlace, countFreePlace,
+    setAuth, navigate 
+}) => {
+    const [idOrganizationCur, setIdOrganization] = useState(idOrganization);
+    const [idRequestCur, setIdRequest] = useState(idRequest);
     const [nameOrganizationCur, setNameOrganization] = useState(nameOrganization);
     const [contactsCur, setContacts] = useState(contacts);
     const [countPlaceCur, setCountPlace] = useState(countPlace);
     const [countFreePlaceCur, setCountFreePlace] = useState(countFreePlace);
 
+    const [studentsRequest, setStudentRequest] = useState([]);
+
+    const [modaActive, setModalActive] = useState(false);
+
+
     useEffect(() => {
-        setId(id);
+        setIdOrganization(idOrganization);
+        setIdRequest(idRequest);
         setNameOrganization(nameOrganization);
         setContacts(contacts);
         setCountPlace(countPlace);
         setCountFreePlace(countFreePlace);
-    }, [id, nameOrganization, contacts, countPlace, countFreePlace]);
+    }, [idOrganization, idRequest, nameOrganization, contacts, countPlace, countFreePlace]);
+
+    const GetStudentFromRequest = async (idRequest) => {
+        try {
+            const token = localStorage.getItem("token");
+
+            const response = await api.get("/Allocation/GetStudentsFromRequest", {
+                params: {
+                    idRequest: idRequest
+                },
+                withCredentials: true,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token ?? ""}`
+                }
+            });
+
+            if (response.data.statusCode != 0) {
+                console.log(response.data.description);
+                return;
+            }
+
+            setStudentRequest(response.data.data);
+            console.log(response);
+            setModalActive(!modaActive);
+        }
+        catch (error) {
+            console.log(error);
+            if (error.request.status == 0) {
+                await useRedirectionRefreshToken(() => { GetStudentFromRequest(idRequest) },
+                    setAuth,
+                    navigate,
+                    useUpdateToken,
+                    useParseToken);
+            }
+        }
+    }
 
     return (
-        <div className={styles.cardRequestMain}>
+        <div className={styles.cardRequestMain} onClick={(e) => { GetStudentFromRequest(idRequest)}}>
+            <Modal onClick={(e) => {e.stopPropagation()}} active={modaActive} setActive={setModalActive}>
+                <p>Студенты заявки</p>
+                {
+                    studentsRequest.length == 0 && (
+                        <p className={styles.emptyRequestMessage}>
+                            Сюда еще не определили студентов
+                        </p>
+                    )
+                }
+                {
+                    studentsRequest.length > 0 && (
+                        studentsRequest.map(student => (
+                            <div className={styles.infoStudentInRequest} key={student.id}>
+                                <p>{student.fullName}</p>
+                                <p>{student.averageScore}</p>
+                                <p>{student.adress}</p>
+                                <p><img src={student.isMarried ? checked : unchecked} alt="" width={30} height={30}/></p>
+                                <p><img src={student.extendedFamily ? checked : unchecked} alt="" width={30} height={30}/></p>
+                            </div>
+                        ))
+                    )
+                }
+            </Modal>
             <p>{nameOrganizationCur}</p>
             <p>{contactsCur}</p>
             <p>{countFreePlaceCur}</p>

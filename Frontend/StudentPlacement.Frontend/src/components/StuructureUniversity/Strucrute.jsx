@@ -110,6 +110,7 @@ const Structure = () => {
                 </div>
                 <Modal active={modalActive} setActive={setModalActive}>
                     <p ref={modalError}></p>
+                    <img src={errorImg} alt="error" width={800} height={600}/>
                 </Modal>
                 <MiniModal active={miniModalActive} setActive={setMiniModalActive}>
                     <p ref={miniMidalError}></p>
@@ -146,6 +147,13 @@ const GroupCreate = ({ specialities, navigate, setAuth,
             }
         }
     }, []);
+
+    useEffect(() => {
+        console.log(selectedSpecialization);
+        if (selectedSpecialization.length > 0) {
+            setSpecialization(selectedSpecialization[0].id);
+        }
+    }, [selectedSpecialization]);
 
     // useEffect(() => {
     //     console.log(selectedSpecialization);
@@ -212,7 +220,7 @@ const GroupCreate = ({ specialities, navigate, setAuth,
             }
 
             console.log(response);
-            miniModalMessage.current.textContent = "Создали специальность";
+            miniModalMessage.current.textContent = "Создали группу";
             setMiniModalActive(true);
             setNumber("");
         }

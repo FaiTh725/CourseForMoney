@@ -141,17 +141,6 @@ namespace StudentPlacement.Backend.Services.Implementations
             {
                 var data  = await allocationRequestRepository.GetAllRequestsWithOrganizationInfo();
 
-                /*var request = (await organizationRepository.GetAllOrganizations()).Select(x => new AllocationResponse
-                {
-                    IdOrganization = x.Id,
-                    IdRequest = x.AllocationRequestId ?? -1,
-                    NameOrganization = x.Name,
-                    Contacts = x.Contacts,
-                    CountSpace = x.AllocationRequest?.CountPlace,
-                    CountFreeSpace = x.AllocationRequest?.CountPlace - x.AllocationRequest?.Students.Count
-                });*/
-
-
                 return new DataResponse<IEnumerable<AllocationResponse>>
                 {
                     Description = "Получили все заявки",
@@ -204,6 +193,30 @@ namespace StudentPlacement.Backend.Services.Implementations
                     Description = "Ошибка сервера",
                     StatusCode = StatusCode.ServerError,
                     Data = new List<AllDepartmentsAndGroupsResponse>()
+                };
+            }
+        }
+
+        public async Task<DataResponse<IEnumerable<GetStudentsFromRequestResponse>>> GetSttudentsByRequest(int idRequest)
+        {
+            try
+            {
+                var students = await studentRepository.GetStudentFromRequest(idRequest);
+
+                return new DataResponse<IEnumerable<GetStudentsFromRequestResponse>>
+                {
+                    Data = students,
+                    Description = "Получили пользователей заявки",
+                    StatusCode = StatusCode.Ok,
+                };
+            }
+            catch 
+            {
+                return new DataResponse<IEnumerable<GetStudentsFromRequestResponse>>
+                {
+                    Description = "Ошибка сервера",
+                    StatusCode = StatusCode.ServerError,
+                    Data = new List<GetStudentsFromRequestResponse>()
                 };
             }
         }

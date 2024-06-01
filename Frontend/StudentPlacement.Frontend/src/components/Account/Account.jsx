@@ -23,11 +23,8 @@ import groupImg from "../../assets/Account/group.png"
 import emailImg from "../../assets/Account/email.png"
 import circleGray from "../../assets/Account/circleGray.png"
 import circleGreen from "../../assets/Account/circleGree.png"
+import errorImg from '/error.png'
 
-
-// маску для телефона для контактов организации
-// соединить создание и управление пользователями в одно 
-// увудомлять о успешном создании
 const Account = ({SetTab}) => {
     const [uploadFile, setUploadFile] = useState(null);
     const [userImage, setUserImage] = useState("");
@@ -255,6 +252,7 @@ const Account = ({SetTab}) => {
             </header>
             <Modal active={modalActive} setActive={setModalActive}>
                 <p className={styles.errorModal} ref={errorMessage}></p>
+                <img src={errorImg} alt="error" width={800} height={600}/>
             </Modal>
             <form onSubmit={(e) => { CreateUser(e) }} className={styles.createAccount}>
                 <div className={styles.imageInput}>

@@ -100,6 +100,21 @@ namespace StudentPlacement.Backend.Dal.Implementations
                     }).ToListAsync();
         }
 
+        public async Task<IEnumerable<GetStudentsFromRequestResponse>> GetStudentFromRequest(int idRequest)
+        {
+            return await context.Students
+                .Where(x => x.IdAllocationRequest == idRequest)
+                .Select(x => new GetStudentsFromRequestResponse
+                {
+                    AverageScore = x.AverageScore,
+                    FullName = x.FullName,
+                    Id = x.Id,
+                    Adress = x.Adress,
+                    ExtendedFamily = x.ExtendedFamily,
+                    IsMarried = x.IsMarried
+                }).ToListAsync();
+        }
+
         public async Task<GetStudentRequestResponse> GetStudentRequest(int idUser)
         {
             var request = await context.Students.Include(x => x.User).Include(x => x.AllocationRequest)

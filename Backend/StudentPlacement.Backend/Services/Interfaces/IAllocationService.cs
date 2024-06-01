@@ -15,5 +15,7 @@ namespace StudentPlacement.Backend.Services.Interfaces
         public Task<DataResponse<AddRequestToUserResponse>> AddRequestToStudent(AddDeleteRequestToUserRequest request);
 
         public Task<BaseResponse> DeleteRequestStudent(AddDeleteRequestToUserRequest request);
+
+        public Task<DataResponse<IEnumerable<GetStudentsFromRequestResponse>>> GetSttudentsByRequest(int idRequest);
     }
 }

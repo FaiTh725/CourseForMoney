@@ -162,6 +162,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    user-select: none;
 }
 
 .tableHeadCell img {
@@ -251,7 +252,14 @@
 
 .pickRequest {
     width: 100%;
+}
 
+.pickRequest button {
+    background-color: #008054d9;
+    color: #fff;
+    font-weight: 500;
+    padding: 7px 10px;
+    border-radius: 7px;
 }
 
 .oneRequest {
@@ -309,6 +317,10 @@
     justify-content: space-between;
 }
 
+.filterRequest + .filterRequest {
+    margin-left: 10px;
+}
+
 .filterRequest p{
     color: #a4a6a8;
     font-weight: 500;
@@ -364,4 +376,55 @@
     text-align: center;
     padding-top: 10px;
     width: 100%;
+}
+
+.filters {
+    display: flex;
+}
+
+.search {
+    border-radius: 14px;
+    border: 2px solid #a4a6a8;
+    padding: 5px 7px;
+    transition: all .5s;
+}
+
+.search:focus-within {
+    border: 2px solid #008054d9;
+    box-shadow: 0 0 10px #08b87ad9;
+}
+
+.inputContainer input {
+    margin-left: 5px;
+    font-size: 18px;
+    font-weight: 500;
+    color: #a4a6a8;
+    transition: all .5s;
+}
+
+.inputContainer input:focus {
+    color: #008054d9;
+} 
+
+.infoStudentInRequest {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+    border: 2px solid transparent;
+    transition: all .5s;
+    padding: 10px 15px;
+    border-radius: 7px;
+    background-color: #ffF;
+    min-width: 800px;
+}
+
+.infoStudentInRequest p img {
+    margin-top: 0px;
+}
+
+.infoStudentInRequest:hover {
+    border: 2px solid #a4a6a8;
+    transform: translate(-10px, -10px);
+    box-shadow: 7px 7px 7px #7273749d ;
 }
