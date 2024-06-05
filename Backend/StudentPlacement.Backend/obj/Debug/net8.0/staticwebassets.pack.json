@@ -25,6 +25,10 @@
       "PackagePath": "staticwebassets\\StorageUserImage\\32 - test1.png"
     },
     {
+      "Id": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\wwwroot\\StorageUserImage\\36 - test2.png",
+      "PackagePath": "staticwebassets\\StorageUserImage\\36 - test2.png"
+    },
+    {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.StudentPlacement.Backend.Microsoft.AspNetCore.StaticWebAssets.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
     },

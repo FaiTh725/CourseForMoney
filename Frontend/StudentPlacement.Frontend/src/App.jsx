@@ -29,6 +29,7 @@ function App() {
             <Route exact path="/Home" element={<Home/>}/>
           </Route>
         </Routes>
+        
       </AuthProvider>
     </BrowserRouter>
   )

@@ -28,10 +28,17 @@ namespace StudentPlacement.Backend.Dal.Implementations
 
         public async Task DeleteRequestInStudents(AllocationRequest allocation)
         {
-            await context.Students
-                .Where(x => x.IdAllocationRequest == allocation.Id)
-                .ExecuteUpdateAsync(x => x.SetProperty(p => p.AllocationRequest, p=>null)
-                                          .SetProperty(p => p.IdAllocationRequest, p => null));
+            var students = await context.Students
+        .Where(x => x.IdAllocationRequest == allocation.Id)
+        .ToListAsync();
+
+            foreach (var student in students)
+            {
+                student.AllocationRequest = null;
+                student.IdAllocationRequest = null;
+            }
+
+            await context.SaveChangesAsync();
         }
 
         public async Task<Student?> FindStudentByLoginAndFullName(string loginName, string fullName)

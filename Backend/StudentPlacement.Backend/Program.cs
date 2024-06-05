@@ -1,9 +1,4 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Abstractions;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
-using Microsoft.AspNetCore.Mvc.Routing;
-using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using StudentPlacement.Backend.Dal;
@@ -44,12 +39,6 @@ builder.Services.AddScoped<IStudentRepository, StudentRepository>();
 builder.Services.AddScoped<IDepartmentsRepository, DepartmentRepository>();
 builder.Services.AddScoped<ISpecialityRepository, SpecialityRepository>();
 
-/*builder.Services.AddScoped<IUrlHelper>(x =>
-{
-    var httpContextAccessor = x.GetRequiredService<IHttpContextAccessor>();
-    var actionContext = new ActionContext(httpContextAccessor.HttpContext, httpContextAccessor.HttpContext.GetRouteData(), new ActionDescriptor());
-    return new UrlHelper(actionContext);
-});*/
 
 builder.Services.AddCors(options =>
 {

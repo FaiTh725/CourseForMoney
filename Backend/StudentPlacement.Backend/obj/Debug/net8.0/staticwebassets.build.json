@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "GcqvF/+A6JJ33xaM40+ztJ93u3ZKjRwTNbZiVbmHhjk=",
+  "Hash": "9DYaKulg9uVtKCJMYhwGdEMCUkVivldo9g/io2kaCYY=",
   "Source": "StudentPlacement.Backend",
   "BasePath": "_content/StudentPlacement.Backend",
   "Mode": "Default",
@@ -129,6 +129,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\StorageUserImage\\32 - test1.png"
+    },
+    {
+      "Identity": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\wwwroot\\StorageUserImage\\36 - test2.png",
+      "SourceId": "StudentPlacement.Backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\wwwroot\\",
+      "BasePath": "_content/StudentPlacement.Backend",
+      "RelativePath": "StorageUserImage/36 - test2.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\StorageUserImage\\36 - test2.png"
     }
   ]
 }

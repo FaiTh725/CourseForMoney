@@ -94,6 +94,8 @@ namespace StudentPlacement.Backend.Services.Implementations
 
                 await organizationRepository.DeleteAllocationRequest(organization);
 
+                await studentRepository.DeleteRequestInStudents(allocation);
+
                 await allocationRequestRepository.DeleteAllocationRequest(allocation);
 
                 //await studentRepository.DeleteRequestInStudents(allocation);
