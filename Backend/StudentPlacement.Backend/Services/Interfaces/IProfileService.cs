@@ -14,5 +14,9 @@ namespace StudentPlacement.Backend.Services.Interfaces
         Task<DataResponse<GetStudentRequestResponse>> GetStudentRequest(int idUser);
 
         Task<DataResponse<HomeProfileResponse>> GetUserHomeProfile(int idUser);
+
+        Task<BaseResponse> UploadFileRequest(AddOrderFileRequest request);
+
+        Task<byte[]> GetOrderAllocationRequest(int allocationRequestId);
     }
 }

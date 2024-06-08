@@ -29,6 +29,8 @@
         OrganizatinExist,
 
         NotFountRequest,
-        LimitStudent
+        LimitStudent,
+
+        NotFoundFile
     }
 }

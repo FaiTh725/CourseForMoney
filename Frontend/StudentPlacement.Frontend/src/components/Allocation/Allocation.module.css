@@ -106,6 +106,7 @@
 
 .requestUser {
     display: flex;
+    cursor: pointer;
 }
 
 .requestUser div+div {
@@ -427,4 +428,28 @@
     border: 2px solid #a4a6a8;
     transform: translate(-10px, -10px);
     box-shadow: 7px 7px 7px #7273749d ;
+}
+
+.orderFileBtnContainer {
+    margin-top: 5px;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+.orderFileBtnContainer button {
+    border-radius: 8px;
+    padding: 7px 10px;
+    font-size: 14px;
+    background-color: #a4a6a8;
+    color: #085c3ed9;
+    font-weight: 500;
+    transition: all .5s;
+}
+
+.orderFileBtnContainer button:hover {
+    background-color: #fff;
+    box-shadow: 0 5px 5px #a4a6a8;
+    transform: translateY(-5px) scale(1.1);
+    color: #008054d9;
 }

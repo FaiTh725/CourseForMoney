@@ -26,6 +26,10 @@ namespace StudentPlacement.Backend.Models.Allocation
 
         public string? AdressRequest {  get; set; }
 
+        public string? Specialist { get; set; } 
+
+        public string? UrlOrderFile { get; set; }
+
         public string? Contacts { get; set; }
     }
 }

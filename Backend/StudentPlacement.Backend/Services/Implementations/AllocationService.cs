@@ -75,6 +75,8 @@ namespace StudentPlacement.Backend.Services.Implementations
                             Contacts = organizationOfRequest.Contacts,
                             IdOrganization = organizationOfRequest.Id,
                             NameOrganization = organizationOfRequest.Name,
+                            Specialist = allocationRequest.Specialist,
+                            UrlOrderFile = allocationRequest.OrderFilePath
                         }
 
                     },

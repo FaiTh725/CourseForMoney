@@ -1,9 +1,9 @@
-﻿using StudentPlacement.Backend.Domain.Response;
+﻿using StudentPlacement.Backend.Dal.Interfaces;
+using StudentPlacement.Backend.Domain.Entities;
+using StudentPlacement.Backend.Domain.Enums;
+using StudentPlacement.Backend.Domain.Response;
 using StudentPlacement.Backend.Models.Profile;
 using StudentPlacement.Backend.Services.Interfaces;
-using StudentPlacement.Backend.Domain.Enums;
-using StudentPlacement.Backend.Dal.Interfaces;
-using StudentPlacement.Backend.Domain.Entities;
 
 namespace StudentPlacement.Backend.Services.Implementations
 {
@@ -13,16 +13,25 @@ namespace StudentPlacement.Backend.Services.Implementations
         private readonly IOrganizationRepository organizationRepository;
         private readonly IAllocationRequestRepository allocationRequestRepository;
         private readonly IStudentRepository studentRepository;
+        private readonly IFileService fileService;
+        private readonly LinkGenerator linkGenerator;
+        private readonly IHttpContextAccessor httpContext;
 
         public ProfileService(IUserRepository userRepository,
                 IOrganizationRepository organizationRepository,
                 IAllocationRequestRepository allocationRequestRepository,
-                IStudentRepository studentRepository)
+                IStudentRepository studentRepository,
+                IFileService fileService,
+                LinkGenerator linkGenerator,
+                IHttpContextAccessor httpContext)
         {
             this.userRepository = userRepository;
             this.organizationRepository = organizationRepository;
             this.allocationRequestRepository = allocationRequestRepository;
             this.studentRepository = studentRepository;
+            this.fileService = fileService;
+            this.linkGenerator = linkGenerator;
+            this.httpContext = httpContext;
         }
 
         public async Task<DataResponse<AddAllocationResponse>> AddAllocationRequest(AddAllocationRequestRequest request)
@@ -31,13 +40,13 @@ namespace StudentPlacement.Backend.Services.Implementations
             {
                 var user = await userRepository.GetUser(request.Id);
 
-                if (user == null) 
+                if (user == null)
                 {
                     return new DataResponse<AddAllocationResponse>
                     {
                         Description = "Пользователь не найден",
                         StatusCode = StatusCode.NotFoundUser,
-                        Data =new()
+                        Data = new()
                     };
                 }
 
@@ -45,7 +54,8 @@ namespace StudentPlacement.Backend.Services.Implementations
                         .CreateAllocationRequest(new AllocationRequest
                         {
                             Adress = request.AllocationRequestAdress,
-                            CountPlace = request.CountSpace
+                            CountPlace = request.CountSpace,
+                            Specialist = request.Specialist
                         });
 
                 var organization = await organizationRepository.GetOrganizationByLogin(user.Login);
@@ -65,7 +75,7 @@ namespace StudentPlacement.Backend.Services.Implementations
                     }
                 };
             }
-            catch 
+            catch
             {
                 return new DataResponse<AddAllocationResponse>
                 {
@@ -83,7 +93,7 @@ namespace StudentPlacement.Backend.Services.Implementations
                 var allocation = await allocationRequestRepository.GetAllocationRequestById(request.IdRequest);
                 var organization = await organizationRepository.FindOrganizationByLoginAndName(request.LoginUser, request.OrganizationName);
 
-                if(allocation == null || organization == null)
+                if (allocation == null || organization == null)
                 {
                     return new BaseResponse
                     {
@@ -98,7 +108,16 @@ namespace StudentPlacement.Backend.Services.Implementations
 
                 await allocationRequestRepository.DeleteAllocationRequest(allocation);
 
-                //await studentRepository.DeleteRequestInStudents(allocation);
+                var isDeleteFile = fileService.DeleteFile(Path.Combine("RequestOrders", $"{allocation.Id}.docx"));
+
+                if (!isDeleteFile)
+                {
+                    return new BaseResponse
+                    {
+                        Description = "Не удалось найти файл приказа",
+                        StatusCode = StatusCode.NotFoundFile
+                    };
+                }
 
                 return new BaseResponse
                 {
@@ -114,6 +133,20 @@ namespace StudentPlacement.Backend.Services.Implementations
                     StatusCode = StatusCode.ServerError,
                 };
             }
+        }
+
+        public async Task<byte[]> GetOrderAllocationRequest(int allocationRequestId)
+        {
+            var allocationRequest = await allocationRequestRepository.GetAllocationRequestById(allocationRequestId);
+
+            if (allocationRequest == null)
+            {
+                return new byte[0];
+            }
+
+            var bytes = await fileService.GetByteFile(Path.Combine("RequestOrders", $"{allocationRequest.Id}.docx"));
+
+            return bytes;
         }
 
         public async Task<DataResponse<GetStudentRequestResponse>> GetStudentRequest(int idUser)
@@ -146,13 +179,13 @@ namespace StudentPlacement.Backend.Services.Implementations
             {
                 var user = await userRepository.GetById(idUser);
 
-                if(user == null)
+                if (user == null)
                 {
                     return new DataResponse<HomeProfileResponse>
                     {
                         Data = new(),
                         Description = "Пользователь не найден",
-                        StatusCode= StatusCode.NotFoundUser,
+                        StatusCode = StatusCode.NotFoundUser,
                     };
                 }
 
@@ -185,16 +218,16 @@ namespace StudentPlacement.Backend.Services.Implementations
             {
                 var organization = await organizationRepository.GetOrganizationByLogin(request.LoginUser);
 
-                if(organization == null) 
+                if (organization == null)
                 {
-                    return new BaseResponse 
-                    { 
+                    return new BaseResponse
+                    {
                         Description = "Организация не найдена",
                         StatusCode = StatusCode.Ok
                     };
                 }
 
-                if(request.AllocationId == null)
+                if (request.AllocationId == null)
                 {
                     await organizationRepository.UpdateOrganizationByLogin(request.LoginUser, new Organization
                     {
@@ -211,7 +244,8 @@ namespace StudentPlacement.Backend.Services.Implementations
 
                 var oldAllocation = await allocationRequestRepository.GetAllocationRequestById(request.AllocationId ?? -1);
 
-                oldAllocation.Adress = request.Adress;
+                oldAllocation.Adress = request.Adress!;
+                oldAllocation.Specialist = request.Specialist!;
                 oldAllocation.CountPlace = request.CountPlace ?? -1;
 
                 await organizationRepository.UpdateOrganizationByLogin(request.LoginUser, new Organization
@@ -222,8 +256,8 @@ namespace StudentPlacement.Backend.Services.Implementations
                     AllocationRequestId = request.AllocationId
                 });
 
-                return new BaseResponse 
-                { 
+                return new BaseResponse
+                {
                     Description = "Обновили организацию",
                     StatusCode = StatusCode.Ok,
                 };
@@ -234,6 +268,51 @@ namespace StudentPlacement.Backend.Services.Implementations
                 {
                     Description = "Ошибка сервера",
                     StatusCode = StatusCode.ServerError,
+                };
+            }
+        }
+
+        public async Task<BaseResponse> UploadFileRequest(AddOrderFileRequest request)
+        {
+            try
+            {
+                var allocationRequest = await allocationRequestRepository.GetAllocationRequestById(request.IdAllocationRequest);
+
+                if (allocationRequest == null)
+                {
+                    return new BaseResponse
+                    {
+                        Description = "Запрос не найден",
+                        StatusCode = StatusCode.NotFountRequest,
+                    };
+                }
+
+                var path = Path.Combine("RequestOrders", $"{allocationRequest.Id}.docx");
+
+                await fileService.AddFile(path, request.OrderRequest);
+
+                var filePath = linkGenerator.GetUriByAction(
+                                httpContext: httpContext.HttpContext,
+                                action: "GetOrderFile",
+                                controller: "File",
+                                values: new { allocationRequestId = allocationRequest.Id });
+
+                allocationRequest.OrderFilePath = filePath;
+
+                await allocationRequestRepository.UpdateAllocationRequest(allocationRequest.Id, allocationRequest);
+
+                return new BaseResponse
+                {
+                    StatusCode = StatusCode.Ok,
+                    Description = "Добавили файл приказа"
+                };
+            }
+            catch
+            {
+                return new BaseResponse
+                {
+                    Description = "Ошибка сервера",
+                    StatusCode = StatusCode.ServerError
                 };
             }
         }

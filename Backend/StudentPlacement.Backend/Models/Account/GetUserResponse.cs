@@ -8,6 +8,10 @@
 
         public string? NameAdressAllocationrequestRequest { get; set; }
 
+        public string? Specialist {  get; set; }
+
+        public string? UrlOrderFile { get; set; }
+
         public int? CountPlace {  get; set; }
     }
 }

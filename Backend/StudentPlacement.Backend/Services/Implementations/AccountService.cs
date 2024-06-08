@@ -5,6 +5,7 @@ using StudentPlacement.Backend.Domain.Response;
 using StudentPlacement.Backend.Models.Account;
 using StudentPlacement.Backend.Models.Enter;
 using StudentPlacement.Backend.Services.Interfaces;
+using System.Net.NetworkInformation;
 using Tokens = StudentPlacement.Backend.Models.Enter.EnterResponse;
 
 namespace StudentPlacement.Backend.Services.Implementations
@@ -20,7 +21,8 @@ namespace StudentPlacement.Backend.Services.Implementations
         private readonly IWebHostEnvironment environment;
         private readonly LinkGenerator linkGenerator;
         private readonly IHttpContextAccessor httpContextAccessor;
-        private readonly IEmailService emailService;    
+        private readonly IEmailService emailService;
+        private readonly IFileService fileService;
 
         public AccountService(IUserRepository userRepository,
                     IJwtProviderService jwtProviderService,
@@ -31,8 +33,9 @@ namespace StudentPlacement.Backend.Services.Implementations
                     IWebHostEnvironment environment,
                     LinkGenerator linkGenerator,
                     IHttpContextAccessor httpContextAccessor,
-                    IEmailService emailService)
-        {
+                    IEmailService emailService,
+                    IFileService fileService)
+        { 
             this.userRepository = userRepository;
             this.jwtProviderService = jwtProviderService;
             this.groupRepository = groupRepository;
@@ -43,6 +46,7 @@ namespace StudentPlacement.Backend.Services.Implementations
             this.linkGenerator = linkGenerator;
             this.httpContextAccessor = httpContextAccessor;
             this.emailService = emailService;
+            this.fileService = fileService;
         }
 
         public async Task<BaseResponse> ChangeUser(ChangeUserRequest request)
@@ -110,7 +114,7 @@ namespace StudentPlacement.Backend.Services.Implementations
                     newImageUser = linkGenerator.GetUriByAction(
                                 httpContext: httpContextAccessor.HttpContext,
                                 action: "GetUserImage",
-                                controller: "Image",
+                                controller: "File",
                                 values: new { userId = user.Id });
 
                     updatedUser.ImageUserStringFormat = newImageUser;
@@ -245,7 +249,7 @@ namespace StudentPlacement.Backend.Services.Implementations
                     urlImage = linkGenerator.GetUriByAction(
                         httpContext: httpContextAccessor.HttpContext,
                         action: "GetUserImage",
-                        controller: "Image",
+                        controller: "File",
                         values: new { userId = user.Id }
                         );
                 }
@@ -346,13 +350,10 @@ namespace StudentPlacement.Backend.Services.Implementations
                     };
                 }
 
-                // Сомнительное место еще не тестил
+
                 await userRepository.DeleteUser(user);
 
-                if (File.Exists(environment.WebRootPath + $"/StorageUserImage/{user.Id} - {user.Login}.png"))
-                {
-                    File.Delete(environment.WebRootPath + $"/StorageUserImage/{user.Id} - {user.Login}.png");
-                }
+                fileService.DeleteFile($"StorageUserImage/{ user.Id} - { user.Login}.png");
 
                 return new BaseResponse
                 {
@@ -453,15 +454,16 @@ namespace StudentPlacement.Backend.Services.Implementations
         {
             var user = await userRepository.GetById(idUser);
 
-            var path = "/StorageUserImage/" + $"{user.Id} - {user.Login}.png";
+            var path = "StorageUserImage/" + $"{user.Id} - {user.Login}.png";
 
 
-            if (File.Exists(environment.WebRootPath + path))
+            return await fileService.GetByteFile(path);
+            /*if (File.Exists(environment.WebRootPath + path))
             {
                 return File.ReadAllBytes(environment.WebRootPath + path);
             }
 
-            return null;
+            return null;*/
         }
 
         public async Task<DataResponse<IEnumerable<GroupView>>> GetStudentSetting()

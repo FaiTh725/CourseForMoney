@@ -37,6 +37,14 @@ namespace StudentPlacement.Backend.Migrations
                     b.Property<int>("CountPlace")
                         .HasColumnType("int");
 
+                    b.Property<string>("OrderFilePath")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Specialist")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.ToTable("AllocationRequests");

@@ -10,6 +10,12 @@
 
         public string Contacts { get; set; }
 
+        public string Adress {  get; set; }
+
+        public string Specialist { get; set; }
+
+        public string UrlOrderFile { get; set; }
+
         public int? CountSpace { get; set; }
 
         public int? CountFreeSpace { get; set; }

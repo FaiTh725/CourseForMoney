@@ -1,6 +1,4 @@
-﻿using Azure.Core;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using StudentPlacement.Backend.Dal.Interfaces;
 using StudentPlacement.Backend.Domain.Entities;
 using StudentPlacement.Backend.Migrations;
@@ -11,20 +9,11 @@ namespace StudentPlacement.Backend.Dal.Implementations
     public class UserRepository : IUserRepository
     {
         private readonly AppDbContext context;
-        /*private readonly IWebHostEnvironment environment;
-        private readonly LinkGenerator linkGenerator;
-        private readonly IHttpContextAccessor httpContextAccessor;*/
-        //private readonly IUrlHelper urlHelper;
 
 
-        public UserRepository(AppDbContext context/*, IWebHostEnvironment environment,
-                LinkGenerator linkGenerator,
-                IHttpContextAccessor httpContextAccessor*/)
+        public UserRepository(AppDbContext context)
         {
-            this.context = context;/*
-            this.environment = environment;
-            this.linkGenerator = linkGenerator;
-            this.httpContextAccessor = httpContextAccessor;*/
+            this.context = context;
         }
 
         public async Task<User> Createuser(User user)
@@ -143,6 +132,8 @@ namespace StudentPlacement.Backend.Dal.Implementations
                             Contacts = o.Contacts,
                             IdAllocationRequest = o.AllocationRequestId,
                             CountPlace = o.AllocationRequest.CountPlace,
+                            Specialist = o.AllocationRequest.Specialist,
+                            UrlOrderFile = o.AllocationRequest.OrderFilePath,
                             NameAdressAllocationrequestRequest = o.AllocationRequest.Adress
                         };
 

@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="wwwroot\RequestOrders\" />
     <Folder Include="wwwroot\StorageUserImage\" />
   </ItemGroup>
 

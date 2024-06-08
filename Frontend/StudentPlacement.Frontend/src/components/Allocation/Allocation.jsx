@@ -6,17 +6,15 @@ import useRedirectionRefreshToken from "../../hooks/useRedirectionRefreshToken"
 import { useNavigate } from "react-router-dom"
 import { useContext, useEffect, useState } from "react"
 import AuthContext from "../Context/AuthProvider"
-import Modal from "../Modal/Modal"
+import useDownloadFileOnClick from "../../hooks/useDownloadFileOnClick"
 
-import whitePlus from "../../assets/Allocation/whitePlus.png"
-import crossDelete from "../../assets/Account/delete_cross.png"
 import circleGray from "../../assets/Account/circleGray.png"
 import circleGreen from "../../assets/Account/circleGree.png"
 import triangleDown from "../../assets/Allocation/downArrow.png"
-import checked from "../../assets/Allocation/checked.png"
-import unchecked from "../../assets/Allocation/unchecked.png"
 import find from "../../assets/Account/find.png"
 
+import CardRequest from "./CardRequest"
+import CardStudentWithRequest from "./CardStudentWithRequest"
 
 const Allocation = () => {
     const [allDepartments, setAllDepartments] = useState([]);
@@ -239,7 +237,8 @@ const Allocation = () => {
                     student.request.nameOrganization = response.data.data.allocationRequest.nameOrganization;
                     student.request.contacts = response.data.data.allocationRequest.contacts;
                     student.request.adressRequest = response.data.data.allocationRequest.adressRequest;
-
+                    student.request.specialist = response.data.data.allocationRequest.specialist;
+                    student.request.urlOrderFile = response.data.data.allocationRequest.urlOrderFile;
                 }
                 return student;
             });
@@ -290,16 +289,7 @@ const Allocation = () => {
                 }
             );
 
-            const href = URL.createObjectURL(response.data);
-
-            const link = document.createElement('a');
-            link.href = href;
-            link.setAttribute('download', 'AllocationReport.docx');
-            document.body.appendChild(link);
-            link.click();
-
-            document.body.removeChild(link);
-            URL.revokeObjectURL(href);
+            useDownloadFileOnClick(response.data, 'AllocationReport.docx');
 
             console.log(response);
         }
@@ -439,6 +429,8 @@ const Allocation = () => {
                         <div className={styles.cardRequestMain}>
                             <p>Название организации</p>
                             <p>Контакты</p>
+                            <p>Специалист</p>
+                            <p>Адресс заявки</p>
                             <p>Количество свободных мест</p>
                         </div>
                         {
@@ -447,8 +439,11 @@ const Allocation = () => {
                                     idRequest = {request.idRequest}
                                     nameOrganization={request.nameOrganization}
                                     contacts={request.contacts}
+                                    specialist={request.specialist}
+                                    adress={request.adress}
                                     countPlace={request.countSpace}
                                     countFreePlace={request.countFreeSpace}
+                                    urlOrderFile = {request.urlOrderFile}
                                     setAuth={setAuth}
                                     navigate={navigate} />
                             ))
@@ -548,196 +543,6 @@ const Allocation = () => {
             }
 
         </main>
-    )
-}
-
-const Requests = ({ Requests, idStudent, AddRequestToUser }) => {
-
-
-    return (
-        <section className={styles.personalRequests}>
-            {
-                Requests.filter(request => request.countFreeSpace > 0).length == 0 && (
-                    <div className={styles.emptyRequests}>
-                        <p>Нету свободных заявок</p>
-                    </div>
-                )
-            }
-            {Requests.map(request => {
-                if (request.countFreeSpace === 0) return null;
-
-                return (
-                    <div className={styles.oneRequest} key={request.idOrganization}>
-                        <div className={styles.oneRequestInfo}>
-                            <p>{request.nameOrganization}</p>
-                            <p>{request.contacts}</p>
-                        </div>
-                        <div className={styles.btnRequestContainer}>
-                            <button onClick={(e) => { AddRequestToUser(e, request.idRequest, idStudent) }} type="button">
-                                <img src={whitePlus} alt="add" width={30} height={30} />
-                            </button>
-                        </div>
-                    </div>
-                );
-            })}
-
-        </section >
-    )
-}
-
-const CardStudentWithRequest = ({ idStudent, fullName, averageScore,
-    currentRequest, status, request,
-    setModalStudentIsOpen, modalStudentIsOpen, DeleteRequestUser,
-    AddRequestToUser }) => {
-
-    const [fullOpenRequest, setFullOpenRequest] = useState(false);
-
-    return (
-        <tr key={idStudent}>
-            <td>{fullName}</td>
-            <td>{averageScore}</td>
-            <td>{status == 0 ? "Распределен" : "Не распределен"}</td>
-            <td className={styles.sectionOptionRequest}>{/*если есть заявка просто ее показать*/}
-                {
-                    currentRequest.idRequest == null && (
-                        <div className={styles.pickRequest}>
-                            <button onClick={(e) => { setModalStudentIsOpen((prev => ({ ...prev, [idStudent]: !prev[idStudent] }))) }} type="button">
-                                выбрать заявку
-                            </button>
-                            <div className={modalStudentIsOpen[idStudent] ? styles.modalRequestOPen : styles.modalRequestHide}>
-                                <Requests AddRequestToUser={AddRequestToUser} Requests={request} idStudent={idStudent} />
-                            </div>
-                        </div>
-                    )
-                }
-                {
-                    currentRequest.idRequest != null && (
-                        <div className={styles.cardRequestUser}>
-                            {fullOpenRequest == false && (
-                                <div className={styles.requestUser} onClick={() => { setFullOpenRequest(!fullOpenRequest) }}>
-                                    <p>{currentRequest.nameOrganization}</p>
-                                    <p>{currentRequest.adressRequest}</p>
-                                    <p>{currentRequest.contacts}</p>
-                                </div>
-                            )}
-                            {fullOpenRequest == true && (
-                                <div className={styles.requestUser} onClick={() => { setFullOpenRequest(!fullOpenRequest) }}>
-                                    <div>
-                                        <label>Организация</label>
-                                        <p>{currentRequest.nameOrganization}</p>
-                                    </div>
-                                    <div>
-                                        <label>Адрес заявки</label>
-                                        <p>{currentRequest.adressRequest}</p>
-                                    </div>
-                                    <div>
-                                        <label>Контакты</label>
-                                        <p>{currentRequest.contacts}</p>
-                                    </div>
-                                </div>
-                            )}
-                            <div className={styles.requestUserContainerBtn}>
-                                <button onClick={(e) => { DeleteRequestUser(e, idStudent, currentRequest.idRequest) }}>
-                                    <img src={crossDelete} alt="delete request" width={35} height={35} />
-                                </button>
-                            </div>
-                        </div>
-                    )
-                }
-            </td>
-        </tr>
-    )
-}
-
-const CardRequest = ({ idOrganization, idRequest, nameOrganization, contacts, countPlace, countFreePlace,
-    setAuth, navigate 
-}) => {
-    const [idOrganizationCur, setIdOrganization] = useState(idOrganization);
-    const [idRequestCur, setIdRequest] = useState(idRequest);
-    const [nameOrganizationCur, setNameOrganization] = useState(nameOrganization);
-    const [contactsCur, setContacts] = useState(contacts);
-    const [countPlaceCur, setCountPlace] = useState(countPlace);
-    const [countFreePlaceCur, setCountFreePlace] = useState(countFreePlace);
-
-    const [studentsRequest, setStudentRequest] = useState([]);
-
-    const [modaActive, setModalActive] = useState(false);
-
-
-    useEffect(() => {
-        setIdOrganization(idOrganization);
-        setIdRequest(idRequest);
-        setNameOrganization(nameOrganization);
-        setContacts(contacts);
-        setCountPlace(countPlace);
-        setCountFreePlace(countFreePlace);
-    }, [idOrganization, idRequest, nameOrganization, contacts, countPlace, countFreePlace]);
-
-    const GetStudentFromRequest = async (idRequest) => {
-        try {
-            const token = localStorage.getItem("token");
-
-            const response = await api.get("/Allocation/GetStudentsFromRequest", {
-                params: {
-                    idRequest: idRequest
-                },
-                withCredentials: true,
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token ?? ""}`
-                }
-            });
-
-            if (response.data.statusCode != 0) {
-                console.log(response.data.description);
-                return;
-            }
-
-            setStudentRequest(response.data.data);
-            console.log(response);
-            setModalActive(!modaActive);
-        }
-        catch (error) {
-            console.log(error);
-            if (error.request.status == 0) {
-                await useRedirectionRefreshToken(() => { GetStudentFromRequest(idRequest) },
-                    setAuth,
-                    navigate,
-                    useUpdateToken,
-                    useParseToken);
-            }
-        }
-    }
-
-    return (
-        <div className={styles.cardRequestMain} onClick={(e) => { GetStudentFromRequest(idRequest)}}>
-            <Modal onClick={(e) => {e.stopPropagation()}} active={modaActive} setActive={setModalActive}>
-                <p>Студенты заявки</p>
-                {
-                    studentsRequest.length == 0 && (
-                        <p className={styles.emptyRequestMessage}>
-                            Сюда еще не определили студентов
-                        </p>
-                    )
-                }
-                {
-                    studentsRequest.length > 0 && (
-                        studentsRequest.map(student => (
-                            <div className={styles.infoStudentInRequest} key={student.id}>
-                                <p>{student.fullName}</p>
-                                <p>{student.averageScore}</p>
-                                <p>{student.adress}</p>
-                                <p><img src={student.isMarried ? checked : unchecked} alt="" width={30} height={30}/></p>
-                                <p><img src={student.extendedFamily ? checked : unchecked} alt="" width={30} height={30}/></p>
-                            </div>
-                        ))
-                    )
-                }
-            </Modal>
-            <p>{nameOrganizationCur}</p>
-            <p>{contactsCur}</p>
-            <p>{countFreePlaceCur}</p>
-        </div>
     )
 }
 

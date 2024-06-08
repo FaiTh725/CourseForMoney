@@ -12,6 +12,8 @@
         
         public string? Adress { get; set; }
 
+        public string? Specialist { get; set; }
+
         public int? CountPlace { get; set; }
     }
 }

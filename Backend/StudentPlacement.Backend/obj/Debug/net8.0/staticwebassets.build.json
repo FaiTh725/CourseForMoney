@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "9DYaKulg9uVtKCJMYhwGdEMCUkVivldo9g/io2kaCYY=",
+  "Hash": "z6tMTA0DsHD2UmmDyz0ni2lyDM1u/F3kiSdgSY+7RfA=",
   "Source": "StudentPlacement.Backend",
   "BasePath": "_content/StudentPlacement.Backend",
   "Mode": "Default",
@@ -16,6 +16,25 @@
     }
   ],
   "Assets": [
+    {
+      "Identity": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\wwwroot\\RequestOrders\\113.docx",
+      "SourceId": "StudentPlacement.Backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\wwwroot\\",
+      "BasePath": "_content/StudentPlacement.Backend",
+      "RelativePath": "RequestOrders/113.docx",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\RequestOrders\\113.docx"
+    },
     {
       "Identity": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\wwwroot\\StorageUserImage\\1 - user123.png",
       "SourceId": "StudentPlacement.Backend",

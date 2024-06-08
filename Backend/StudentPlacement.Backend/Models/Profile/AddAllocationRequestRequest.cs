@@ -8,6 +8,8 @@
     
         public string AllocationRequestAdress {  get; set; }
 
+        public string Specialist { get; set; }
+
         public int CountSpace {  get; set; }
     }
 }

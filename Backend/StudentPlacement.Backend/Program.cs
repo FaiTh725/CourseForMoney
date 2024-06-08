@@ -30,6 +30,7 @@ builder.Services.AddScoped<IAllocationService, AllocationService>();
 builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<IDocService, DocService>();
 builder.Services.AddScoped<IStructureService, StructureService>();
+builder.Services.AddScoped<IFileService, FileService>();
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IGroupRepository, GroupRepository>();

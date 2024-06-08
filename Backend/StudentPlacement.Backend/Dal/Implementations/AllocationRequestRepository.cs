@@ -9,10 +9,12 @@ namespace StudentPlacement.Backend.Dal.Implementations
     public class AllocationRequestRepository : IAllocationRequestRepository
     {
         private readonly AppDbContext context;
+        private readonly IWebHostEnvironment environment;
 
-        public AllocationRequestRepository(AppDbContext context)
+        public AllocationRequestRepository(AppDbContext context, IWebHostEnvironment environment)
         {
             this.context = context;
+            this.environment = environment;
         }
 
         public async Task<AllocationRequest> CreateAllocationRequest(AllocationRequest allocationRequest)
@@ -42,10 +44,13 @@ namespace StudentPlacement.Backend.Dal.Implementations
             { 
                 IdRequest = x.Id,
                 CountSpace = x.CountPlace,
+                Specialist = x.Specialist,
+                Adress = x.Adress,
                 IdOrganization = context.Organizations.FirstOrDefault(y => y.AllocationRequestId == x.Id).Id,
                 Contacts = context.Organizations.FirstOrDefault(y => y.AllocationRequestId == x.Id).Contacts,
                 NameOrganization = context.Organizations.FirstOrDefault(y => y.AllocationRequestId == x.Id).Name,
-                CountFreeSpace = x.CountPlace - x.Students.Count
+                CountFreeSpace = x.CountPlace - x.Students.Count,
+                UrlOrderFile = x.OrderFilePath
             }).ToListAsync();
         }
 
@@ -58,6 +63,8 @@ namespace StudentPlacement.Backend.Dal.Implementations
             oldRequest.Students.AddRange(students);
             oldRequest.Adress = allocationRequest.Adress;
             oldRequest.CountPlace = allocationRequest.CountPlace;
+            oldRequest.Specialist = allocationRequest.Specialist;
+            oldRequest.OrderFilePath = allocationRequest.OrderFilePath;
 
             await context.SaveChangesAsync();
 

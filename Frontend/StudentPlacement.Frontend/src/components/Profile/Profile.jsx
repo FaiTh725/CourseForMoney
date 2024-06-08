@@ -12,6 +12,8 @@ import defaultUserImage from "../../assets/Account/user.png";
 import deleteCross from "../../assets/Account/delete_cross.png"
 import plus from "../../assets/Account/plus.png"
 import arrowLeft from "../../assets/Profile/ArrowLeft.svg"
+import useDownloadFileOnClick from "../../hooks/useDownloadFileOnClick";
+import useDownloadFileWithUrl from "../../hooks/useDownloadFileWithUrl";
 
 // валидацию на ввод
 // возле полей женат и многодетная добавить значки да или нет а то там ничего
@@ -37,13 +39,11 @@ const Profile = () => {
     const [nameOrganization, setNameOrganization] = useState("");
     const [contacts, setContacts] = useState("");
     const [idAllocationRequest, setIdAllocationRequest] = useState();
-    const [nameAdressAllocationRequest, setNameAdressAllocationRequest] = useState();
-    const [countPlace, setCountPlace] = useState();
-
-
-
-    const refRequest = useRef(null);
-    const refCountPlace = useRef(null);
+    const [nameAdressAllocationRequest, setNameAdressAllocationRequest] = useState("");
+    const [specialistAllocationRequest, setSpecialistAllocationRequest] = useState("");
+    const [countPlace, setCountPlace] = useState("");
+    const [orderFile, setOrderFile] = useState(null);
+    const [urlOrderFile, setUrlOrderFile] = useState(null);
 
     const navigate = useNavigate();
     const { auth, setAuth } = useContext(AuthContext);
@@ -53,6 +53,8 @@ const Profile = () => {
         2: "Админ",
         3: "Организация"
     }
+
+    const inputFile = useRef(null);
 
     const ChangeProfile = async () => {
         try {
@@ -64,6 +66,7 @@ const Profile = () => {
                 contact: contacts,
                 allocationId: idAllocationRequest,
                 adress: nameAdressAllocationRequest,
+                specialist: specialistAllocationRequest,
                 countPlace: countPlace
             }, {
                 withCredentials: true,
@@ -112,15 +115,16 @@ const Profile = () => {
 
             if (response.data.statusCode != 0) {
                 alert(response.data.description);
-                return ;
+                return;
             }
 
             console.log(response);
             setNameAdressAllocationRequest();
             setCountPlace();
             setIdAllocationRequest();
-            refCountPlace.current.value = "";
-            refRequest.current.value = "";
+            setSpecialistAllocationRequest();
+            setOrderFile(null);
+            setUrlOrderFile("");
         }
         catch (error) {
             console.log(error);
@@ -134,8 +138,54 @@ const Profile = () => {
         }
     }
 
+    const AddOrderFileRequest = async (idRequest) => {
+        try {
+            var token = localStorage.getItem("token");
+
+            var data = new FormData();
+
+            data.append("idAllocationRequest", idRequest);
+            data.append("orderRequest", orderFile);
+
+            var response = await api.post("/Profile/AddOrderFileToRequest",
+                data,
+                {
+                    withCredentials: true,
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                        'Authorization': `Bearer ${token == null ? "" : token}`
+                    }
+                });
+
+            if (response.data.statusCode != 0) {
+                console.log(response.data.description);
+            }
+
+        }
+        catch (error) {
+            console.log(error);
+            if (error.request.status == 0) {
+                await useRedirectionRefreshToken(() => { AddOrderFileRequest(idRequest) },
+                    setAuth,
+                    navigate,
+                    useUpdateToken,
+                    useParseToken);
+            }
+        }
+    }
+
     const AddAllocationRequest = async (e) => {
         e.preventDefault();
+
+        if (specialistAllocationRequest == "" || countPlace == "") {
+            alert("введите данные(сделать модальным окном)")
+            return;
+        }
+
+        if (orderFile == null) {
+            alert("загрузите файл(сделать модальным окном)")
+            return;
+        }
 
         try {
             const token = localStorage.getItem("token");
@@ -145,6 +195,7 @@ const Profile = () => {
                     id: idUser,
                     organizationName: nameOrganization,
                     allocationRequestAdress: nameAdressAllocationRequest,
+                    specialist: specialistAllocationRequest,
                     countSpace: countPlace
                 },
                 {
@@ -162,6 +213,8 @@ const Profile = () => {
 
             console.log(response);
             setIdAllocationRequest(response.data.data.idAllocatinRequest);
+
+            await AddOrderFileRequest(response.data.data.idAllocatinRequest);
         }
         catch (error) {
             console.log(error);
@@ -260,6 +313,8 @@ const Profile = () => {
                 setIdAllocationRequest(response.data.data.idAllocationRequest);
                 setNameAdressAllocationRequest(response.data.data.nameAdressAllocationrequestRequest);
                 setCountPlace(response.data.data.countPlace);
+                setSpecialistAllocationRequest(response.data.data.specialist);
+                setUrlOrderFile(response.data.data.urlOrderFile);
             }
         }
         catch (error) {
@@ -381,11 +436,30 @@ const Profile = () => {
                             <form className={styles.organizationRequest}>
                                 <div className={styles.inputData}>
                                     <label>Адрес</label>
-                                    <input onBlur={() => { ChangeProfile() }} ref={refRequest} onChange={(e) => { setNameAdressAllocationRequest(e.target.value) }} defaultValue={nameAdressAllocationRequest} type="text" placeholder="Адрес" />
+                                    <input onBlur={() => { ChangeProfile() }} value={nameAdressAllocationRequest ?? ""} onChange={(e) => { setNameAdressAllocationRequest(e.target.value) }} type="text" placeholder="Адрес" />
+                                </div>
+                                <div className={styles.inputData}>
+                                    <label>Специалист</label>
+                                    <input onBlur={() => { ChangeProfile() }} value={specialistAllocationRequest ?? ""} onChange={(e) => { setSpecialistAllocationRequest(e.target.value) }} type="text" placeholder="Требуемый специалист" />
                                 </div>
                                 <div className={styles.inputData}>
                                     <label>Количество мест</label>
-                                    <input onBlur={() => { ChangeProfile() }} ref={refCountPlace} onChange={(e) => { setCountPlace(e.target.value) }} defaultValue={countPlace} type="text" placeholder="количество мест" />
+                                    <input onBlur={() => { ChangeProfile() }} value={countPlace ?? ""} onChange={(e) => { setCountPlace(e.target.value) }} type="text" placeholder="Количество мест" />
+                                </div>
+                                <div className={styles.inputData}>
+                                    <label>Приказ(.docx)</label>
+                                    <div className={styles.inputFile}>
+                                        <label onClick={() => {urlOrderFile == null ? alert("Шляпа с файлом") : useDownloadFileWithUrl(urlOrderFile, "Order.docx")}}>{idAllocationRequest == null ? "Загрузите файл" : orderFile == null ? "Посмотреть файл" : orderFile.name}</label>
+                                        {
+                                            idAllocationRequest == null && (
+                                                <div>
+                                                    <input ref={inputFile} onChange={(e) => { setOrderFile(e.target.files[0]) }} type="file" accept="*.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.documen" placeholder="файл в формате .docx" />
+                                                    <button type="button" onClick={() => { inputFile.current.click() }}>выбрать файл</button>
+                                                </div>
+                                            )
+                                        }
+
+                                    </div>
                                 </div>
                                 {
                                     idAllocationRequest == null && (

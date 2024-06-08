@@ -67,6 +67,8 @@ namespace StudentPlacement.Backend.Dal.Implementations
                     Request = new AllocationRequestView
                     {
                         AdressRequest = x.AllocationRequest.Adress,
+                        Specialist = x.AllocationRequest.Specialist,
+                        UrlOrderFile = x.AllocationRequest.OrderFilePath,
                         IdRequest = x.AllocationRequest.Id,
                         IdOrganization = context.Organizations.Include(x => x.AllocationRequest)
                             .FirstOrDefault(y => x.AllocationRequest.Id == y.AllocationRequestId).Id,

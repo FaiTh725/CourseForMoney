@@ -60,5 +60,14 @@ namespace StudentPlacement.Backend.Controllers
 
             return new JsonResult(response);
         }
+
+        [HttpPost("[action]")]
+        [Authorize]
+        public async Task<IActionResult> AddOrderFileToRequest(AddOrderFileRequest request)
+        {
+            var response = await profileService.UploadFileRequest(request);
+
+            return new JsonResult(response);
+        }
     }
 }
