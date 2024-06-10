@@ -3,32 +3,60 @@
   "WorkspaceRootPath": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\services\\implementations\\accountservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:services\\implementations\\accountservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\domain\\entities\\allocationrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:domain\\entities\\allocationrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\domain\\entities\\organization.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:domain\\entities\\organization.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\services\\interfaces\\iprofileservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:services\\interfaces\\iprofileservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\services\\implementations\\profileservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:services\\implementations\\profileservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\services\\implementations\\allocationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:services\\implementations\\allocationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\controllers\\allocationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:controllers\\allocationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\models\\profile\\addallocationrequestrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:models\\profile\\addallocationrequestrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\models\\allocation\\addrequesttouserresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:models\\allocation\\addrequesttouserresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\dal\\interfaces\\istudentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:dal\\interfaces\\istudentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\models\\allocation\\getstudentallocationresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:models\\allocation\\getstudentallocationresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\dal\\interfaces\\iorganizationrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:dal\\interfaces\\iorganizationrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\services\\implementations\\accountservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:services\\implementations\\accountservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\dal\\implementations\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:dal\\implementations\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\dal\\implementations\\studentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:dal\\implementations\\studentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\services\\implementations\\docservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:services\\implementations\\docservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\dal\\implementations\\organizationrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:dal\\implementations\\organizationrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\dal\\implementations\\departmentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:dal\\implementations\\departmentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\dal\\implementations\\allocationrequestrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -39,48 +67,116 @@
       "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:controllers\\profilecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\controllers\\allocationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:controllers\\allocationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\models\\allocation\\allocationresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:models\\allocation\\allocationresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|c:\\vsprojects\\react\\courceformoney\\backend\\studentplacement.backend\\dal\\implementations\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:dal\\implementations\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\services\\implementations\\emailservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:services\\implementations\\emailservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\services\\implementations\\profileservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:services\\implementations\\profileservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\services\\interfaces\\iprofileservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:services\\interfaces\\iprofileservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\controllers\\reportcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:controllers\\reportcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\models\\account\\getuserresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:models\\account\\getuserresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\controllers\\filecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:controllers\\filecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\domain\\response\\baseresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:domain\\response\\baseresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|c:\\vsprojects\\react\\courceformoney\\backend\\studentplacement.backend\\models\\profile\\changerequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:models\\profile\\changerequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\models\\profile\\changeprofilerequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:models\\profile\\changeprofilerequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|c:\\vsprojects\\react\\courceformoney\\backend\\studentplacement.backend\\models\\profile\\deleteallocationrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:models\\profile\\deleteallocationrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|c:\\vsprojects\\react\\courceformoney\\backend\\studentplacement.backend\\services\\implementations\\uploadfilerequestresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:services\\implementations\\uploadfilerequestresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|c:\\vsprojects\\react\\courceformoney\\backend\\studentplacement.backend\\models\\profile\\addallocationresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:models\\profile\\addallocationresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|c:\\vsprojects\\react\\courceformoney\\backend\\studentplacement.backend\\models\\profile\\getallocationrequestresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:models\\profile\\getallocationrequestresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|c:\\vsprojects\\react\\courceformoney\\backend\\studentplacement.backend\\models\\profile\\getorganizationprofileresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:models\\profile\\getorganizationprofileresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\domain\\response\\baseresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:domain\\response\\baseresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\domain\\enums\\statuscode.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:domain\\enums\\statuscode.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\domain\\entities\\student.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:domain\\entities\\student.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\domain\\enums\\role.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:domain\\enums\\role.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\domain\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:domain\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\dal\\interfaces\\iuserrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:dal\\interfaces\\iuserrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\models\\profile\\getuserprofileresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:models\\profile\\getuserprofileresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\models\\profile\\getstudentprofileresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:models\\profile\\getstudentprofileresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\models\\account\\getuserresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:models\\account\\getuserresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\models\\allocation\\getstudentallocationresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:models\\allocation\\getstudentallocationresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\models\\account\\getallusersresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:models\\account\\getallusersresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\models\\profile\\getstudentrequestresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:models\\profile\\getstudentrequestresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\dal\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:dal\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\models\\allocation\\addrequesttouserresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:models\\allocation\\addrequesttouserresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\services\\implementations\\docservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:services\\implementations\\docservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\services\\implementations\\emailservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:services\\implementations\\emailservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\controllers\\reportcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:controllers\\reportcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\controllers\\filecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:controllers\\filecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\services\\implementations\\fileservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -95,48 +191,16 @@
       "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:services\\implementations\\structureservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\domain\\enums\\statuscode.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:domain\\enums\\statuscode.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\models\\profile\\addorderfilerequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:models\\profile\\addorderfilerequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\domain\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:domain\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\dal\\interfaces\\iallocationrequestrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:dal\\interfaces\\iallocationrequestrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\models\\profile\\addallocationrequestrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:models\\profile\\addallocationrequestrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\domain\\entities\\allocationrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:domain\\entities\\allocationrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\dal\\implementations\\organizationrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:dal\\implementations\\organizationrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\models\\profile\\changeprofilerequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:models\\profile\\changeprofilerequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\controllers\\structurecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:controllers\\structurecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\domain\\entities\\organization.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:domain\\entities\\organization.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\dal\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:dal\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\domain\\entities\\department.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -151,10 +215,6 @@
       "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:domain\\entities\\specialization.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\domain\\entities\\student.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:domain\\entities\\student.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\models\\allocation\\getstudentsfromrequestresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:models\\allocation\\getstudentsfromrequestresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -163,16 +223,8 @@
       "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:services\\interfaces\\iallocationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\dal\\interfaces\\istudentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:dal\\interfaces\\istudentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\models\\structure\\getdepartmentswithspecresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:models\\structure\\getdepartmentswithspecresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\models\\account\\getallusersresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:models\\account\\getallusersresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\services\\interfaces\\istructureservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -193,10 +245,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\models\\structure\\getalloptionsresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:models\\structure\\getalloptionsresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\dal\\implementations\\departmentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:dal\\implementations\\departmentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\dal\\interfaces\\ispecialityrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -249,6 +297,10 @@
     {
       "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Migrations\\20240608154440_AddOrderFile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:Migrations\\20240608154440_AddOrderFile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Migrations\\20240609211726_Organization can add more than one request.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21AB9589-05D2-4810-894B-8377DEBA3A92}|StudentPlacement.Backend.csproj|solutionrelative:Migrations\\20240609211726_Organization can add more than one request.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -258,7 +310,7 @@
       "DocumentGroups": [
         {
           "DockedHeight": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 10,
           "Children": [
             {
               "$type": "Bookmark",
@@ -274,132 +326,28 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "AllocationController.cs",
-              "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Controllers\\AllocationController.cs",
-              "RelativeDocumentMoniker": "Controllers\\AllocationController.cs",
-              "ToolTip": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Controllers\\AllocationController.cs",
-              "RelativeToolTip": "Controllers\\AllocationController.cs",
-              "ViewState": "AQIAACwAAAAAAAAAAADwvzIAAAAMAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-27T13:39:57.114Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 6,
               "Title": "AllocationService.cs",
               "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Services\\Implementations\\AllocationService.cs",
               "RelativeDocumentMoniker": "Services\\Implementations\\AllocationService.cs",
               "ToolTip": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Services\\Implementations\\AllocationService.cs",
               "RelativeToolTip": "Services\\Implementations\\AllocationService.cs",
-              "ViewState": "AQIAAC0AAAAAAAAAAAAowE0AAABGAAAA",
+              "ViewState": "AQIAAEgAAAAAAAAAAAAowE8AAAAZAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-29T14:14:23.988Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "AllocationRequestRepository.cs",
-              "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Dal\\Implementations\\AllocationRequestRepository.cs",
-              "RelativeDocumentMoniker": "Dal\\Implementations\\AllocationRequestRepository.cs",
-              "ToolTip": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Dal\\Implementations\\AllocationRequestRepository.cs",
-              "RelativeToolTip": "Dal\\Implementations\\AllocationRequestRepository.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAqwDcAAAAAAAAA",
+              "DocumentIndex": 12,
+              "Title": "OrganizationRepository.cs",
+              "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Dal\\Implementations\\OrganizationRepository.cs",
+              "RelativeDocumentMoniker": "Dal\\Implementations\\OrganizationRepository.cs",
+              "ToolTip": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Dal\\Implementations\\OrganizationRepository.cs",
+              "RelativeToolTip": "Dal\\Implementations\\OrganizationRepository.cs",
+              "ViewState": "AQIAAE8AAAAAAAAAAAArwGEAAABIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-27T13:43:15.401Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "ProfileController.cs",
-              "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Controllers\\ProfileController.cs",
-              "RelativeDocumentMoniker": "Controllers\\ProfileController.cs",
-              "ToolTip": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Controllers\\ProfileController.cs",
-              "RelativeToolTip": "Controllers\\ProfileController.cs",
-              "ViewState": "AQIAABoAAAAAAAAAAAAUwDIAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-28T23:13:50.958Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "AccountService.cs",
-              "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Services\\Implementations\\AccountService.cs",
-              "RelativeDocumentMoniker": "Services\\Implementations\\AccountService.cs",
-              "ToolTip": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Services\\Implementations\\AccountService.cs",
-              "RelativeToolTip": "Services\\Implementations\\AccountService.cs",
-              "ViewState": "AQIAAEwBAAAAAAAAAAAjwDUAAAAPAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-05T14:27:46.206Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "DocService.cs",
-              "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Services\\Implementations\\DocService.cs",
-              "RelativeDocumentMoniker": "Services\\Implementations\\DocService.cs",
-              "ToolTip": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Services\\Implementations\\DocService.cs",
-              "RelativeToolTip": "Services\\Implementations\\DocService.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAJAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-27T12:20:48.038Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "StudentRepository.cs",
-              "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Dal\\Implementations\\StudentRepository.cs",
-              "RelativeDocumentMoniker": "Dal\\Implementations\\StudentRepository.cs",
-              "ToolTip": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Dal\\Implementations\\StudentRepository.cs",
-              "RelativeToolTip": "Dal\\Implementations\\StudentRepository.cs",
-              "ViewState": "AQIAACwAAAAAAAAAAAAIwEYAAAAkAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-27T13:41:17.394Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "GetStudentAllocationResponse.cs",
-              "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Models\\Allocation\\GetStudentAllocationResponse.cs",
-              "RelativeDocumentMoniker": "Models\\Allocation\\GetStudentAllocationResponse.cs",
-              "ToolTip": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Models\\Allocation\\GetStudentAllocationResponse.cs",
-              "RelativeToolTip": "Models\\Allocation\\GetStudentAllocationResponse.cs",
-              "ViewState": "AQIAAAkAAAAAAAAAAAAowBwAAAAwAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-27T13:46:49.954Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "AddRequestToUserResponse.cs",
-              "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Models\\Allocation\\AddRequestToUserResponse.cs",
-              "RelativeDocumentMoniker": "Models\\Allocation\\AddRequestToUserResponse.cs",
-              "ToolTip": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Models\\Allocation\\AddRequestToUserResponse.cs",
-              "RelativeToolTip": "Models\\Allocation\\AddRequestToUserResponse.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAkAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-27T13:46:48.607Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "AllocationResponse.cs",
-              "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Models\\Allocation\\AllocationResponse.cs",
-              "RelativeDocumentMoniker": "Models\\Allocation\\AllocationResponse.cs",
-              "ToolTip": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Models\\Allocation\\AllocationResponse.cs",
-              "RelativeToolTip": "Models\\Allocation\\AllocationResponse.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAjAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-05T17:16:25.663Z",
+              "WhenOpened": "2024-05-29T14:11:48.821Z",
               "EditorCaption": ""
             },
             {
@@ -410,7 +358,7 @@
               "RelativeDocumentMoniker": "Dal\\Implementations\\UserRepository.cs",
               "ToolTip": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Dal\\Implementations\\UserRepository.cs",
               "RelativeToolTip": "Dal\\Implementations\\UserRepository.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAjAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAH8AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-06-05T14:28:20.135Z",
               "EditorCaption": ""
@@ -418,6 +366,498 @@
             {
               "$type": "Document",
               "DocumentIndex": 11,
+              "Title": "StudentRepository.cs",
+              "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Dal\\Implementations\\StudentRepository.cs",
+              "RelativeDocumentMoniker": "Dal\\Implementations\\StudentRepository.cs",
+              "ToolTip": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Dal\\Implementations\\StudentRepository.cs",
+              "RelativeToolTip": "Dal\\Implementations\\StudentRepository.cs",
+              "ViewState": "AQIAAMMAAAAAAAAAAAAiwEsAAABNAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-27T13:41:17.394Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "IOrganizationRepository.cs",
+              "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Dal\\Interfaces\\IOrganizationRepository.cs",
+              "RelativeDocumentMoniker": "Dal\\Interfaces\\IOrganizationRepository.cs",
+              "ToolTip": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Dal\\Interfaces\\IOrganizationRepository.cs",
+              "RelativeToolTip": "Dal\\Interfaces\\IOrganizationRepository.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAA9AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-10T00:04:31.575Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "IStudentRepository.cs",
+              "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Dal\\Interfaces\\IStudentRepository.cs",
+              "RelativeDocumentMoniker": "Dal\\Interfaces\\IStudentRepository.cs",
+              "ToolTip": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Dal\\Interfaces\\IStudentRepository.cs",
+              "RelativeToolTip": "Dal\\Interfaces\\IStudentRepository.cs",
+              "ViewState": "AQIAAAcAAAAAAAAAAIA0wBUAAAAoAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-27T13:47:15.179Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "AddAllocationRequestRequest.cs",
+              "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Models\\Profile\\AddAllocationRequestRequest.cs",
+              "RelativeDocumentMoniker": "Models\\Profile\\AddAllocationRequestRequest.cs",
+              "ToolTip": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Models\\Profile\\AddAllocationRequestRequest.cs",
+              "RelativeToolTip": "Models\\Profile\\AddAllocationRequestRequest.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAEAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-05T14:16:02.657Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AccountService.cs",
+              "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Services\\Implementations\\AccountService.cs",
+              "RelativeDocumentMoniker": "Services\\Implementations\\AccountService.cs",
+              "ToolTip": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Services\\Implementations\\AccountService.cs",
+              "RelativeToolTip": "Services\\Implementations\\AccountService.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACsAAAA3AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-05T14:27:46.206Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ProfileService.cs",
+              "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Services\\Implementations\\ProfileService.cs",
+              "RelativeDocumentMoniker": "Services\\Implementations\\ProfileService.cs",
+              "ToolTip": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Services\\Implementations\\ProfileService.cs",
+              "RelativeToolTip": "Services\\Implementations\\ProfileService.cs",
+              "ViewState": "AQIAABgAAAAAAAAAAAAAwCYAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-27T12:25:12.204Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "IProfileService.cs",
+              "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Services\\Interfaces\\IProfileService.cs",
+              "RelativeDocumentMoniker": "Services\\Interfaces\\IProfileService.cs",
+              "ToolTip": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Services\\Interfaces\\IProfileService.cs",
+              "RelativeToolTip": "Services\\Interfaces\\IProfileService.cs",
+              "ViewState": "AQIAAAQAAAAAAAAAAAAAAA4AAAA+AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-28T23:15:37.019Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AQIAAAUAAAAAAAAAAAAjwBcAAAAxAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-27T12:20:59.499Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Organization.cs",
+              "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Domain\\Entities\\Organization.cs",
+              "RelativeDocumentMoniker": "Domain\\Entities\\Organization.cs",
+              "ToolTip": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Domain\\Entities\\Organization.cs",
+              "RelativeToolTip": "Domain\\Entities\\Organization.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAoAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-04T21:47:01.434Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AllocationRequest.cs",
+              "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Domain\\Entities\\AllocationRequest.cs",
+              "RelativeDocumentMoniker": "Domain\\Entities\\AllocationRequest.cs",
+              "ToolTip": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Domain\\Entities\\AllocationRequest.cs",
+              "RelativeToolTip": "Domain\\Entities\\AllocationRequest.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-04T21:46:37.931Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "DepartmentRepository.cs",
+              "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Dal\\Implementations\\DepartmentRepository.cs",
+              "RelativeDocumentMoniker": "Dal\\Implementations\\DepartmentRepository.cs",
+              "ToolTip": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Dal\\Implementations\\DepartmentRepository.cs",
+              "RelativeToolTip": "Dal\\Implementations\\DepartmentRepository.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAADgAAAAhAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-29T22:57:55.982Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "AllocationRequestRepository.cs",
+              "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Dal\\Implementations\\AllocationRequestRepository.cs",
+              "RelativeDocumentMoniker": "Dal\\Implementations\\AllocationRequestRepository.cs",
+              "ToolTip": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Dal\\Implementations\\AllocationRequestRepository.cs",
+              "RelativeToolTip": "Dal\\Implementations\\AllocationRequestRepository.cs",
+              "ViewState": "AQIAADcAAAAAAAAAAAAcwEUAAAAaAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-27T13:43:15.401Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "ProfileController.cs",
+              "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Controllers\\ProfileController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ProfileController.cs",
+              "ToolTip": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Controllers\\ProfileController.cs",
+              "RelativeToolTip": "Controllers\\ProfileController.cs",
+              "ViewState": "AQIAAFcAAAAAAAAAAIAwwGoAAAA9AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-28T23:13:50.958Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "ChangeRequest.cs",
+              "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Models\\Profile\\ChangeRequest.cs",
+              "RelativeDocumentMoniker": "Models\\Profile\\ChangeRequest.cs",
+              "ToolTip": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Models\\Profile\\ChangeRequest.cs",
+              "RelativeToolTip": "Models\\Profile\\ChangeRequest.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAqwAwAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-10T15:45:48.483Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "AccountController.cs",
+              "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Controllers\\AccountController.cs",
+              "RelativeDocumentMoniker": "Controllers\\AccountController.cs",
+              "ToolTip": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Controllers\\AccountController.cs",
+              "RelativeToolTip": "Controllers\\AccountController.cs",
+              "ViewState": "AQIAAB8AAAAAAAAAAAAuwC4AAAAMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-28T23:13:47.352Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "AllocationResponse.cs",
+              "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Models\\Allocation\\AllocationResponse.cs",
+              "RelativeDocumentMoniker": "Models\\Allocation\\AllocationResponse.cs",
+              "ToolTip": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Models\\Allocation\\AllocationResponse.cs",
+              "RelativeToolTip": "Models\\Allocation\\AllocationResponse.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAATAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-05T17:16:25.663Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "AllocationController.cs",
+              "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Controllers\\AllocationController.cs",
+              "RelativeDocumentMoniker": "Controllers\\AllocationController.cs",
+              "ToolTip": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Controllers\\AllocationController.cs",
+              "RelativeToolTip": "Controllers\\AllocationController.cs",
+              "ViewState": "AQIAACUAAAAAAAAAAAD4vzIAAAAMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-27T13:39:57.114Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "ChangeProfileRequest.cs",
+              "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Models\\Profile\\ChangeProfileRequest.cs",
+              "RelativeDocumentMoniker": "Models\\Profile\\ChangeProfileRequest.cs",
+              "ToolTip": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Models\\Profile\\ChangeProfileRequest.cs",
+              "RelativeToolTip": "Models\\Profile\\ChangeProfileRequest.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAqwAIAAAAlAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-05T14:15:24.86Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "DeleteAllocationRequest.cs",
+              "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Models\\Profile\\DeleteAllocationRequest.cs",
+              "RelativeDocumentMoniker": "Models\\Profile\\DeleteAllocationRequest.cs",
+              "ToolTip": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Models\\Profile\\DeleteAllocationRequest.cs",
+              "RelativeToolTip": "Models\\Profile\\DeleteAllocationRequest.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAqwAYAAAAhAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-10T14:26:28.981Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "UploadFileRequestResponse.cs",
+              "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Services\\Implementations\\UploadFileRequestResponse.cs",
+              "RelativeDocumentMoniker": "Services\\Implementations\\UploadFileRequestResponse.cs",
+              "ToolTip": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Services\\Implementations\\UploadFileRequestResponse.cs",
+              "RelativeToolTip": "Services\\Implementations\\UploadFileRequestResponse.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAwAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-10T14:00:11.126Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "AddAllocationResponse.cs",
+              "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Models\\Profile\\AddAllocationResponse.cs",
+              "RelativeDocumentMoniker": "Models\\Profile\\AddAllocationResponse.cs",
+              "ToolTip": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Models\\Profile\\AddAllocationResponse.cs",
+              "RelativeToolTip": "Models\\Profile\\AddAllocationResponse.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAqwAwAAAA0AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-10T12:33:39.052Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "GetAllocationRequestResponse.cs",
+              "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Models\\Profile\\GetAllocationRequestResponse.cs",
+              "RelativeDocumentMoniker": "Models\\Profile\\GetAllocationRequestResponse.cs",
+              "ToolTip": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Models\\Profile\\GetAllocationRequestResponse.cs",
+              "RelativeToolTip": "Models\\Profile\\GetAllocationRequestResponse.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAqwAsAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-10T12:47:49.2Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "GetOrganizationProfileResponse.cs",
+              "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Models\\Profile\\GetOrganizationProfileResponse.cs",
+              "RelativeDocumentMoniker": "Models\\Profile\\GetOrganizationProfileResponse.cs",
+              "ToolTip": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Models\\Profile\\GetOrganizationProfileResponse.cs",
+              "RelativeToolTip": "Models\\Profile\\GetOrganizationProfileResponse.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAvAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-09T23:40:30.303Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "BaseResponse.cs",
+              "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Domain\\Response\\BaseResponse.cs",
+              "RelativeDocumentMoniker": "Domain\\Response\\BaseResponse.cs",
+              "ToolTip": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Domain\\Response\\BaseResponse.cs",
+              "RelativeToolTip": "Domain\\Response\\BaseResponse.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAwAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-08T17:55:25.703Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "StatusCode.cs",
+              "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Domain\\Enums\\StatusCode.cs",
+              "RelativeDocumentMoniker": "Domain\\Enums\\StatusCode.cs",
+              "ToolTip": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Domain\\Enums\\StatusCode.cs",
+              "RelativeToolTip": "Domain\\Enums\\StatusCode.cs",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAWwBsAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-29T23:34:32.857Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "Student.cs",
+              "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Domain\\Entities\\Student.cs",
+              "RelativeDocumentMoniker": "Domain\\Entities\\Student.cs",
+              "ToolTip": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Domain\\Entities\\Student.cs",
+              "RelativeToolTip": "Domain\\Entities\\Student.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAABsAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-01T14:52:46.988Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "Role.cs",
+              "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Domain\\Enums\\Role.cs",
+              "RelativeDocumentMoniker": "Domain\\Enums\\Role.cs",
+              "ToolTip": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Domain\\Enums\\Role.cs",
+              "RelativeToolTip": "Domain\\Enums\\Role.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-09T21:23:04.908Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "User.cs",
+              "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Domain\\Entities\\User.cs",
+              "RelativeDocumentMoniker": "Domain\\Entities\\User.cs",
+              "ToolTip": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Domain\\Entities\\User.cs",
+              "RelativeToolTip": "Domain\\Entities\\User.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAqwAUAAAAVAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-01T14:52:46.354Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "IUserRepository.cs",
+              "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Dal\\Interfaces\\IUserRepository.cs",
+              "RelativeDocumentMoniker": "Dal\\Interfaces\\IUserRepository.cs",
+              "ToolTip": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Dal\\Interfaces\\IUserRepository.cs",
+              "RelativeToolTip": "Dal\\Interfaces\\IUserRepository.cs",
+              "ViewState": "AQIAAAQAAAAAAAAAAAAWwBgAAAAsAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-09T23:53:44.08Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "GetUserProfileResponse.cs",
+              "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Models\\Profile\\GetUserProfileResponse.cs",
+              "RelativeDocumentMoniker": "Models\\Profile\\GetUserProfileResponse.cs",
+              "ToolTip": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Models\\Profile\\GetUserProfileResponse.cs",
+              "RelativeToolTip": "Models\\Profile\\GetUserProfileResponse.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAqwAYAAAApAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-09T23:39:39.361Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "GetStudentProfileResponse.cs",
+              "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Models\\Profile\\GetStudentProfileResponse.cs",
+              "RelativeDocumentMoniker": "Models\\Profile\\GetStudentProfileResponse.cs",
+              "ToolTip": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Models\\Profile\\GetStudentProfileResponse.cs",
+              "RelativeToolTip": "Models\\Profile\\GetStudentProfileResponse.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-09T23:40:11.869Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "GetUserResponse.cs",
+              "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Models\\Account\\GetUserResponse.cs",
+              "RelativeDocumentMoniker": "Models\\Account\\GetUserResponse.cs",
+              "ToolTip": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Models\\Account\\GetUserResponse.cs",
+              "RelativeToolTip": "Models\\Account\\GetUserResponse.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAqwAIAAAAgAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-05T14:29:10.07Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "GetStudentAllocationResponse.cs",
+              "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Models\\Allocation\\GetStudentAllocationResponse.cs",
+              "RelativeDocumentMoniker": "Models\\Allocation\\GetStudentAllocationResponse.cs",
+              "ToolTip": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Models\\Allocation\\GetStudentAllocationResponse.cs",
+              "RelativeToolTip": "Models\\Allocation\\GetStudentAllocationResponse.cs",
+              "ViewState": "AQIAAAsAAAAAAAAAAAAwwBIAAAAmAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-27T13:46:49.954Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "GetAllUsersResponse.cs",
+              "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Models\\Account\\GetAllUsersResponse.cs",
+              "RelativeDocumentMoniker": "Models\\Account\\GetAllUsersResponse.cs",
+              "ToolTip": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Models\\Account\\GetAllUsersResponse.cs",
+              "RelativeToolTip": "Models\\Account\\GetAllUsersResponse.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAABoAAAAxAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-28T23:17:01.707Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "GetStudentRequestResponse.cs",
+              "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Models\\Profile\\GetStudentRequestResponse.cs",
+              "RelativeDocumentMoniker": "Models\\Profile\\GetStudentRequestResponse.cs",
+              "ToolTip": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Models\\Profile\\GetStudentRequestResponse.cs",
+              "RelativeToolTip": "Models\\Profile\\GetStudentRequestResponse.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-09T23:40:40.04Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Dal\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "Dal\\AppDbContext.cs",
+              "ToolTip": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Dal\\AppDbContext.cs",
+              "RelativeToolTip": "Dal\\AppDbContext.cs",
+              "ViewState": "AQIAAAUAAAAAAAAAAAAWwBkAAAAZAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-30T14:22:55.938Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 74,
+              "Title": "20240609211726_Organization can add more than one request.cs",
+              "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Migrations\\20240609211726_Organization can add more than one request.cs",
+              "RelativeDocumentMoniker": "Migrations\\20240609211726_Organization can add more than one request.cs",
+              "ToolTip": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Migrations\\20240609211726_Organization can add more than one request.cs",
+              "RelativeToolTip": "Migrations\\20240609211726_Organization can add more than one request.cs",
+              "ViewState": "AQIAAFQAAAAAAAAAAAAowAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-09T21:17:26.21Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "DocService.cs",
+              "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Services\\Implementations\\DocService.cs",
+              "RelativeDocumentMoniker": "Services\\Implementations\\DocService.cs",
+              "ToolTip": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Services\\Implementations\\DocService.cs",
+              "RelativeToolTip": "Services\\Implementations\\DocService.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-27T12:20:48.038Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "AddRequestToUserResponse.cs",
+              "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Models\\Allocation\\AddRequestToUserResponse.cs",
+              "RelativeDocumentMoniker": "Models\\Allocation\\AddRequestToUserResponse.cs",
+              "ToolTip": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Models\\Allocation\\AddRequestToUserResponse.cs",
+              "RelativeToolTip": "Models\\Allocation\\AddRequestToUserResponse.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAkAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-27T13:46:48.607Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
               "Title": "EmailService.cs",
               "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Services\\Implementations\\EmailService.cs",
               "RelativeDocumentMoniker": "Services\\Implementations\\EmailService.cs",
@@ -429,19 +869,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "IProfileService.cs",
-              "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Services\\Interfaces\\IProfileService.cs",
-              "RelativeDocumentMoniker": "Services\\Interfaces\\IProfileService.cs",
-              "ToolTip": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Services\\Interfaces\\IProfileService.cs",
-              "RelativeToolTip": "Services\\Interfaces\\IProfileService.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAABGAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-28T23:15:37.019Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 42,
               "Title": "ReportController.cs",
               "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Controllers\\ReportController.cs",
               "RelativeDocumentMoniker": "Controllers\\ReportController.cs",
@@ -453,19 +881,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "GetUserResponse.cs",
-              "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Models\\Account\\GetUserResponse.cs",
-              "RelativeDocumentMoniker": "Models\\Account\\GetUserResponse.cs",
-              "ToolTip": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Models\\Account\\GetUserResponse.cs",
-              "RelativeToolTip": "Models\\Account\\GetUserResponse.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAqwAwAAAAxAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-05T14:29:10.07Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 43,
               "Title": "FileController.cs",
               "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Controllers\\FileController.cs",
               "RelativeDocumentMoniker": "Controllers\\FileController.cs",
@@ -478,56 +894,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "ProfileService.cs",
-              "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Services\\Implementations\\ProfileService.cs",
-              "RelativeDocumentMoniker": "Services\\Implementations\\ProfileService.cs",
-              "ToolTip": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Services\\Implementations\\ProfileService.cs",
-              "RelativeToolTip": "Services\\Implementations\\ProfileService.cs",
-              "ViewState": "AQIAAHgAAAAAAAAAAAAAAJAAAAANAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-27T12:25:12.204Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "BaseResponse.cs",
-              "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Domain\\Response\\BaseResponse.cs",
-              "RelativeDocumentMoniker": "Domain\\Response\\BaseResponse.cs",
-              "ToolTip": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Domain\\Response\\BaseResponse.cs",
-              "RelativeToolTip": "Domain\\Response\\BaseResponse.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-08T17:55:25.703Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "AccountController.cs",
-              "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Controllers\\AccountController.cs",
-              "RelativeDocumentMoniker": "Controllers\\AccountController.cs",
-              "ToolTip": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Controllers\\AccountController.cs",
-              "RelativeToolTip": "Controllers\\AccountController.cs",
-              "ViewState": "AQIAAD8AAAAAAAAAAAAiwEkAAAA1AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-28T23:13:47.352Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 19,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Program.cs",
-              "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Program.cs",
-              "RelativeToolTip": "Program.cs",
-              "ViewState": "AQIAAAcAAAAAAAAAAAAAABgAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-27T12:20:59.499Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 44,
               "Title": "FileService.cs",
               "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Services\\Implementations\\FileService.cs",
               "RelativeDocumentMoniker": "Services\\Implementations\\FileService.cs",
@@ -539,7 +906,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 45,
               "Title": "IFileService.cs",
               "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Services\\Interfaces\\IFileService.cs",
               "RelativeDocumentMoniker": "Services\\Interfaces\\IFileService.cs",
@@ -551,7 +918,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 46,
               "Title": "StructureService.cs",
               "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Services\\Implementations\\StructureService.cs",
               "RelativeDocumentMoniker": "Services\\Implementations\\StructureService.cs",
@@ -563,19 +930,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
-              "Title": "StatusCode.cs",
-              "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Domain\\Enums\\StatusCode.cs",
-              "RelativeDocumentMoniker": "Domain\\Enums\\StatusCode.cs",
-              "ToolTip": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Domain\\Enums\\StatusCode.cs",
-              "RelativeToolTip": "Domain\\Enums\\StatusCode.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAACEAAAAUAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-29T23:34:32.857Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 47,
               "Title": "AddOrderFileRequest.cs",
               "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Models\\Profile\\AddOrderFileRequest.cs",
               "RelativeDocumentMoniker": "Models\\Profile\\AddOrderFileRequest.cs",
@@ -587,19 +942,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
-              "Title": "User.cs",
-              "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Domain\\Entities\\User.cs",
-              "RelativeDocumentMoniker": "Domain\\Entities\\User.cs",
-              "ToolTip": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Domain\\Entities\\User.cs",
-              "RelativeToolTip": "Domain\\Entities\\User.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAApAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-01T14:52:46.354Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 48,
               "Title": "IAllocationRequestRepository.cs",
               "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Dal\\Interfaces\\IAllocationRequestRepository.cs",
               "RelativeDocumentMoniker": "Dal\\Interfaces\\IAllocationRequestRepository.cs",
@@ -611,7 +954,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 61,
+              "DocumentIndex": 73,
               "Title": "20240608154440_AddOrderFile.cs",
               "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Migrations\\20240608154440_AddOrderFile.cs",
               "RelativeDocumentMoniker": "Migrations\\20240608154440_AddOrderFile.cs",
@@ -623,43 +966,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
-              "Title": "AllocationRequest.cs",
-              "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Domain\\Entities\\AllocationRequest.cs",
-              "RelativeDocumentMoniker": "Domain\\Entities\\AllocationRequest.cs",
-              "ToolTip": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Domain\\Entities\\AllocationRequest.cs",
-              "RelativeToolTip": "Domain\\Entities\\AllocationRequest.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAABBAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-04T21:46:37.931Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 27,
-              "Title": "AddAllocationRequestRequest.cs",
-              "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Models\\Profile\\AddAllocationRequestRequest.cs",
-              "RelativeDocumentMoniker": "Models\\Profile\\AddAllocationRequestRequest.cs",
-              "ToolTip": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Models\\Profile\\AddAllocationRequestRequest.cs",
-              "RelativeToolTip": "Models\\Profile\\AddAllocationRequestRequest.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAuAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-05T14:16:02.657Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 29,
-              "Title": "OrganizationRepository.cs",
-              "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Dal\\Implementations\\OrganizationRepository.cs",
-              "RelativeDocumentMoniker": "Dal\\Implementations\\OrganizationRepository.cs",
-              "ToolTip": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Dal\\Implementations\\OrganizationRepository.cs",
-              "RelativeToolTip": "Dal\\Implementations\\OrganizationRepository.cs",
-              "ViewState": "AQIAAEMAAAAAAAAAAIBZwEgAAABaAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-29T14:11:48.821Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 60,
+              "DocumentIndex": 72,
               "Title": "20240605141839_AddSpecialistToAllocationRequest.cs",
               "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Migrations\\20240605141839_AddSpecialistToAllocationRequest.cs",
               "RelativeDocumentMoniker": "Migrations\\20240605141839_AddSpecialistToAllocationRequest.cs",
@@ -671,19 +978,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
-              "Title": "ChangeProfileRequest.cs",
-              "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Models\\Profile\\ChangeProfileRequest.cs",
-              "RelativeDocumentMoniker": "Models\\Profile\\ChangeProfileRequest.cs",
-              "ToolTip": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Models\\Profile\\ChangeProfileRequest.cs",
-              "RelativeToolTip": "Models\\Profile\\ChangeProfileRequest.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAvAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-05T14:15:24.86Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 38,
+              "DocumentIndex": 53,
               "Title": "GetStudentsFromRequestResponse.cs",
               "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Models\\Allocation\\GetStudentsFromRequestResponse.cs",
               "RelativeDocumentMoniker": "Models\\Allocation\\GetStudentsFromRequestResponse.cs",
@@ -695,7 +990,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 49,
               "Title": "StructureController.cs",
               "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Controllers\\StructureController.cs",
               "RelativeDocumentMoniker": "Controllers\\StructureController.cs",
@@ -708,31 +1003,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
-              "Title": "AppDbContext.cs",
-              "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Dal\\AppDbContext.cs",
-              "RelativeDocumentMoniker": "Dal\\AppDbContext.cs",
-              "ToolTip": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Dal\\AppDbContext.cs",
-              "RelativeToolTip": "Dal\\AppDbContext.cs",
-              "ViewState": "AQIAAA4AAAAAAAAAAAAiwCMAAAAIAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-30T14:22:55.938Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 32,
-              "Title": "Organization.cs",
-              "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Domain\\Entities\\Organization.cs",
-              "RelativeDocumentMoniker": "Domain\\Entities\\Organization.cs",
-              "ToolTip": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Domain\\Entities\\Organization.cs",
-              "RelativeToolTip": "Domain\\Entities\\Organization.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAvAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-04T21:47:01.434Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 35,
+              "DocumentIndex": 51,
               "Title": "Group.cs",
               "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Domain\\Entities\\Group.cs",
               "RelativeDocumentMoniker": "Domain\\Entities\\Group.cs",
@@ -744,7 +1015,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 36,
+              "DocumentIndex": 52,
               "Title": "Specialization.cs",
               "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Domain\\Entities\\Specialization.cs",
               "RelativeDocumentMoniker": "Domain\\Entities\\Specialization.cs",
@@ -756,7 +1027,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 34,
+              "DocumentIndex": 50,
               "Title": "Department.cs",
               "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Domain\\Entities\\Department.cs",
               "RelativeDocumentMoniker": "Domain\\Entities\\Department.cs",
@@ -768,19 +1039,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 37,
-              "Title": "Student.cs",
-              "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Domain\\Entities\\Student.cs",
-              "RelativeDocumentMoniker": "Domain\\Entities\\Student.cs",
-              "ToolTip": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Domain\\Entities\\Student.cs",
-              "RelativeToolTip": "Domain\\Entities\\Student.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAIBJwBsAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-01T14:52:46.988Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 39,
+              "DocumentIndex": 54,
               "Title": "IAllocationService.cs",
               "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Services\\Interfaces\\IAllocationService.cs",
               "RelativeDocumentMoniker": "Services\\Interfaces\\IAllocationService.cs",
@@ -792,7 +1051,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 41,
+              "DocumentIndex": 55,
               "Title": "GetDepartmentsWithSpecResponse.cs",
               "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Models\\Structure\\GetDepartmentsWithSpecResponse.cs",
               "RelativeDocumentMoniker": "Models\\Structure\\GetDepartmentsWithSpecResponse.cs",
@@ -804,31 +1063,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 42,
-              "Title": "GetAllUsersResponse.cs",
-              "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Models\\Account\\GetAllUsersResponse.cs",
-              "RelativeDocumentMoniker": "Models\\Account\\GetAllUsersResponse.cs",
-              "ToolTip": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Models\\Account\\GetAllUsersResponse.cs",
-              "RelativeToolTip": "Models\\Account\\GetAllUsersResponse.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-28T23:17:01.707Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 40,
-              "Title": "IStudentRepository.cs",
-              "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Dal\\Interfaces\\IStudentRepository.cs",
-              "RelativeDocumentMoniker": "Dal\\Interfaces\\IStudentRepository.cs",
-              "ToolTip": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Dal\\Interfaces\\IStudentRepository.cs",
-              "RelativeToolTip": "Dal\\Interfaces\\IStudentRepository.cs",
-              "ViewState": "AQIAAAgAAAAAAAAAAAAQwBkAAABfAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-27T13:47:15.179Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 53,
+              "DocumentIndex": 65,
               "Title": "IGroupRepository.cs",
               "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Dal\\Interfaces\\IGroupRepository.cs",
               "RelativeDocumentMoniker": "Dal\\Interfaces\\IGroupRepository.cs",
@@ -840,7 +1075,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 50,
+              "DocumentIndex": 62,
               "Title": "IDepartmentsRepository.cs",
               "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Dal\\Interfaces\\IDepartmentsRepository.cs",
               "RelativeDocumentMoniker": "Dal\\Interfaces\\IDepartmentsRepository.cs",
@@ -852,19 +1087,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 48,
-              "Title": "DepartmentRepository.cs",
-              "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Dal\\Implementations\\DepartmentRepository.cs",
-              "RelativeDocumentMoniker": "Dal\\Implementations\\DepartmentRepository.cs",
-              "ToolTip": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Dal\\Implementations\\DepartmentRepository.cs",
-              "RelativeToolTip": "Dal\\Implementations\\DepartmentRepository.cs",
-              "ViewState": "AQIAABAAAAAAAAAAAAA1wDgAAAAhAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-29T22:57:55.982Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 44,
+              "DocumentIndex": 57,
               "Title": "CreatestructResponse.cs",
               "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Models\\Structure\\CreatestructResponse.cs",
               "RelativeDocumentMoniker": "Models\\Structure\\CreatestructResponse.cs",
@@ -876,7 +1099,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 49,
+              "DocumentIndex": 61,
               "Title": "ISpecialityRepository.cs",
               "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Dal\\Interfaces\\ISpecialityRepository.cs",
               "RelativeDocumentMoniker": "Dal\\Interfaces\\ISpecialityRepository.cs",
@@ -888,7 +1111,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 45,
+              "DocumentIndex": 58,
               "Title": "GroupRepository.cs",
               "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Dal\\Implementations\\GroupRepository.cs",
               "RelativeDocumentMoniker": "Dal\\Implementations\\GroupRepository.cs",
@@ -900,7 +1123,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 43,
+              "DocumentIndex": 56,
               "Title": "IStructureService.cs",
               "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Services\\Interfaces\\IStructureService.cs",
               "RelativeDocumentMoniker": "Services\\Interfaces\\IStructureService.cs",
@@ -912,7 +1135,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 46,
+              "DocumentIndex": 59,
               "Title": "SpecialityRepository.cs",
               "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Dal\\Implementations\\SpecialityRepository.cs",
               "RelativeDocumentMoniker": "Dal\\Implementations\\SpecialityRepository.cs",
@@ -924,7 +1147,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 47,
+              "DocumentIndex": 60,
               "Title": "GetAllOptionsResponse.cs",
               "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Models\\Structure\\GetAllOptionsResponse.cs",
               "RelativeDocumentMoniker": "Models\\Structure\\GetAllOptionsResponse.cs",
@@ -936,7 +1159,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 52,
+              "DocumentIndex": 64,
               "Title": "CreateSpecialityRequest.cs",
               "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Models\\Structure\\CreateSpecialityRequest.cs",
               "RelativeDocumentMoniker": "Models\\Structure\\CreateSpecialityRequest.cs",
@@ -948,7 +1171,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 51,
+              "DocumentIndex": 63,
               "Title": "CreateGroupRequest..cs",
               "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Models\\Structure\\CreateGroupRequest..cs",
               "RelativeDocumentMoniker": "Models\\Structure\\CreateGroupRequest..cs",
@@ -960,7 +1183,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 54,
+              "DocumentIndex": 66,
               "Title": "CreateDepartmentRequest.cs",
               "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Models\\Structure\\CreateDepartmentRequest.cs",
               "RelativeDocumentMoniker": "Models\\Structure\\CreateDepartmentRequest.cs",
@@ -972,7 +1195,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 57,
+              "DocumentIndex": 69,
               "Title": "CreateAccountRequest.cs",
               "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Models\\Account\\CreateAccountRequest.cs",
               "RelativeDocumentMoniker": "Models\\Account\\CreateAccountRequest.cs",
@@ -984,7 +1207,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 55,
+              "DocumentIndex": 67,
               "Title": "HomeProfileResponse.cs",
               "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Models\\Profile\\HomeProfileResponse.cs",
               "RelativeDocumentMoniker": "Models\\Profile\\HomeProfileResponse.cs",
@@ -996,7 +1219,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 56,
+              "DocumentIndex": 68,
               "Title": "ChangeUserRequest.cs",
               "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Models\\Account\\ChangeUserRequest.cs",
               "RelativeDocumentMoniker": "Models\\Account\\ChangeUserRequest.cs",
@@ -1008,7 +1231,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 59,
+              "DocumentIndex": 71,
               "Title": "ReportStudentAllocation.cs",
               "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Models\\Doc\\ReportStudentAllocation.cs",
               "RelativeDocumentMoniker": "Models\\Doc\\ReportStudentAllocation.cs",
@@ -1020,7 +1243,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 58,
+              "DocumentIndex": 70,
               "Title": "IDocService.cs",
               "DocumentMoniker": "C:\\VSProjects\\React\\CourceForMoney\\Backend\\StudentPlacement.Backend\\Services\\Interfaces\\IDocService.cs",
               "RelativeDocumentMoniker": "Services\\Interfaces\\IDocService.cs",

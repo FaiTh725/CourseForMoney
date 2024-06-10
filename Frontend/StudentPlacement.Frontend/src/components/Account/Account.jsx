@@ -96,7 +96,7 @@ const Account = ({SetTab}) => {
             return;
         }
 
-        if (selectedRole == 0 && selectedGroup == null) {
+        if (selectedRole == 0 && selectedGroup == null && groups.length == 0) {
             errorMessage.current.value = "Сейчас невозможно добавить студента";
             return;
         }

@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Components.Web.Virtualization;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using StudentPlacement.Backend.Dal.Interfaces;
 using StudentPlacement.Backend.Domain.Entities;
 using StudentPlacement.Backend.Models.Allocation;
@@ -40,18 +39,35 @@ namespace StudentPlacement.Backend.Dal.Implementations
 
         public async Task<List<AllocationResponse>> GetAllRequestsWithOrganizationInfo()
         {
-            return await context.AllocationRequests.Select(x => new AllocationResponse 
-            { 
-                IdRequest = x.Id,
-                CountSpace = x.CountPlace,
-                Specialist = x.Specialist,
-                Adress = x.Adress,
-                IdOrganization = context.Organizations.FirstOrDefault(y => y.AllocationRequestId == x.Id).Id,
-                Contacts = context.Organizations.FirstOrDefault(y => y.AllocationRequestId == x.Id).Contacts,
-                NameOrganization = context.Organizations.FirstOrDefault(y => y.AllocationRequestId == x.Id).Name,
-                CountFreeSpace = x.CountPlace - x.Students.Count,
-                UrlOrderFile = x.OrderFilePath
-            }).ToListAsync();
+            var organizations = await context.Organizations
+                .Include(x => x.AllocationRequests).ThenInclude(x => x.Students)
+                .ToListAsync();
+
+            var result = new List<AllocationResponse>();
+
+            foreach (var x in organizations)
+            {
+                foreach (var request in x.AllocationRequests)
+                {
+
+                    result.Add(
+                        new AllocationResponse
+                        {
+                            IdOrganization = x.Id,
+                            Contacts = x.Contacts,
+                            NameOrganization = x.Name,
+                            IdRequest = request.Id,
+                            CountSpace = request.CountPlace,
+                            Specialist = request.Specialist,
+                            Adress = request.Adress,
+                            UrlOrderFile = request.OrderFilePath,
+                            CountFreeSpace = request.CountPlace - request.Students.Count
+                        }
+                        );
+                }
+            }
+
+            return result;
         }
 
         public async Task<AllocationRequest> UpdateAllocationRequest(int idAllocationRequest, AllocationRequest allocationRequest)

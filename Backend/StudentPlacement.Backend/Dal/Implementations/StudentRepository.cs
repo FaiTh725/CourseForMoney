@@ -56,7 +56,8 @@ namespace StudentPlacement.Backend.Dal.Implementations
         public async Task<IEnumerable<GetStudentAllocationResponse>> GetAllStudentWithRequestAndOrganization(int idGroup)
         {
             return await context.Students
-                .Include(x => x.User).Include(x => x.AllocationRequest)
+                .Include(x => x.User)
+                .Include(x => x.AllocationRequest).ThenInclude(x => x.Organization)
                 .Where(x => x.Group.Id == idGroup)
                 .Select(x => new GetStudentAllocationResponse()
                 {
@@ -70,12 +71,9 @@ namespace StudentPlacement.Backend.Dal.Implementations
                         Specialist = x.AllocationRequest.Specialist,
                         UrlOrderFile = x.AllocationRequest.OrderFilePath,
                         IdRequest = x.AllocationRequest.Id,
-                        IdOrganization = context.Organizations.Include(x => x.AllocationRequest)
-                            .FirstOrDefault(y => x.AllocationRequest.Id == y.AllocationRequestId).Id,
-                        NameOrganization = context.Organizations.Include(x => x.AllocationRequest)
-                            .FirstOrDefault(y => x.AllocationRequest.Id == y.AllocationRequestId).Name,
-                        Contacts = context.Organizations.Include(x => x.AllocationRequest)
-                            .FirstOrDefault(y => x.AllocationRequest.Id == y.AllocationRequestId).Contacts
+                        IdOrganization = x.AllocationRequest.Organization.Id,
+                        NameOrganization = x.AllocationRequest.Organization.Name,
+                        Contacts = x.AllocationRequest.Organization.Contacts,
 
                     }
                 }).ToListAsync();
@@ -91,22 +89,28 @@ namespace StudentPlacement.Backend.Dal.Implementations
             return await context.Students.Include(x => x.User).FirstOrDefaultAsync(x => x.User.Login == login);
         }
 
+        public async Task<Student> GetStudentByUserId(int idUser)
+        {
+            return await context.Students.Include(x => x.User).Include(x => x.Group).FirstOrDefaultAsync(x => x.UserId == idUser);
+        }
+
         public async Task<List<ReportStudentAllocation>> GetStudentForReport(int idGroup)
         {
             return await context.Students
-                .Include(x => x.AllocationRequest).Include(x => x.Group)
+                .Include(x => x.AllocationRequest).ThenInclude(x => x.Organization)
+                .Include(x => x.Group)
                 .Where(x => x.GroupId == idGroup)
                 .Select(x => new ReportStudentAllocation
+                {
+                    AverageScore = x.AverageScore,
+                    FullName = x.FullName,
+                    AllocationData = new AllocationData
                     {
-                        AverageScore = x.AverageScore,
-                        FullName = x.FullName,
-                        AllocationData = new AllocationData
-                        {
-                            AdressRequest = x.AllocationRequest.Adress,
-                            NameOrganixation = context.Organizations.FirstOrDefault(y => y.AllocationRequestId == x.IdAllocationRequest).Name,
-                            Contacts = context.Organizations.FirstOrDefault(y => y.AllocationRequestId == x.IdAllocationRequest).Contacts
-                        }
-                    }).ToListAsync();
+                        AdressRequest = x.AllocationRequest.Adress,
+                        NameOrganixation = x.AllocationRequest.Organization.Name,
+                        Contacts = x.AllocationRequest.Organization.Contacts
+                    }
+                }).ToListAsync();
         }
 
         public async Task<IEnumerable<GetStudentsFromRequestResponse>> GetStudentFromRequest(int idRequest)
@@ -129,7 +133,7 @@ namespace StudentPlacement.Backend.Dal.Implementations
             var request = await context.Students.Include(x => x.User).Include(x => x.AllocationRequest)
                 .FirstOrDefaultAsync(x => x.User.Id == idUser);
 
-            if(request == null)
+            if (request == null)
             {
                 return new GetStudentRequestResponse
                 {
@@ -140,16 +144,18 @@ namespace StudentPlacement.Backend.Dal.Implementations
                 };
             }
 
-            var data = (await context.Organizations.Include(x => x.AllocationRequest)
-                .FirstOrDefaultAsync(x => x.AllocationRequestId == request.IdAllocationRequest));
+            var data = await context.AllocationRequests
+                .Include(x => x.Organization)
+                .FirstOrDefaultAsync(x => x.Id == request.Id);
 
             return new GetStudentRequestResponse
             {
-                IdRequest = data?.AllocationRequestId,
-                RequestAdressRequest = data?.AllocationRequest.Adress,
-                RequestContacts = data?.Contacts,
-                RequestNameOrganization = data?.Name
+                IdRequest = data.Id,
+                RequestAdressRequest = data.Adress,
+                RequestContacts = data.Organization.Contacts,
+                RequestNameOrganization = data.Organization.Name
             };
+            throw new NotImplementedException();
         }
 
         public async Task<Student> UpdateStudentById(int studentId, Student student)

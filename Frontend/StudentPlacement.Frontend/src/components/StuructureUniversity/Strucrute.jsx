@@ -8,6 +8,7 @@ import AuthContext from "../Context/AuthProvider";
 import { useNavigate } from "react-router-dom";
 import Modal from "../Modal/Modal";
 import MiniModal from "../Modal/MiniModal";
+import errorImg from "/error.png"
 
 // сделать красивую выборку из специальностей и кафедр
 // валидация ввода
@@ -57,45 +58,9 @@ const Structure = () => {
             }
         }
     }
-
-    // const GetAllDepartment = async () => {
-    //     try {
-    //         const token = localStorage.getItem("token");
-
-    //         const response = await api.get("/Structure/GetAllDepartments",
-    //             {
-    //                 withCredentials: true,
-    //                 headers: {
-    //                     'Authorization': `Bearer ${token == null ? "" : token}`
-    //                 }
-    //             }
-    //         );
-
-    //         if (response.data.statusCode != 0) {
-    //             console.log(response.data.description);
-    //             return;
-    //         }
-
-    //         console.log(response);
-    //         setDepartments(response.data.data);
-    //     }
-    //     catch (error) {
-    //         console.log(error);
-    //         if (error.request.status == 0) {
-    //             await useRedirectionRefreshToken(() => { GetAllDepartment() },
-    //                 setAuth,
-    //                 navigate,
-    //                 useUpdateToken,
-    //                 useParseToken);
-    //         }
-    //     }
-    // }
-
     useEffect(() => {
-        //const fatchAllDepartments = async () => { await GetAllDepartment() };
         const fatchAllSpecializations = async () => { await GetAllSpecializations() };
 
-        //fatchAllDepartments();
         fatchAllSpecializations();
     }, []);
 
@@ -154,14 +119,6 @@ const GroupCreate = ({ specialities, navigate, setAuth,
             setSpecialization(selectedSpecialization[0].id);
         }
     }, [selectedSpecialization]);
-
-    // useEffect(() => {
-    //     console.log(selectedSpecialization);
-    //     if (selectedSpecialization.departmentSpeciality.length>0) {
-    //         console.log("Условие выполнилось");
-    //         setSpecialization(selectedSpecialization.departmentSpeciality[0].id);
-    //     }
-    // }, [selectedSpecialization]);
 
     const CreateGroup = async (e) => {
         var flag = false;

@@ -458,12 +458,6 @@ namespace StudentPlacement.Backend.Services.Implementations
 
 
             return await fileService.GetByteFile(path);
-            /*if (File.Exists(environment.WebRootPath + path))
-            {
-                return File.ReadAllBytes(environment.WebRootPath + path);
-            }
-
-            return null;*/
         }
 
         public async Task<DataResponse<IEnumerable<GroupView>>> GetStudentSetting()
@@ -492,26 +486,8 @@ namespace StudentPlacement.Backend.Services.Implementations
 
         public async Task<DataResponse<GetUserResponse>> GetUser(int idUser)
         {
-            try
-            {
-                var user = await userRepository.GetUser(idUser);
-
-                return new DataResponse<GetUserResponse>
-                {
-                    Description = "Получили пользователя",
-                    StatusCode = StatusCode.Ok,
-                    Data = user
-                };
-            }
-            catch
-            {
-                return new DataResponse<GetUserResponse>
-                {
-                    Description = "Ошибка сервера",
-                    StatusCode = StatusCode.Ok,
-                    Data = new()
-                };
-            }
+            throw new NotImplementedException();
+            
         }
 
         public async Task<DataResponse<Tokens>> RefreshToken(string token)

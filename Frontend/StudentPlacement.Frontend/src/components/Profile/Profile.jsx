@@ -7,21 +7,18 @@ import { Link, useNavigate } from "react-router-dom";
 import useUpdateToken from "../../hooks/useUpdateToken";
 import useRedirectionRefreshToken from "../../hooks/useRedirectionRefreshToken";
 import AuthContext from "../Context/AuthProvider";
+import MiniModal from "../Modal/MiniModal";
+
 
 import defaultUserImage from "../../assets/Account/user.png";
-import deleteCross from "../../assets/Account/delete_cross.png"
-import plus from "../../assets/Account/plus.png"
 import arrowLeft from "../../assets/Profile/ArrowLeft.svg"
-import useDownloadFileOnClick from "../../hooks/useDownloadFileOnClick";
-import useDownloadFileWithUrl from "../../hooks/useDownloadFileWithUrl";
+import RequestOrganization from "./RequestOrganization";
 
-// валидацию на ввод
-// возле полей женат и многодетная добавить значки да или нет а то там ничего
-// в зависимости от запроса отправлять запрос на получения или организации или студента или ничего
+// какаето хуйня если добавлять сначало файл потом поля то нихуя не работате
 const Profile = () => {
     const [idUser, setIdUser] = useState(0);
     const [login, setLogin] = useState("");
-    const [role, setRole] = useState(0);
+    const [role, setRole] = useState(null);
     const [group, setGroup] = useState("");
     const [image, setImage] = useState(null);
     const [email, setEmail] = useState("");
@@ -36,14 +33,13 @@ const Profile = () => {
     const [organizationNameRequest, setOrganizationNameRequest] = useState("");
     const [contactRequest, setContactsRequest] = useState("");
 
+    const [idOrganization, setIdOrganization] = useState(null);
     const [nameOrganization, setNameOrganization] = useState("");
     const [contacts, setContacts] = useState("");
-    const [idAllocationRequest, setIdAllocationRequest] = useState();
-    const [nameAdressAllocationRequest, setNameAdressAllocationRequest] = useState("");
-    const [specialistAllocationRequest, setSpecialistAllocationRequest] = useState("");
-    const [countPlace, setCountPlace] = useState("");
-    const [orderFile, setOrderFile] = useState(null);
-    const [urlOrderFile, setUrlOrderFile] = useState(null);
+    const [requests, setRequests] = useState([]);
+
+    const [activeMiniModal, setActiveMiniModal] = useState(false);
+    const [miniMidalMessage, setMiniModalMessage] = useState("");
 
     const navigate = useNavigate();
     const { auth, setAuth } = useContext(AuthContext);
@@ -54,8 +50,6 @@ const Profile = () => {
         3: "Организация"
     }
 
-    const inputFile = useRef(null);
-
     const ChangeProfile = async () => {
         try {
             const token = localStorage.getItem("token");
@@ -64,10 +58,6 @@ const Profile = () => {
                 loginUser: login,
                 organizationName: nameOrganization,
                 contact: contacts,
-                allocationId: idAllocationRequest,
-                adress: nameAdressAllocationRequest,
-                specialist: specialistAllocationRequest,
-                countPlace: countPlace
             }, {
                 withCredentials: true,
                 headers: {
@@ -81,6 +71,8 @@ const Profile = () => {
             }
 
             console.log(response);
+            setMiniModalMessage("Обновили профиль");
+            setActiveMiniModal(true);
         }
         catch (error) {
             console.log(error);
@@ -94,7 +86,45 @@ const Profile = () => {
         }
     }
 
-    const DeleteAllocationRequest = async (e) => {
+    const ChangeRequest = async (e, idRequest, adress, specialist, countPlace) => {
+        e.preventDefault();
+
+        try {
+            const token = localStorage.getItem("token");
+
+            const response = await api.patch("/Profile/ChangeRequest", {
+                idRequest: idRequest,
+                adress: adress,
+                countPlace: countPlace,
+                specialist: specialist
+            }, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token == null ? "" : token}`
+                }
+            });
+
+            if (response.data.statusCode != 0) {
+                console.log(response.data.description);
+                return;
+            }
+
+            setMiniModalMessage("Обновили заявку");
+            setActiveMiniModal(true);
+        }
+        catch (error) {
+            console.log(error);
+            if (error.request.status == 0) {
+                await useRedirectionRefreshToken(() => { ChangeRequest(e, idRequest, adress, specialist, countPlace) },
+                    setAuth,
+                    navigate,
+                    useUpdateToken,
+                    useParseToken);
+            }
+        }
+    }
+
+    const DeleteAllocationRequest = async (e, idRequestAllocation, idOrganization) => {
         e.preventDefault();
 
         try {
@@ -102,9 +132,8 @@ const Profile = () => {
 
             const response = await api.delete("/Profile/DeleteAllocationRequest", {
                 data: {
-                    idRequest: idAllocationRequest,
-                    organizationName: nameOrganization,
-                    loginUser: login
+                    idRequest: idRequestAllocation,
+                    idOrganization: idOrganization,
                 },
                 withCredentials: true,
                 headers: {
@@ -119,12 +148,9 @@ const Profile = () => {
             }
 
             console.log(response);
-            setNameAdressAllocationRequest();
-            setCountPlace();
-            setIdAllocationRequest();
-            setSpecialistAllocationRequest();
-            setOrderFile(null);
-            setUrlOrderFile("");
+            var updateRequests = requests.filter(request => request.idRequest !== idRequestAllocation);
+
+            setRequests(updateRequests);
         }
         catch (error) {
             console.log(error);
@@ -138,7 +164,7 @@ const Profile = () => {
         }
     }
 
-    const AddOrderFileRequest = async (idRequest) => {
+    const AddOrderFileRequest = async (idRequest, orderFile) => {
         try {
             var token = localStorage.getItem("token");
 
@@ -161,6 +187,14 @@ const Profile = () => {
                 console.log(response.data.description);
             }
 
+            const updatedData = requests.map(request => {
+                if (request.idRequest == idRequest) {
+                    return { ...request, urlOrderFile: response.data.data.urlOrderFile }
+                }
+                return request;
+            });
+
+            setRequests(updatedData);
         }
         catch (error) {
             console.log(error);
@@ -174,10 +208,10 @@ const Profile = () => {
         }
     }
 
-    const AddAllocationRequest = async (e) => {
+    const AddAllocationRequest = async (e, idOrganization, adress, specialist, countFreePlace, orderFile) => {
         e.preventDefault();
 
-        if (specialistAllocationRequest == "" || countPlace == "") {
+        if (adress == "" || countFreePlace == "" || specialist == "") {
             alert("введите данные(сделать модальным окном)")
             return;
         }
@@ -192,11 +226,10 @@ const Profile = () => {
 
             const response = await api.post("/Profile/AddAllocationRequest",
                 {
-                    id: idUser,
-                    organizationName: nameOrganization,
-                    allocationRequestAdress: nameAdressAllocationRequest,
-                    specialist: specialistAllocationRequest,
-                    countSpace: countPlace
+                    idOrganization: idOrganization,
+                    adress: adress,
+                    specialist: specialist,
+                    countFreePlace: countFreePlace
                 },
                 {
                     withCredentials: true,
@@ -212,14 +245,21 @@ const Profile = () => {
             }
 
             console.log(response);
-            setIdAllocationRequest(response.data.data.idAllocatinRequest);
 
-            await AddOrderFileRequest(response.data.data.idAllocatinRequest);
+            await AddOrderFileRequest(response.data.data.idRequest, orderFile);
+
+            setRequests(prevRequest => [...prevRequest, {
+                idRequest: response.data.data.idRequest,
+                countPlace: response.data.data.countPlace,
+                specialist: response.data.data.specialist,
+                nameRequest: response.data.data.nameRequest,
+                urlOrderFile: response.data.data.urlOrderFile
+            }]);
         }
         catch (error) {
             console.log(error);
             if (error.request.status == 0) {
-                await useRedirectionRefreshToken(() => { AddAllocationRequest(e) },
+                await useRedirectionRefreshToken(() => { AddAllocationRequest(e, adress, specialist, countFreePlace) },
                     setAuth,
                     navigate,
                     useUpdateToken,
@@ -268,13 +308,131 @@ const Profile = () => {
         }
     }
 
+    const GetRequestOrganization = async (idOrganization) => {
+        try {
+            const token = localStorage.getItem("token");
+
+            const response = await api.get("/Profile/GetAllRequestsOrganazation", {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token == null ? "" : token}`
+                },
+                params: {
+                    idOrganization: idOrganization
+                }
+            });
+
+            if (response.data.statusCode != 0) {
+                console.log(response.data.description);
+                return;
+            }
+
+            setRequests(response.data.data);
+        }
+        catch (error) {
+            console.log(error);
+            if (error.request.status == 0) {
+                await useRedirectionRefreshToken(() => { GetRequestOrganization(idOrganization) },
+                    setAuth,
+                    navigate,
+                    useUpdateToken,
+                    useParseToken);
+            }
+        }
+    }
+
+    useEffect(() => {
+        if (role == 3) {
+            GetOrganizationInfo();
+
+        }
+        else if (role == 0) {
+            GetStudentInfo();
+        }
+    }, [role]);
+
+    const GetStudentInfo = async () => {
+        try {
+            var token = localStorage.getItem("token");
+
+            const { id, login, role } = useParseToken(token);
+
+            var response = await api.get("/Profile/GetStudentPofile", {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token == null ? "" : token}`
+                },
+                params: {
+                    idUser: id
+                }
+            });
+
+            if (response.data.statusCode != 0) {
+                console.log(response.data.description);
+                return;
+            }
+
+
+        }
+        catch (error) {
+            console.log(error);
+            if (error.request.status == 0) {
+                await useRedirectionRefreshToken(() => { GetStudentInfo() },
+                    setAuth,
+                    navigate,
+                    useUpdateToken,
+                    useParseToken);
+            }
+        }
+    }
+
+    const GetOrganizationInfo = async () => {
+        try {
+            var token = localStorage.getItem("token");
+
+            const { id, login, role } = useParseToken(token);
+
+            var response = await api.get("/Profile/GetOrganizationPofile", {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token == null ? "" : token}`
+                },
+                params: {
+                    idUser: id
+                }
+            });
+
+            if (response.data.statusCode != 0) {
+                console.log(response.data.description);
+                return;
+            }
+
+            console.log(response);
+            setIdOrganization(response.data.data.idOrganization);
+            setNameOrganization(response.data.data.nameOrganization);
+            setContacts(response.data.data.contacts);
+            setRequests(response.data.data.requests);
+
+        }
+        catch (error) {
+            console.log(error);
+            if (error.request.status == 0) {
+                await useRedirectionRefreshToken(() => { GetOrganizationInfo() },
+                    setAuth,
+                    navigate,
+                    useUpdateToken,
+                    useParseToken);
+            }
+        }
+    }
+
     const GetUserInfo = async () => {
         try {
             const token = localStorage.getItem("token");
 
             const { id, login, role } = useParseToken(token);
 
-            const response = await api.get("/Account/GetUser", {
+            const response = await api.get("/Profile/GetUserPofile", {
                 withCredentials: true,
                 headers: {
                     'Content-Type': 'application/json',
@@ -298,24 +456,6 @@ const Profile = () => {
             setImage(response.data.data.image);
             setEmail(response.data.data.email);
 
-            if (response.data.data.role == 0) {
-                setGroup(response.data.data.group);
-                setFullName(response.data.data.fullName);
-                setAverageScore(response.data.data.averageScore);
-                setAdressstudent(response.data.data.adressStudent);
-                setIsMaried(response.data.data.isMarried);
-                setIsExtendFamily(response.data.data.extendedFamily);
-                setGroup(response.data.data.groupName);
-            }
-            else if (response.data.data.role == 3) {
-                setNameOrganization(response.data.data.nameOrganization);
-                setContacts(response.data.data.contacts);
-                setIdAllocationRequest(response.data.data.idAllocationRequest);
-                setNameAdressAllocationRequest(response.data.data.nameAdressAllocationrequestRequest);
-                setCountPlace(response.data.data.countPlace);
-                setSpecialistAllocationRequest(response.data.data.specialist);
-                setUrlOrderFile(response.data.data.urlOrderFile);
-            }
         }
         catch (error) {
             console.log(error);
@@ -339,6 +479,9 @@ const Profile = () => {
 
     return (
         <main className={styles.main}>
+            <MiniModal active={activeMiniModal} setActive={setActiveMiniModal}>
+                <p>{miniMidalMessage}</p>
+            </MiniModal>
             <header className={styles.header}>
                 <h1>Профиль</h1>
                 <Link className={styles.backHomeBtn} to="/Home">
@@ -423,67 +566,38 @@ const Profile = () => {
                     )
                 }
                 {role == 3 && (
-                    <section className={styles.extentionInfo}>
-                        <div className={styles.organizationInfo}>
-                            <div className={styles.inputData}>
-                                <label>Название</label>
-                                <input onBlur={() => { ChangeProfile() }} type="text" onChange={(e) => { setNameOrganization(e.target.value) }} defaultValue={nameOrganization} />
+                    <section className={styles.organizationRequests}>
+                        <section className={styles.extentionInfo}>
+                            <div className={styles.organizationInfo}>
+                                <div className={styles.inputData}>
+                                    <label>Название</label>
+                                    <input onBlur={() => { ChangeProfile() }} type="text" onChange={(e) => { setNameOrganization(e.target.value) }} defaultValue={nameOrganization} />
+                                </div>
+                                <div className={styles.inputData}>
+                                    <label>Контакты</label>
+                                    <input onBlur={() => { ChangeProfile() }} type="text" onChange={(e) => { setContacts(e.target.value) }} defaultValue={contacts} />
+                                </div>
+                                <RequestOrganization type={"add"}
+                                    idOrganization={idOrganization}
+                                    AddAllocationRequest={AddAllocationRequest}
+                                    DeleteAllocationRequest={DeleteAllocationRequest}
+                                    AddOrderFileRequest={AddAllocationRequest}
+                                    request={null} />
                             </div>
-                            <div className={styles.inputData}>
-                                <label>Контакты</label>
-                                <input onBlur={() => { ChangeProfile() }} type="text" onChange={(e) => { setContacts(e.target.value) }} defaultValue={contacts} />
-                            </div>
-                            <form className={styles.organizationRequest}>
-                                <div className={styles.inputData}>
-                                    <label>Адрес</label>
-                                    <input onBlur={() => { ChangeProfile() }} value={nameAdressAllocationRequest ?? ""} onChange={(e) => { setNameAdressAllocationRequest(e.target.value) }} type="text" placeholder="Адрес" />
-                                </div>
-                                <div className={styles.inputData}>
-                                    <label>Специалист</label>
-                                    <input onBlur={() => { ChangeProfile() }} value={specialistAllocationRequest ?? ""} onChange={(e) => { setSpecialistAllocationRequest(e.target.value) }} type="text" placeholder="Требуемый специалист" />
-                                </div>
-                                <div className={styles.inputData}>
-                                    <label>Количество мест</label>
-                                    <input onBlur={() => { ChangeProfile() }} value={countPlace ?? ""} onChange={(e) => { setCountPlace(e.target.value) }} type="text" placeholder="Количество мест" />
-                                </div>
-                                <div className={styles.inputData}>
-                                    <label>Приказ(.docx)</label>
-                                    <div className={styles.inputFile}>
-                                        <label onClick={() => {urlOrderFile == null ? alert("Шляпа с файлом") : useDownloadFileWithUrl(urlOrderFile, "Order.docx")}}>{idAllocationRequest == null ? "Загрузите файл" : orderFile == null ? "Посмотреть файл" : orderFile.name}</label>
-                                        {
-                                            idAllocationRequest == null && (
-                                                <div>
-                                                    <input ref={inputFile} onChange={(e) => { setOrderFile(e.target.files[0]) }} type="file" accept="*.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.documen" placeholder="файл в формате .docx" />
-                                                    <button type="button" onClick={() => { inputFile.current.click() }}>выбрать файл</button>
-                                                </div>
-                                            )
-                                        }
 
-                                    </div>
-                                </div>
-                                {
-                                    idAllocationRequest == null && (
-                                        <div className={styles.btnContainer} onClick={(e) => { AddAllocationRequest(e) }}>
-                                            <button className={styles.addBtn} type="submit">
-                                                <p>Добавить запрос</p>
-                                                <img src={plus} alt="delete profile" height={35} />
-                                            </button>
-                                        </div>
-                                    )
-                                }
-                                {
-                                    idAllocationRequest != null && (
-                                        <div className={styles.btnContainer} onClick={(e) => { DeleteAllocationRequest(e) }}>
-                                            <button className={styles.deleteBtn} type="submit">
-                                                <p>Удалить запрос</p>
-                                                <img src={deleteCross} alt="delete profile" height={35} />
-                                            </button>
-                                        </div>
-                                    )
-                                }
-                            </form>
-                        </div>
+                        </section>
+                        <section className={styles.listRequests}>
+                            {
+                                requests.map((request, index) => (
+                                    <RequestOrganization key={index} type="view" idOrganization={idOrganization}
+                                        DeleteAllocationRequest={DeleteAllocationRequest} 
+                                        AddAllocationRequest={AddAllocationRequest}
+                                        ChangeRequest = {ChangeRequest}
+                                        request={request} />
 
+                                ))
+                            }
+                        </section>
                     </section>
 
                 )}

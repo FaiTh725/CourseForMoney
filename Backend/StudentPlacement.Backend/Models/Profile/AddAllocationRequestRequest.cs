@@ -2,14 +2,12 @@
 {
     public class AddAllocationRequestRequest
     {
-        public int Id { get; set; }
+        public int IdOrganization { get; set; }
 
-        public string OrganizationName { get; set; }
+        public string Adress { get; set; }
     
-        public string AllocationRequestAdress {  get; set; }
-
         public string Specialist { get; set; }
 
-        public int CountSpace {  get; set; }
+        public int CountFreePlace {  get; set; }
     }
 }

@@ -60,7 +60,7 @@ namespace StudentPlacement.Backend.Services.Implementations
 
                 await allocationRequestRepository.UpdateAllocationRequest(allocationRequest.Id, allocationRequest);
 
-                var organizationOfRequest = await organizationRepository.GetOrganizationIdRequest(allocationRequest.Id);
+                var organizationOfRequest = await organizationRepository.GetOrganizationIdRequest(allocationRequest.OrganizationId);
 
                 return new DataResponse<AddRequestToUserResponse>
                 {

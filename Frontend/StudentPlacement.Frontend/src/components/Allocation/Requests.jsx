@@ -17,7 +17,7 @@ const Requests = ({ Requests, idStudent, AddRequestToUser }) => {
                 if (request.countFreeSpace === 0) return null;
 
                 return (
-                    <div className={styles.oneRequest} key={request.idOrganization}>
+                    <div className={styles.oneRequest} key={request.idRequest}>
                         <div className={styles.oneRequestInfo}>
                             <p>{request.nameOrganization}</p>
                             <p>{request.specialist}</p>

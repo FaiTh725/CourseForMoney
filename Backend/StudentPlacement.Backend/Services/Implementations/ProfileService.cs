@@ -1,4 +1,5 @@
-﻿using StudentPlacement.Backend.Dal.Interfaces;
+﻿using Azure.Core;
+using StudentPlacement.Backend.Dal.Interfaces;
 using StudentPlacement.Backend.Domain.Entities;
 using StudentPlacement.Backend.Domain.Enums;
 using StudentPlacement.Backend.Domain.Response;
@@ -38,30 +39,30 @@ namespace StudentPlacement.Backend.Services.Implementations
         {
             try
             {
-                var user = await userRepository.GetUser(request.Id);
+                var organization = await organizationRepository.GetOrganizationById(request.IdOrganization);
 
-                if (user == null)
+                if(organization == null)
                 {
                     return new DataResponse<AddAllocationResponse>
                     {
-                        Description = "Пользователь не найден",
-                        StatusCode = StatusCode.NotFoundUser,
-                        Data = new()
+                        Data = new(),
+                        StatusCode = StatusCode.NotFoundOrganization,
+                        Description = "Организация не найдена"
                     };
                 }
 
                 var createdAllocationRequest = await allocationRequestRepository
                         .CreateAllocationRequest(new AllocationRequest
                         {
-                            Adress = request.AllocationRequestAdress,
-                            CountPlace = request.CountSpace,
-                            Specialist = request.Specialist
+                            Adress = request.Adress,
+                            CountPlace = request.CountFreePlace,
+                            Specialist = request.Specialist,
+                            Organization = organization,
+                            OrganizationId = organization.Id
                         });
 
-                var organization = await organizationRepository.GetOrganizationByLogin(user.Login);
 
-                organization.AllocationRequest = createdAllocationRequest;
-                organization.AllocationRequestId = createdAllocationRequest.Id;
+                organization.AllocationRequests.Add(createdAllocationRequest);
 
                 var newOrganization = await organizationRepository.UpdateOrganizationById(organization.Id, organization);
 
@@ -71,7 +72,11 @@ namespace StudentPlacement.Backend.Services.Implementations
                     StatusCode = StatusCode.Ok,
                     Data = new AddAllocationResponse
                     {
-                        IdAllocatinRequest = createdAllocationRequest.Id
+                        IdRequest = createdAllocationRequest.Id,
+                        CountPlace = createdAllocationRequest.CountPlace,
+                        Specialist = createdAllocationRequest.Specialist,
+                        NameRequest = createdAllocationRequest.Adress,
+                        UrlOrderFile = createdAllocationRequest.OrderFilePath
                     }
                 };
             }
@@ -91,7 +96,7 @@ namespace StudentPlacement.Backend.Services.Implementations
             try
             {
                 var allocation = await allocationRequestRepository.GetAllocationRequestById(request.IdRequest);
-                var organization = await organizationRepository.FindOrganizationByLoginAndName(request.LoginUser, request.OrganizationName);
+                var organization = await organizationRepository.GetOrganizationById(request.IdOrganization);
 
                 if (allocation == null || organization == null)
                 {
@@ -102,11 +107,10 @@ namespace StudentPlacement.Backend.Services.Implementations
                     };
                 }
 
-                await organizationRepository.DeleteAllocationRequest(organization);
+                organization.AllocationRequests.Remove(allocation);
+                await organizationRepository.UpdateOrganizationById(organization.Id, organization);
 
                 await studentRepository.DeleteRequestInStudents(allocation);
-
-                await allocationRequestRepository.DeleteAllocationRequest(allocation);
 
                 var isDeleteFile = fileService.DeleteFile(Path.Combine("RequestOrders", $"{allocation.Id}.docx"));
 
@@ -135,6 +139,47 @@ namespace StudentPlacement.Backend.Services.Implementations
             }
         }
 
+        public async Task<DataResponse<IEnumerable<GetAllocationRequestResponse>>> GetAllRequestsOrganization(int idOrganization)
+        {
+            try
+            {
+                var organization = await organizationRepository.GetOrganizationById(idOrganization);
+
+                if (organization == null) 
+                {
+                    return new DataResponse<IEnumerable<GetAllocationRequestResponse>>
+                    {
+                        StatusCode = StatusCode.NotFoundOrganization,
+                        Description = "Не удалось найти организацию",
+                        Data = new List<GetAllocationRequestResponse>()
+                    };
+                }
+
+                return new DataResponse<IEnumerable<GetAllocationRequestResponse>>
+                {
+                    Description = "Получили все запросы организации",
+                    StatusCode = StatusCode.Ok,
+                    Data = organization.AllocationRequests.Select(x => new GetAllocationRequestResponse
+                    {
+                        IdRequest = x.Id,
+                        Adress = x.Adress,
+                        Specialist = x.Specialist,
+                        CountPlace = x.Students.Count,
+                        UrlOrderFile = x.OrderFilePath
+                    }).ToList()
+                };
+            }
+            catch
+            {
+                return new DataResponse<IEnumerable<GetAllocationRequestResponse>>
+                {
+                    Description = "Ошибка сервера",
+                    StatusCode = StatusCode.ServerError,
+                    Data = new List<GetAllocationRequestResponse>()
+                };
+            }
+        }
+
         public async Task<byte[]> GetOrderAllocationRequest(int allocationRequestId)
         {
             var allocationRequest = await allocationRequestRepository.GetAllocationRequestById(allocationRequestId);
@@ -147,6 +192,95 @@ namespace StudentPlacement.Backend.Services.Implementations
             var bytes = await fileService.GetByteFile(Path.Combine("RequestOrders", $"{allocationRequest.Id}.docx"));
 
             return bytes;
+        }
+
+        public async Task<DataResponse<GetOrganizationProfileResponse>> GetOrganizationProfile(int idUser)
+        {
+            try
+            {
+                var organization = await organizationRepository.GetOrganizationByIdUser(idUser);
+
+                if(organization == null)
+                {
+                    return new DataResponse<GetOrganizationProfileResponse>
+                    {
+                        Data = new (),
+                        Description = "Организация не найдена",
+                        StatusCode = StatusCode.NotFoundOrganization
+                    };
+                }
+
+                return new DataResponse<GetOrganizationProfileResponse>
+                {
+                    Description = "Получили информацию организации",
+                    StatusCode = StatusCode.Ok,
+                    Data = new GetOrganizationProfileResponse
+                    {
+                        Contacts = organization.Contacts,
+                        IdOrganization = organization.Id,
+                        NameOrganization = organization.Name,
+                        Requests = organization.AllocationRequests.Select(x => new RequestProfileView
+                        {
+                            IdRequest = x.Id,
+                            CountPlace = x.CountPlace,
+                            NameRequest = x.Adress,
+                            Specialist = x.Specialist,
+                            UrlOrderFile = x.OrderFilePath
+                        }).ToList()
+                    }
+                };
+            }
+            catch
+            {
+                return new DataResponse<GetOrganizationProfileResponse>
+                {
+                    StatusCode = StatusCode.ServerError,
+                    Description = "Ошибка сервера",
+                    Data = new()
+                };
+            }
+        }
+
+        public async Task<DataResponse<GetStudentProfileResponse>> GetStudentProfile(int idUser)
+        {
+            try
+            {
+                var student = await studentRepository.GetStudentByUserId(idUser);
+
+                if (student == null) 
+                {
+                    return new DataResponse<GetStudentProfileResponse>
+                    {
+                        Description = "Студен не найден",
+                        StatusCode = StatusCode.NotFoundStudent,
+                        Data = new()
+                    };
+                }
+
+                return new DataResponse<GetStudentProfileResponse>
+                {
+                    Description = "Получили профиль студента",
+                    StatusCode = StatusCode.Ok,
+                    Data = new GetStudentProfileResponse
+                    {
+                        IsMarried = student.IsMarried,
+                        AdressStudent = student.Adress,
+                        AverageScore = student.AverageScore,
+                        ExtendedFamily = student.ExtendedFamily,
+                        FullName = student.FullName,
+                        Group = student.GroupId
+                    }
+                };
+            }
+            catch
+            {
+                return new DataResponse<GetStudentProfileResponse>
+                {
+                    Data = new(),
+                    Description = "Ошибка сервера",
+                    StatusCode = StatusCode.ServerError
+                };
+            }
         }
 
         public async Task<DataResponse<GetStudentRequestResponse>> GetStudentRequest(int idUser)
@@ -212,67 +346,111 @@ namespace StudentPlacement.Backend.Services.Implementations
             }
         }
 
-        public async Task<BaseResponse> UpdateProfileOrganization(ChangeProfileRequest request)
+        public async Task<DataResponse<GetUserProfileResponse>> GetUserProfile(int idUser)
         {
             try
             {
-                var organization = await organizationRepository.GetOrganizationByLogin(request.LoginUser);
+                var user = await userRepository.GetById(idUser);
 
-                if (organization == null)
+                if(user == null)
                 {
-                    return new BaseResponse
+                    return new DataResponse<GetUserProfileResponse>
                     {
-                        Description = "Организация не найдена",
-                        StatusCode = StatusCode.Ok
+                        Data = new(),
+                        Description = "Пользователь не найден",
+                        StatusCode = StatusCode.NotFoundUser,
                     };
                 }
 
-                if (request.AllocationId == null)
-                {
-                    await organizationRepository.UpdateOrganizationByLogin(request.LoginUser, new Organization
-                    {
-                        Name = request.OrganizationName,
-                        Contacts = organization.Contacts,
-                    });
-
-                    return new BaseResponse
-                    {
-                        Description = "Обновили организацию",
-                        StatusCode = StatusCode.Ok,
-                    };
-                }
-
-                var oldAllocation = await allocationRequestRepository.GetAllocationRequestById(request.AllocationId ?? -1);
-
-                oldAllocation.Adress = request.Adress!;
-                oldAllocation.Specialist = request.Specialist!;
-                oldAllocation.CountPlace = request.CountPlace ?? -1;
-
-                await organizationRepository.UpdateOrganizationByLogin(request.LoginUser, new Organization
-                {
-                    Name = request.OrganizationName,
-                    Contacts = request.Contact,
-                    AllocationRequest = oldAllocation,
-                    AllocationRequestId = request.AllocationId
-                });
-
-                return new BaseResponse
-                {
-                    Description = "Обновили организацию",
+                return new DataResponse<GetUserProfileResponse> 
+                { 
+                    Description = "Получили основные данные пользователя",
                     StatusCode = StatusCode.Ok,
+                    Data = new GetUserProfileResponse
+                    {
+                        Id = user.Id,
+                        Login = user.Login,
+                        Email = user.Email,
+                        Image = user.ImageUserStringFormat,
+                        Role = (int)user.Role
+                    }
                 };
             }
             catch
             {
-                return new BaseResponse
+                return new DataResponse<GetUserProfileResponse>
                 {
+                    Data = new(),
                     Description = "Ошибка сервера",
                     StatusCode = StatusCode.ServerError,
                 };
             }
         }
 
-        public async Task<BaseResponse> UploadFileRequest(AddOrderFileRequest request)
+        public async Task<BaseResponse> UpdateProfileOrganization(ChangeProfileRequest request)
+        {
+            
+            var organization  = await organizationRepository.GetOrganizationByLogin(request.LoginUser);
+
+            if(organization == null)
+            {
+                return new BaseResponse
+                {
+                    Description = "Организация не найдена",
+                    StatusCode = StatusCode.NotFoundOrganization,
+                };
+            }
+
+            organization.Contacts = request.Contact;
+            organization.Name = request.OrganizationName;
+
+            await organizationRepository.UpdateOrganizationById(organization.Id, organization);
+
+            return new BaseResponse
+            {
+                Description = "Обновили профиль организации",
+                StatusCode = StatusCode.Ok,
+            };
+        }
+
+        public async Task<BaseResponse> UpdateRequest(ChangeRequest request)
+        {
+            try
+            {
+                var allocationRequest = await allocationRequestRepository.GetAllocationRequestById(request.IdRequest);
+
+                if(allocationRequest == null)
+                {
+                    return new BaseResponse
+                    {
+                        Description = "Запрос не найден",
+                        StatusCode = StatusCode.NotFountRequest,
+                    };
+                }
+
+                allocationRequest.Adress = request.Adress;
+                allocationRequest.Specialist = request.Specialist;
+                allocationRequest.CountPlace = request.CountPlace;
+
+                await allocationRequestRepository.UpdateAllocationRequest(allocationRequest.Id, allocationRequest);
+
+                return new BaseResponse
+                {
+                    Description = "Обновили запрос",
+                    StatusCode = StatusCode.Ok
+                };
+            }
+            catch
+            {
+                return new BaseResponse 
+                {
+                    Description = "Ошибка сервера",
+                    StatusCode = StatusCode.ServerError
+                };
+            }
+        }
+
+        public async Task<DataResponse<UploadFileRequestResponse>> UploadFileRequest(AddOrderFileRequest request)
         {
             try
             {
@@ -280,10 +458,11 @@ namespace StudentPlacement.Backend.Services.Implementations
 
                 if (allocationRequest == null)
                 {
-                    return new BaseResponse
+                    return new DataResponse<UploadFileRequestResponse>
                     {
                         Description = "Запрос не найден",
                         StatusCode = StatusCode.NotFountRequest,
+                        Data = new UploadFileRequestResponse()
                     };
                 }
 
@@ -301,18 +480,23 @@ namespace StudentPlacement.Backend.Services.Implementations
 
                 await allocationRequestRepository.UpdateAllocationRequest(allocationRequest.Id, allocationRequest);
 
-                return new BaseResponse
+                return new DataResponse<UploadFileRequestResponse>
                 {
                     StatusCode = StatusCode.Ok,
-                    Description = "Добавили файл приказа"
+                    Description = "Добавили файл приказа",
+                    Data = new UploadFileRequestResponse()
+                    {
+                        UrlOrderFile = filePath
+                    }
                 };
             }
             catch
             {
-                return new BaseResponse
+                return new DataResponse<UploadFileRequestResponse>
                 {
                     Description = "Ошибка сервера",
-                    StatusCode = StatusCode.ServerError
+                    StatusCode = StatusCode.ServerError,
+                    Data = new UploadFileRequestResponse()
                 };
             }
         }

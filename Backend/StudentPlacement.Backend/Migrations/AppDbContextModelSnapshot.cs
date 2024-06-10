@@ -37,15 +37,23 @@ namespace StudentPlacement.Backend.Migrations
                     b.Property<int>("CountPlace")
                         .HasColumnType("int");
 
+                    b.Property<int>("IdOrganization")
+                        .HasColumnType("int");
+
                     b.Property<string>("OrderFilePath")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("OrganizationId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Specialist")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("OrganizationId");
 
                     b.ToTable("AllocationRequests");
                 });
@@ -105,9 +113,6 @@ namespace StudentPlacement.Backend.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("AllocationRequestId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Contacts")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -120,8 +125,6 @@ namespace StudentPlacement.Backend.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AllocationRequestId");
 
                     b.HasIndex("UserId");
 
@@ -246,6 +249,17 @@ namespace StudentPlacement.Backend.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("StudentPlacement.Backend.Domain.Entities.AllocationRequest", b =>
+                {
+                    b.HasOne("StudentPlacement.Backend.Domain.Entities.Organization", "Organization")
+                        .WithMany("AllocationRequests")
+                        .HasForeignKey("OrganizationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Organization");
+                });
+
             modelBuilder.Entity("StudentPlacement.Backend.Domain.Entities.Group", b =>
                 {
                     b.HasOne("StudentPlacement.Backend.Domain.Entities.Specialization", "Specialization")
@@ -259,17 +273,11 @@ namespace StudentPlacement.Backend.Migrations
 
             modelBuilder.Entity("StudentPlacement.Backend.Domain.Entities.Organization", b =>
                 {
-                    b.HasOne("StudentPlacement.Backend.Domain.Entities.AllocationRequest", "AllocationRequest")
-                        .WithMany()
-                        .HasForeignKey("AllocationRequestId");
-
                     b.HasOne("StudentPlacement.Backend.Domain.Entities.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("AllocationRequest");
 
                     b.Navigation("User");
                 });
@@ -323,6 +331,11 @@ namespace StudentPlacement.Backend.Migrations
             modelBuilder.Entity("StudentPlacement.Backend.Domain.Entities.Group", b =>
                 {
                     b.Navigation("Students");
+                });
+
+            modelBuilder.Entity("StudentPlacement.Backend.Domain.Entities.Organization", b =>
+                {
+                    b.Navigation("AllocationRequests");
                 });
 
             modelBuilder.Entity("StudentPlacement.Backend.Domain.Entities.Specialization", b =>

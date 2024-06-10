@@ -191,3 +191,47 @@
     box-shadow: 0 5px 5px #c3c6c9;
     transform: translateY(-5px) scale(1.1);
 }
+
+.saveButton {
+    color: #a4a6a8;
+    transition: all .5s;
+    padding: 7px 10px;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.saveButton:hover {
+    color: #fff;
+    background-color: #008054d9;
+    transform: scale(1.1);
+}
+
+.btnContainerView {
+    display: flex;
+    justify-content: space-between;
+}
+
+.organizationRequests {
+    display: flex;
+}
+
+.listRequests {
+    display: inline-flex;
+    flex-wrap: wrap;
+    overflow-y: scroll;
+}
+
+.viewRequest {
+    margin: 10px;
+    border-radius: 14px;
+    padding: 10px 15px;
+    border: 2px solid #6e6d6d9d;
+    transition: all .5s;
+}
+
+.viewRequest:hover {
+    box-shadow: 5px 5px 5px #6e6d6d9d;
+    border: 2px solid transparent;
+    transform: translateX(-5px) translateY(-5px);
+}

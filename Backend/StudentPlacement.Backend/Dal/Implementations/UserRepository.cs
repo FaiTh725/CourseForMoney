@@ -104,41 +104,35 @@ namespace StudentPlacement.Backend.Dal.Implementations
 
         public async Task<GetUserResponse> GetUser(int idUser)
         {
-            var user = await GetById(idUser);
-
-            var query = from u in context.Users
-                        where u.Id == idUser
-                        join o in context.Organizations.Include(x => x.AllocationRequest) on u.Id equals o.UserId into ou
-                        from o in ou.DefaultIfEmpty()
-                        join s in context.Students.Include(x => x.AllocationRequest) on u.Id equals s.UserId into su
-                        from s in su.DefaultIfEmpty()
+            var query = from user in context.Users
+                        where user.Id == idUser
+                        join request in context.AllocationRequests.Include(x => x.Organization) on user.Id equals request.Organization.UserId into ou
+                        from request in ou.DefaultIfEmpty()
+                        join student in context.Students.Include(x => x.Group).Include(x => x.AllocationRequest) on user.Id equals student.Id into su
+                        from student in su.DefaultIfEmpty()
                         select new GetUserResponse
                         {
-                            Id = u.Id,
-                            Login = u.Login,
-                            Password = u.Password,
-                            Role = (int)u.Role,
-                            Image = u.ImageUserStringFormat,
-                            Email = u.Email,
-                            FullName = s.FullName,
-                            AdressStudent = s.Adress,
-                            AverageScore = s.AverageScore,
-                            IsMarried = s.IsMarried,
-                            ExtendedFamily = s.ExtendedFamily,
-                            Group = s.GroupId,
-                            GroupName = s.Group.Number,
-                            //IdOrganization = o.Id,
-                            NameOrganization = o.Name,
-                            Contacts = o.Contacts,
-                            IdAllocationRequest = o.AllocationRequestId,
-                            CountPlace = o.AllocationRequest.CountPlace,
-                            Specialist = o.AllocationRequest.Specialist,
-                            UrlOrderFile = o.AllocationRequest.OrderFilePath,
-                            NameAdressAllocationrequestRequest = o.AllocationRequest.Adress
+                            Id = user.Id,
+                            Login = user.Login,
+                            Password = user.Password,
+                            Role = (int)user.Role,
+                            Image = user.ImageUserStringFormat,
+                            Email = user.Email,
+                            FullName = student.FullName,
+                            AdressStudent = student.Adress,
+                            AverageScore = student.AverageScore,
+                            IsMarried = student.IsMarried,
+                            ExtendedFamily = student.ExtendedFamily,
+                            Group = student.GroupId,
+                            GroupName = student.Group.Number,
+                            NameOrganization = request.Organization.Name,
+                            Contacts = request.Organization.Contacts,
+                            IdAllocationRequest = request.Id,
+                            CountPlace = request.CountPlace,
+                            Specialist = request.Specialist,
+                            UrlOrderFile = request.OrderFilePath,
+                            NameAdressAllocationrequestRequest = request.Adress
                         };
-
-
-
             return await query.FirstOrDefaultAsync(x => x.Id == idUser);
         }
 

@@ -27,6 +27,7 @@
         NotFoundStudent,
 
         OrganizatinExist,
+        NotFoundOrganization,
 
         NotFountRequest,
         LimitStudent,

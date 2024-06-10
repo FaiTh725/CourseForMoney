@@ -24,12 +24,7 @@ namespace StudentPlacement.Backend.Dal.Implementations
 
         public async Task DeleteAllocationRequest(Organization organization)
         {
-            var organizationByQuery = await GetOrganizationById(organization.Id);
-
-            organizationByQuery.AllocationRequest = null;
-            organizationByQuery.AllocationRequestId = null;
-
-            await context.SaveChangesAsync();
+            throw new NotImplementedException();
         }
 
         public async Task<Organization?> FindOrganizationByLoginAndName(string login, string name)
@@ -40,38 +35,47 @@ namespace StudentPlacement.Backend.Dal.Implementations
 
         public async Task<IEnumerable<Organization>> GetAllOrganizations()
         {
-            return await context.Organizations.Include(x => x.AllocationRequest).ThenInclude(x => x.Students).ToListAsync();
+            return await context.Organizations.Include(x => x.AllocationRequests).ThenInclude(x => x.Students).ToListAsync();
         }
 
         public async Task<Organization> GetOrganizationById(int idOrganization)
         {
             return await context.Organizations
-                .Include(x => x.AllocationRequest).Include(x => x.User)
+                .Include(x => x.AllocationRequests)
+                .Include(x => x.User)
                 .FirstOrDefaultAsync(x => x.Id == idOrganization);
+        }
+
+        public async Task<Organization> GetOrganizationByIdUser(int idUser)
+        {
+            return await context.Organizations
+                .Include(x => x.User)
+                .Include(x => x.AllocationRequests).FirstOrDefaultAsync(x => x.UserId == idUser);
         }
 
         public async Task<Organization> GetOrganizationByLogin(string login)
         {
             return await context.Organizations
-                .Include(x => x.User).Include(x => x.AllocationRequest)
+                .Include(x => x.User).Include(x => x.AllocationRequests)
                 .FirstOrDefaultAsync(x => x.User.Login == login);
+
         }
 
         public async Task<Organization> GetOrganizationIdRequest(int idRequest)
         {
-            return await context.Organizations.Include(x => x.AllocationRequest).FirstOrDefaultAsync(x => x.AllocationRequestId == idRequest);
+            return (await context.AllocationRequests.Include(x => x.Organization).FirstOrDefaultAsync(x => x.OrganizationId == idRequest)).Organization;
         }
 
         public async Task<Organization> UpdateOrganizationBase(Organization oldOrganization, Organization newOrganization)
         {
             oldOrganization.Contacts = newOrganization.Contacts;
             oldOrganization.Name = newOrganization.Name;
-            
-            if(newOrganization.AllocationRequest != null)
-            {
-                oldOrganization.AllocationRequest = newOrganization.AllocationRequest;
-                oldOrganization.AllocationRequestId = newOrganization.AllocationRequestId;
-            }
+
+            var requests = new List<AllocationRequest>(newOrganization.AllocationRequests);
+
+            oldOrganization.AllocationRequests.Clear();
+
+            oldOrganization.AllocationRequests.AddRange(requests);
 
             await context.SaveChangesAsync();
 
@@ -92,18 +96,6 @@ namespace StudentPlacement.Backend.Dal.Implementations
             var oldOrganization = await GetOrganizationByLogin(loginOrganization);
 
             await UpdateOrganizationBase(oldOrganization, organization);
-
-            /*oldOrganization.Contacts = organization.Contacts;
-            oldOrganization.Name = organization.Name;
-            
-            if(organization.AllocationRequest != null)
-            {
-                oldOrganization.AllocationRequest = new();
-                oldOrganization.AllocationRequest = organization.AllocationRequest;
-                oldOrganization.AllocationRequestId = organization.AllocationRequestId;
-            }
-
-            await context.SaveChangesAsync();*/
 
             return oldOrganization;
         }

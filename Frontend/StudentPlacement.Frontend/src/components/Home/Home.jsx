@@ -7,6 +7,7 @@ import useUpdateToken from "../../hooks/useUpdateToken";
 import useRedirectionRefreshToken from "../../hooks/useRedirectionRefreshToken";
 import api from "../../api/helpAxios";
 import Create from "../Create/Create";
+import Slider from "./SliderImages";
 
 import logo from "../../assets/Auth/LogoAuth.png"
 import defaultUserImage from "../../assets/Account/user.png";

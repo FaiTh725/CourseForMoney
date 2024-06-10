@@ -8,9 +8,7 @@
 
         public string Name { get; set; }
 
-        public int? AllocationRequestId { get; set; }
-
-        public AllocationRequest? AllocationRequest { get; set; }
+        public List<AllocationRequest> AllocationRequests { get; set; } = new List<AllocationRequest>();
 
         public int UserId { get; set; }
 

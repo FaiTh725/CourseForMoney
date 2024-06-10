@@ -10,6 +10,8 @@ namespace StudentPlacement.Backend.Dal.Interfaces
 
         Task<Organization> GetOrganizationByLogin(string login);
 
+        Task<Organization> GetOrganizationByIdUser(int idUser);
+
         Task<Organization> GetOrganizationById(int idOrganization);
 
         Task<Organization> GetOrganizationIdRequest(int idRequest);

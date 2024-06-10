@@ -225,7 +225,7 @@ const Allocation = () => {
                 });
 
             if (response.data.statusCode != 0) {
-                console.log(response.data.descriptionc);
+                console.log(response.data.description);
                 return;
             }
 
@@ -435,7 +435,7 @@ const Allocation = () => {
                         </div>
                         {
                             allAllocationRequest.map(request => (
-                                <CardRequest key={request.idOrganization} idOrganization={request.idOrganization}
+                                <CardRequest key={request.idRequest} idOrganization={request.idOrganization}
                                     idRequest = {request.idRequest}
                                     nameOrganization={request.nameOrganization}
                                     contacts={request.contacts}

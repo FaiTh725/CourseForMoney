@@ -8,6 +8,7 @@
     padding: 40px 80px;
 }
 
+
 .header {
     font-size: 24px;
     color: #a4a6a8;
@@ -103,6 +104,11 @@
     font-size: 18px;
     transition: all .5s;
 }
+
+.inputData select {
+    max-width: 200px;
+    font-size: 16px;
+} 
 
 .inputData input:focus {
     border: 2px solid #008054d9;

@@ -19,6 +19,8 @@ namespace StudentPlacement.Backend.Dal.Interfaces
 
         Task<Student> GetStudentById(int id);
 
+        Task<Student> GetStudentByUserId(int idUser);
+
         Task<IEnumerable<Student>> GetAllStudents();
 
         Task<IEnumerable<GetStudentAllocationResponse>> GetAllStudentWithRequestAndOrganization(int idGroup);

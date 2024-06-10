@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Routing;
 using StudentPlacement.Backend.Models.Profile;
 using StudentPlacement.Backend.Services.Interfaces;
 
@@ -57,6 +58,53 @@ namespace StudentPlacement.Backend.Controllers
         public async Task<IActionResult> GetHomeProfile(int idUser)
         {
             var response = await profileService.GetUserHomeProfile(idUser);
+
+            return new JsonResult(response);
+        }
+
+        // Удалить хуйню
+        [HttpGet("[action]")]
+        [Authorize]
+        public async Task<IActionResult> GetAllRequestsOrganazation(int idOrganization)
+        {
+            var response = await profileService.GetAllRequestsOrganization(idOrganization);
+
+            return new JsonResult(response);
+        }
+
+        [HttpGet("[action]")]
+        [Authorize]
+        public async Task<IActionResult> GetUserPofile(int idUser)
+        {
+            var response = await profileService.GetUserProfile(idUser);
+
+            return new JsonResult(response);
+        }
+        
+        [HttpGet("[action]")]
+        [Authorize]
+        public async Task<IActionResult> GetOrganizationPofile(int idUser)
+        {
+            var response = await profileService.GetOrganizationProfile(idUser);
+
+            return new JsonResult(response);
+        }
+
+
+        [HttpGet("[action]")]
+        [Authorize]
+        public async Task<IActionResult> GetStudentPofile(int idUser)
+        {
+            var response = await profileService.GetStudentProfile(idUser);
+
+            return new JsonResult(response);
+        }
+
+        [HttpPatch("[action]")]
+        [Authorize]
+        public async Task<IActionResult> ChangeRequest(ChangeRequest request)
+        {
+            var response = await profileService.UpdateRequest(request);
 
             return new JsonResult(response);
         }

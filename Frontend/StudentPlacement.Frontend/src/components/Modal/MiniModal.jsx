@@ -1,4 +1,4 @@
-import { act, useEffect, useState } from "react"
+import { useEffect } from "react"
 import styles from "./MiniModal.module.css"
 
 
